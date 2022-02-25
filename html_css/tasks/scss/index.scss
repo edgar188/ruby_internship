@@ -1,0 +1,12 @@
+@import "navbar";
+@import "main_page";
+@import "footer";
+
+/** BODY */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: $primary-font;
+}
