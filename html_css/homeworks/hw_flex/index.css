@@ -1,0 +1,31 @@
+.display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.bg-primary {
+  background-color: #91eeec;
+}
+
+.bg-secondary {
+  background-color: #f1f1f1;
+}
+
+.display-1 {
+  font-size: 50px;
+}
+
+.w-max {
+  width: max-content;
+}
+
+.p-40 {
+  padding: 40px;
+}
+
+.border-1 {
+  border: 1px solid #000000;
+}
