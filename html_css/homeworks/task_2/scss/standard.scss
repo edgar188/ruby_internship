@@ -1,0 +1,105 @@
+@import "variables";
+
+//BODY
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: $font-family-primary;
+}
+
+// MARGINS AND PADDINGS
+.ml-3 {
+  margin-left: 15px;
+}
+
+.p-3 {
+  padding: 15px;
+}
+
+.pb-4 {
+  padding-bottom: 20px;
+}
+
+.pt-10 {
+  padding-top: 50px;
+}
+
+.pt-20 {
+  padding-top: 100px;
+}
+
+// FONTS
+.font-family-primary {
+  font-family: $font-family-primary;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+.fs-25 {
+  font-size: 25px;
+}
+
+.text-white {
+  color: $text-white;
+}
+
+.text-align-start {
+  text-align: start;
+}
+
+.font-weight-bold {
+  font-weight: bold;
+}
+
+// LAYOUTS
+.container {
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.j-c-space-around {
+  justify-content: space-around;
+}
+
+.a-i-center {
+  align-items: center;
+}
+
+.f-d-column {
+  flex-direction: column;
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// OTHER
+.logo img {
+  width: 70px;
+  height: 70px;
+}
+
+.transform {
+  display: inline-block;
+  &:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+  }
+}
