@@ -1,5 +1,5 @@
 main {
-  height: 70vh;
+  min-height: calc(100vh - (10vh + 20vh));
 }
 
 .card {
