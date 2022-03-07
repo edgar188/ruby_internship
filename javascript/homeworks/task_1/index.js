@@ -118,7 +118,7 @@
 // Given any number between 1 and 12. Print the name of the respective month.
 
 // function get_month(num) {
-//   let month = {
+//   const MONTHS = Object.freeze({
 //     1: "January",
 //     2: "February",
 //     3: "March",
@@ -131,12 +131,12 @@
 //     10: "October",
 //     11: "November",
 //     12: "December",
-//   };
+//   });
 
-//   return month[num];
+//   return MONTHS[num];
 // }
 
-// console.log(get_month(2));
+// console.log(get_month(5));
 
 /////////////////////////  Ex. 9 | End
 
