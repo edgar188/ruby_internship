@@ -27,7 +27,7 @@
 //   }
 // }
 
-// console.log(swap_first_and_last_digits(100));
+// console.log(swap_first_and_last_digits(1004));
 
 /////////////////////////  Ex. 4 | End
 
@@ -52,18 +52,21 @@
 // function sort(a, b, c) {
 //   if (a < b && a < c) {
 //     console.log(a);
+
 //     if (b < c) {
 //       console.log(b);
 //       console.log(c);
 //     }
 //   } else if (b < c && b < a) {
 //     console.log(b);
+
 //     if (c < a) {
 //       console.log(c);
 //       console.log(a);
 //     }
 //   } else if (c < a && c < b) {
 //     console.log(c);
+
 //     if (a < b) {
 //       console.log(a);
 //       console.log(b);
@@ -81,16 +84,15 @@
 
 // function mult(a, b, c) {
 //   if (a == 0 || b == 0 || c == 0) {
-//     console.log("Unsigned");
+//     console.log('Unsigned');
 //   } else if (
 //     (a < 0 && b > 0 && c > 0) ||
 //     (b < 0 && a > 0 && c > 0) ||
 //     (c < 0 && a > 0 && b > 0) ||
-//     (a < 0 && b < 0 && c < 0)
-//   ) {
-//     console.log("-");
+//     (a < 0 && b < 0 && c < 0)) {
+//     console.log('-');
 //   } else {
-//     console.log("+");
+//     console.log('+');
 //   }
 // }
 
@@ -107,21 +109,22 @@
 // and write a program to solve quadratic equations: ax 2 + bx + c = 0 .
 
 // function quadratic_eq(a, b, c) {
-//   let D = b * b - 4 * a * c;
+//   let discriminant = b * b - 4 * a * c;
 
 //   if (a == 0) {
-//     console.log("Enter valid constants");
+//     console.log('Enter valid constants');
 //     return;
 //   }
-//   if (D > 0) {
-//     let x1 = (-b + Math.sqrt(D)) / (2 * a);
-//     let x2 = (-b - Math.sqrt(D)) / (2 * a);
+
+//   if (discriminant > 0) {
+//     let x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+//     let x2 = (-b - Math.sqrt(discriminant)) / (2 * a);
 //     console.log(`Solutions are ${x1} and ${x2} `);
-//   } else if (D == 0) {
+//   } else if (discriminant == 0) {
 //     x1 = -b / (2 * a);
-//     console.log("x = ", x1);
+//     console.log('x = ', x1);
 //   } else {
-//     console.log("Solution does not exists");
+//     console.log('Solution does not exists');
 //   }
 // }
 
@@ -157,14 +160,14 @@
 
 // function is_num_contains_dig(dig, num) {
 //   if (String(num).includes(String(dig))) {
-//     alert("Yes");
+//     alert('Yes');
 //   } else {
-//     alert("No");
+//     alert('No');
 //   }
 // }
 
-// let dig = +prompt("Please insert a digit: ");
-// let num = +prompt("Please insert a number: ");
+// let dig = +prompt('Please insert a digit: ');
+// let num = +prompt('Please insert a number: ');
 // is_num_contains_dig(dig, num);
 
 /////////////////////////  Ex. 10 | End
@@ -179,12 +182,11 @@
 //     let first = String(num)[0];
 //     let last = String(num).slice(-1);
 //     new_num = +(last + String(num).slice(1, -1) + first);
-
 //     alert(`before: ${num}, now: ${new_num}`);
 //   }
 // }
 
-// let num = +prompt("Please insert a number: ");
+// let num = +prompt('Please insert a number: ');
 // swap_first_and_last_digits(num);
 
 /////////////////////////  Ex. 11 | End
@@ -197,21 +199,20 @@
 
 // function area_of_rect_or_triangle(form, a, b) {
 //   if (a <= 0 || b <= 0) {
-//     alert("Please enter only positives!");
+//     alert('Please enter only positives!');
 //     return;
 //   }
 
-//   if (form == "T" || form == "triangle") {
+//   if (form == 'T' || form == 'triangle') {
 //     alert(`Square of the triangle is ${(1 / 2) * (a * b)}`);
-//   } else if (form == "R" || form == "rectangle") {
+//   } else if (form == 'R' || form == 'rectangle') {
 //     alert(`Square of the rectangle is ${a * b}`);
 //   }
 // }
 
-// let form = prompt("Please write form name(T/triangle or R/rectangle)");
-// let a = +prompt("Please write 1 number: ");
-// let b = +prompt("Please write 2 number: ");
-
+// let form = prompt('Please write form name(T/triangle or R/rectangle)');
+// let a = +prompt('Please write 1 number: ');
+// let b = +prompt('Please write 2 number: ');
 // area_of_rect_or_triangle(form, a, b);
 
 /////////////////////////  Ex. 12 | End
@@ -222,9 +223,9 @@
 function difference(n) {
   let biggest = 0;
   let smallest = 9;
+
   while (n) {
     let r = n % 10;
-
     biggest = Math.max(r, biggest);
     smallest = Math.min(r, smallest);
     n = parseInt(n / 10);
@@ -234,12 +235,7 @@ function difference(n) {
   return diff;
 }
 
-let num = +prompt("Please insert a number: ");
-
-alert(
-  `difference beetwen smallest and biggest digits of ${num} is ${difference(
-    num
-  )}`
-);
+let num = +prompt('Please insert a number: ');
+alert(`difference beetwen smallest and biggest digits of ${num} is ${difference(num)}`);
 
 /////////////////////////  Ex. 13 | End
