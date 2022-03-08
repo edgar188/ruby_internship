@@ -50,7 +50,7 @@
 //   let prod = 1;
 
 //   if (num == 0) {
-//     console.log("Cannot calculate");
+//     console.log('Cannot calculate');
 //     return;
 //   }
 
@@ -61,9 +61,9 @@
 //   }
 
 //   if (prod % sum == 0) {
-//     console.log("Quotient is: ", prod / sum);
+//     console.log('Quotient is: ', prod / sum);
 //   } else {
-//     console.log("Remainder is: ", prod % sum);
+//     console.log('Remainder is: ', prod % sum);
 //   }
 // }
 
@@ -90,6 +90,7 @@
 
 //   return arr;
 // }
+
 // console.log(range(1, 5, 1));
 // console.log(range(10, 100, 3));
 // console.log(range(1, 5, 6));
@@ -101,12 +102,14 @@
 
 // function second_largest_number(nums) {
 //   // Complete the function
-//   var largest = nums[0];
+//   let largest = nums[0];
+
 //   for (let i = 1; i < nums.length; ++i) {
 //     if (nums[i] > largest) largest = nums[i];
 //   }
-//   var large;
-//   var index = 0;
+
+//   let large;
+//   let index = 0;
 
 //   //To ensure that the selected number is not the largest
 //   for (let j = 0; j < nums.length; ++j) {
@@ -126,8 +129,8 @@
 //   return index;
 // }
 
-// a = [23, -98, 0, -456, 12, 8];
-// b = [-60, 2, 43, -18, 5, -19, 36, 7, 56];
+// let a = [23, -98, 0, -456, 12, 8];
+// let b = [-60, 2, 43, -18, 5, -19, 36, 7, 56];
 // console.log(second_largest_number(a));
 // console.log(second_largest_number(b));
 
@@ -139,21 +142,22 @@
 // the array edges, the repeat amount specifies how many times the pad should be
 // repeated. Also, you should check that ​ padding amount <= length of array.
 
-function repeat_array_items(arr, pad_amount, n) {
-  if (pad_amount > arr.length) {
-    console.log("Invalid padding amount");
-    return -1;
-  }
-  let begin_value = arr.slice(0, pad_amount);
-  let end_values = arr.slice(-pad_amount);
+// function repeat_array_items(arr, pad_amount, n) {
+//   if (pad_amount > arr.length) {
+//     console.log('Invalid padding amount');
+//     return -1;
+//   }
 
-  for (var i = 0; i < n; i++) {
-    arr = arr.slice().reverse().concat(begin_value).reverse();
-    arr = arr.concat(end_values);
-  }
+//   let begin_value = arr.slice(0, pad_amount);
+//   let end_values = arr.slice(-pad_amount);
 
-  return arr;
-}
+//   for (let i = 0; i < n; i++) {
+//     arr = arr.slice().reverse().concat(begin_value).reverse();
+//     arr = arr.concat(end_values);
+//   }
 
-let a = [1, 2, 3, 4];
-console.log(repeat_array_items(a, 1, 3));
+//   return arr;
+// }
+
+// let a = [1, 2, 3, 4];
+// console.log(repeat_array_items(a, 1, 3));
