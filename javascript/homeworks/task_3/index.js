@@ -2,7 +2,7 @@
 // Print numbers from 10 to 1.
 
 // for (let i = 10; i > 0; i--) {
-//     console.log(i);
+//   console.log(i);
 // }
 
 /////////////////////////  Ex. 1 | End
@@ -28,7 +28,7 @@
 // Count numbers of digit 9 in a number.
 
 // function count_of_nines(num) {
-//   return String(num).split("9").length - 1;
+//   return String(num).split('9').length - 1;
 // }
 
 // console.log(count_of_nines(659978799924));
@@ -68,14 +68,13 @@
 
 //   for (let i = 1; i < num.length; i++) {
 //     if (num[i - 1] % 2 === 0 && num[i] % 2 === 0) {
-
 //       // If number is even, than add dash to array
-//       num_with_dashes.push("-", num[i]);
+//       num_with_dashes.push('-', num[i]);
 //     } else {
 //       num_with_dashes.push(num[i]);
 //     }
 //   }
-//   console.log(num_with_dashes.join(""));
+//   console.log(num_with_dashes.join(''));
 // }
 
 // add_dashes(25468);
@@ -89,7 +88,8 @@
 // function armstrong_number(n) {
 //   let sum = 0;
 //   let digit = 0;
-//   temp = n;
+//   let temp = n;
+
 //   while (temp > 0) {
 //     digit = temp % 10;
 //     sum += digit ** 3;
@@ -97,9 +97,9 @@
 //   }
 
 //   if (n == sum) {
-//     console.log(n, "Yes");
+//     console.log(n, 'Yes');
 //   } else {
-//     console.log(n, "No");
+//     console.log(n, 'No');
 //   }
 // }
 
@@ -113,6 +113,7 @@
 // function reverse(num) {
 //   let sum = 0;
 //   let digit = 0;
+
 //   while (num > 0) {
 //     digit = num % 10;
 //     sum = sum * 10 + digit;
@@ -121,7 +122,9 @@
 
 //   return sum;
 // }
+
 // console.log(reverse(123456789));
+
 /////////////////////////  Ex. 7 | End
 
 /////////////////////////  Ex. 8 | Start
@@ -130,6 +133,7 @@
 // function three_zeros(num) {
 //   let arr = [];
 //   let dig = 0;
+
 //   // Get each digit and add into array
 //   while (num) {
 //     dig = num % 10;
@@ -139,6 +143,7 @@
 
 //   // Check if array contains 3 successive zeros
 //   let count = 0;
+
 //   for (let n of arr) {
 //     if (n == 0) {
 //       count++;
@@ -146,11 +151,11 @@
 //       count = 0;
 //     }
 //     if (count == 3) {
-//       return "Yes";
+//       return 'Yes';
 //     }
 //   }
 
-//   return "No";
+//   return 'No';
 // }
 
 // console.log(three_zeros(350120003));
@@ -163,6 +168,7 @@
 
 // function perfect_number(num) {
 //   let sum = 0;
+
 //   for (let i = 1; i < num; i++) {
 //     if (num % i == 0) {
 //       sum += i;
@@ -186,14 +192,13 @@
 
 // function remove_zeros(n) {
 //   // Crteate list from my number
-//   let list = n.toString().split("");
+//   let list = n.toString().split('');
 
-//   if (list.filter((el) => el === "0").length < 2) {
-//     return "Nothing to remove!";
+//   if (list.filter((el) => el === '0').length < 2) {
+//     return 'Nothing to remove!';
 //   }
-//   return +list
-//     .filter((el, i, arr) => el !== "0" || i === arr.lastIndexOf(el))
-//     .join("");
+
+//   return +list.filter((el, i, arr) => el !== '0' || i === arr.lastIndexOf(el)).join('');
 // }
 
 // console.log(remove_zeros(45120));
@@ -223,6 +228,7 @@
 //   }
 
 //   let k = 0;
+
 //   while (digits.length != 0) {
 //     k = k * 10 + digits[digits.length - 1];
 //     digits.pop();
@@ -242,12 +248,14 @@
 //   let primes = [2];
 //   let x = 3;
 //   let count = 0;
+
 //   do {
 //     for (let y = 2; y < x; y++) {
 //       if (x % y === 0) {
 //         count++;
 //       }
 //     }
+
 //     if (count === 0) {
 //       primes.push(x);
 //       x++;
@@ -259,6 +267,7 @@
 
 //   return primes[primes.length - 1];
 // }
+
 // console.log(primeMover(10000));
 
 /////////////////////////  Ex. 12 | End
@@ -268,12 +277,14 @@
 
 // function my_pow(num, pow) {
 //   let res = 0;
+
 //   for (let i = 0; i < pow; i++) {
 //     res = num ** pow;
 //   }
 
 //   return res;
 // }
+
 // console.log(my_pow(4, 5));
 
 /////////////////////////  Ex. 13 | End
@@ -287,6 +298,7 @@
 //     y = x % y;
 //     x = t;
 //   }
+
 //   return x;
 // }
 
@@ -309,11 +321,12 @@
 //       divisor++;
 //     }
 //   }
+
 //   return factors;
 // }
 
-// n = 420;
-// console.log(`Prime factors of ${n}: are ${prime_factors(n).join(" ")}`);
+// let n = 420;
+// console.log(`Prime factors of ${n}: are ${prime_factors(n).join(' ')}`);
 
 /////////////////////////  Ex. 15 | End
 
@@ -342,10 +355,11 @@
 // Given a number n ( n >= 0 ). Print n Fibonacci number.
 
 // function fibonacci(n) {
-//     if (n < 2) {
-//         return n;
-//     }
-//     return fibonacci(n - 1) + fibonacci(n - 2)
+//   if (n < 2) {
+//     return n;
+//   }
+
+//   return fibonacci(n - 1) + fibonacci(n - 2);
 // }
 
 // console.log(fibonacci(20));
@@ -369,6 +383,7 @@
 // }
 
 // fibonacci_series(45);
+
 /////////////////////////  Ex. 19 | End
 
 /////////////////////////  Ex. 20 | Start
@@ -376,12 +391,13 @@
 
 // let row = 7;
 // let i, j;
+
 // // First part
 // for (i = 1; i <= row; i++) {
 //   for (j = 1; j <= i; j++) {
 //     document.write(j);
 //   }
-//   document.write("<br>");
+//   document.write('<br>');
 // }
 
 // // Second part
@@ -389,7 +405,7 @@
 //   for (j = 1; j <= i; j++) {
 //     document.write(j);
 //   }
-//   document.write("<br>");
+//   document.write('<br>');
 // }
 
 /////////////////////////  Ex. 20 | End
@@ -425,9 +441,10 @@
 //     j = String(j);
 //     process.stdout.write(i);
 //     process.stdout.write(j);
-//     process.stdout.write(", ");
+//     process.stdout.write(', ');
 //   }
-//   console.log("");
+
+//   console.log('');
 // }
 
 /////////////////////////  Ex. 22 | End
@@ -443,58 +460,62 @@
 
 // function password_validation(password) {
 //   let validated = true;
+
 //   if (password.length < 6) {
 //     validated = false;
-//     console.log("Password length must be atleast 6 characters");
+//     console.log('Password length must be atleast 6 characters');
 //   }
+
 //   if (password.length > 16) {
 //     validated = false;
-//     console.log("Password length must not exceed 16 characters");
+//     console.log('Password length must not exceed 16 characters');
 //   }
 
 //   if (!/[a-z]/.test(password)) {
 //     validated = false;
-//     console.log("Must contain at least one lowercase letter");
+//     console.log('Must contain at least one lowercase letter');
 //   }
 
 //   if (!/[A-Z]/.test(password)) {
 //     validated = false;
-//     console.log("Must contain at least one uppercase letter");
+//     console.log('Must contain at least one uppercase letter');
 //   }
 
 //   if (!/[0-9]/.test(password)) {
 //     validated = false;
-//     console.log("Must contain at least one number");
+//     console.log('Must contain at least one number');
 //   }
+
 //   if (!/[$#@]/.test(password)) {
 //     validated = false;
-//     console.log("Must contain at least one character from [$#@]");
+//     console.log('Must contain at least one character from [$#@]');
 //   }
 
-//   validated ? console.log("Valid") : console.log("Invalid");
-//   console.log("--------------------------------------");
+//   validated ? console.log('Valid') : console.log('Invalid');
+//   console.log('--------------------------------------');
 // }
 
-// password_validation("12asdf");
-// password_validation("Aaza1234566#");
+// password_validation('12asdf');
+// password_validation('Aaza1234566#');
 
 /////////////////////////  Ex. 23 | End
 
 /////////////////////////  Ex. 24 | Start
 // Write a program to print X star pattern series using loop.
 
-function x_pattern(row) {
-  for (let i = 0; i <= row; i++) {
-    for (let j = 0; j <= row; j++) {
-      if (i == j || i + j == row) {
-        process.stdout.write("*");
-      } else {
-        process.stdout.write(" ");
-      }
-    }
-    console.log("");
-  }
-}
-x_pattern(20);
+// function x_pattern(row) {
+//   for (let i = 0; i <= row; i++) {
+//     for (let j = 0; j <= row; j++) {
+//       if (i == j || i + j == row) {
+//         process.stdout.write('*');
+//       } else {
+//         process.stdout.write(' ');
+//       }
+//     }
+
+//     console.log('');
+//   }
+// }
+// x_pattern(20);
 
 /////////////////////////  Ex. 24 | End
