@@ -1,12 +1,20 @@
-header {
-  background-color: #293B5F;
+* {
+  padding: 0;
+  margin: 0;
 }
 
-main {
+.bg-blue-100 {
+  background-color: #dbe6fd;
+}
+
+.bg-blue-600 {
+  background-color: #47597e;
+}
+
+.bg-blue-700 {
+  background-color: #293b5f;
+}
+
+.min-height-750 {
   min-height: 750px;
-  background-color: #DBE6FD;
-}
-
-footer {
-  background-color: #47597E;
 }
