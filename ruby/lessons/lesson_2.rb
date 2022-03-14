@@ -11,11 +11,10 @@ class Person
 end
 
 class Developer < Person
-  @@count = 0
-
   def initialize(name, position)
     super(name)
     @position = position
+    defined?(@@count) ? @@count += 1 : @@count = 1
   end
 
   attr_accessor :position
@@ -29,7 +28,7 @@ class Developer < Person
   end
 end
 
-z = Developer.new('Ziggs Ziggs', 'Ruby Developer')
-p = Developer.new('Ziggs 2', 'Python Developer')
+ruby = Developer.new('Ziggs Ziggs', 'Ruby Developer')
+python = Developer.new('Ziggs 2', 'Python Developer')
 # pp z.say_hi
-# pp Developer.count
+pp Developer.count
