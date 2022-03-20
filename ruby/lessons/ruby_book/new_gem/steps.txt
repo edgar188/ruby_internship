@@ -1,0 +1,4 @@
+1) Create all neccessary folders(bin, doc, lib, pkg, test)
+2) Create logic of gem in lib folder
+3) Create 'gem_name.gemspec' file in root of project
+4) Run gem build 'gem_name.gemspec'

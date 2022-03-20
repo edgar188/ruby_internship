@@ -98,32 +98,31 @@
 ##############  Ex. 11 | Start
 # Write a Ruby program to check two integers and return true if one of them is 20 otherwise return their sum.
 
-# def is_number_20(a, b)
-#   if a == 20 || b == 20
-#     pp true
-#   else
-#     pp a + b
-#   end
+# def is_number_20(int_1, int_2)
+#   return true if int_1 == 20 || int_2 == 20
+#   int_1 + int_2
 # end
 
-# is_number_20(20, 22)
-# is_number_20(5, 22)
+# pp is_number_20(20, 22)
+# pp is_number_20(5, 22)
 ##############  Ex. 11 | End
 
 ##############  Ex. 12 | Start
 # Write a Ruby program to find the greatest of three numbers.
 
-# def max(a, b, c)
-#   if b > a && b > c
-#     pp "b = #{b} is greatest"
-#   elsif c > a && c > b 
-#     pp "c = #{c} is greatest"
-#   else 
-#     pp "a = #{a} is greatest"
+# def max(*args)
+#   max_num = args[0]
+
+#   for num in args do
+#     if num > max_num
+#       max_num = num
+#     end
 #   end
+
+#   max_num
 # end
 
-# max(2000, 22, 444)
+# pp max(14332432, 24543, 343454)
 ##############  Ex. 12 | End
 
 ##############  Ex. 13 | Start
@@ -131,8 +130,9 @@
 
 # print("Input your number: ")
 # number = gets.to_i 
-
-# if number.between?(10, 100) || number == 200  
+# if number == 200
+#   pp true
+# elsif number.between?(10, 100)   
 #   pp true
 # else
 #   pp false
@@ -150,16 +150,13 @@
 ##############  Ex. 15 | Start
 # Write a Ruby program to check two non-negative integer values and return true if they have the same last digit.
 
-# def same_last_digit(a, b)
-#   if a % 10 == b % 10
-#     pp true
-#   else 
-#     pp false
-#   end
+# def same_last_digit(int_1, int_2)
+#   return true if int_1 % 10 == int_2 % 10  
+#   false
 # end
 
-# same_last_digit(347, 567)
-# same_last_digit(345, 567)
+# pp same_last_digit(347, 567)
+# pp same_last_digit(345, 567)
 ##############  Ex. 15 | End
 
 ##############  Ex. 16 | Start
@@ -167,20 +164,26 @@
 
 # def sum(a, b, c)
 #   if a == b || a == c || b == c
-#     pp "Same values"
+#     "Same values"
 #   else
-#     pp a + b + c
+#     a + b + c
 #   end
 # end
 
-# sum(0,3,4)
-# sum(1,2,2)
-# sum(22,22,3)
-# sum(3,22,3)
+# pp sum(0,3,4)
+# pp sum(1,2,2)
+# pp sum(22,22,3)
+# pp sum(3,22,3)
 ##############  Ex. 16 | End
 
-
 ##############  Ex. 17 | Start
+# Write a Ruby program to check three given integers and return their sum. However, If one of the values is the same as another of the values, it does not count towards the sum.
+
+## Done in Ex 16
+
+##############  Ex. 17 | End
+
+##############  Ex. 18 | Start
 # Write a Ruby program to test whether a year is leap year or not.
 
 # require 'date'
@@ -197,42 +200,45 @@
 # is_leap(1500)
 # is_leap(1600)
 # is_leap(2020)
-##############  Ex. 17 | End
-
-##############  Ex. 18 | Start
-# Write a Ruby program to check two given integers and return the larger value. However, if the two values have the same remainder when divided by 5 then return the smaller value and if the two values are the same, return 0.
-
-# def larger_number(a, b)
-#   if a == b
-#     pp 0
-#   elsif a % 5 == b % 5 
-#     pp a < b ? a : b
-#   else 
-#     pp a > b ? a : b
-#   end
-# end
-
-# larger_number(2,2)
-# larger_number(2,3)
-# larger_number(5,10)
 ##############  Ex. 18 | End
 
 ##############  Ex. 19 | Start
+# Write a Ruby program to check two given integers and return the larger value. However, if the two values have the same remainder when divided by 5 then return the smaller value and if the two values are the same, return 0.
+
+# def larger_number(int_1, int_2)
+#   if int_1 == int_2
+#     0
+#   elsif int_1 % 5 == int_2 % 5 
+#     int_1 < int_2 ? int_1 : int_2
+#   else 
+#     int_1 > int_2 ? a : int_2
+#   end
+# end
+
+# pp larger_number(2,2)
+# pp larger_number(2,3)
+# pp larger_number(5,10)
+##############  Ex. 19 | End
+
+##############  Ex. 20 | Start
 # Write a Ruby program to check whether the sequence of numbers 10, 20, 30 appears anywhere in a given array of integers.
 
 # def is_appears(array)
 #   idx = 0
 #   sequence = [10, 20, 30]
+
 #   while idx < array.length - 2
 #     if array[idx..idx+2] == sequence
 #       return true
 #     end
+
 #     idx += 1
 #   end
+
 #   return false
 # end
 
 # pp is_appears([1, 2, 3, 4])
 # pp is_appears([1, 2, 10, 20, 30, 45])
 # pp is_appears([1, 2, 10, 20, 45, 30])
-##############  Ex. 19 | End
+##############  Ex. 20 | End
