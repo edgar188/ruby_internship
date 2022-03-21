@@ -20,7 +20,7 @@
 ##############  Ex. 4 | Start
 #  Write a Ruby program which accept the radius of a circle from the user and compute the parameter and area.
 
-# print "Input the radius of the circle: "
+# print 'Input the radius of the circle: '
 # radius = gets.chomp
 # parameter = 2 * Math::PI * radius.to_f  
 # area = Math::PI * radius.to_f ** 2 
@@ -32,9 +32,9 @@
 ##############  Ex. 5 | Start
 # Write a Ruby program which accept the user's first and last name and print them in reverse order with a space between them.
 
-# print "Input your first name: "
+# print 'Input your first name: '
 # first_name = gets.chomp
-# print "Input your last name: "
+# print 'Input your last name: '
 # last_name = gets.chomp
 # pp "Hello #{last_name} #{first_name}"
 ##############  Ex. 5 | End
@@ -42,9 +42,9 @@
 ##############  Ex. 6 | Start
 # Write a Ruby program to accept a filename from the user print the extension of that.
 
-# print "File name: "
+# print 'File name: '
 # file_name = gets.chomp
-# pp File.basename(file_name, ".*")
+# pp File.basename(file_name, '.*')
 # pp File.extname(file_name)
 # pp File.expand_path(file_name)
 ##############  Ex. 6 | End
@@ -53,9 +53,9 @@
 ##############  Ex. 7 | Start
 # Write a Ruby program to print the following 'here document'. Write a Ruby program to accept a filename from the user print the extension of that.
 
-# text = File.readlines("test.txt") 
+# text = File.readlines('test.txt') 
 # puts text
-# puts "-"*60
+# puts '-'*60
 # new_text = text.to_s[/.+?(?=string -------->)/]
 # puts new_text.to_s
 ##############  Ex. 7 | End
@@ -63,7 +63,7 @@
 ##############  Ex. 8 | Start
 # Write a Ruby program to create a new string from a given string using the first three characters or whatever is there if the string is less than length 3. Return n copies of the string.
 
-# print "Your word: "
+# print 'Your word: '
 # word = gets.chomp
 
 # if word.length > 2 
@@ -77,20 +77,20 @@
 ##############  Ex. 9 | Start
 # Write a Ruby program to test whether you are minor (Consider a child unless he or she is less than 18 years old.) or not.print "Your number: "
 
-# print "Input your age: "
+# print 'Input your age: '
 # age = gets.to_i
 
 # if age < 18
-#   pp "You are a minor"
+#   pp 'You are a minor'
 # else
-#   pp "You are not a minor"
+#   pp 'You are not a minor'
 # end
 ##############  Ex. 9 | End
 
 ##############  Ex. 10 | Start
 # Write a Ruby program to compute the absolute difference between n and 33 and return double the absolute difference if n is over 33.
 
-# print "Input your number: "
+# print 'Input your number: '
 # number = gets.to_i
 # pp (33 - number).abs
 ##############  Ex. 10 | End
@@ -128,15 +128,11 @@
 ##############  Ex. 13 | Start
 # Write a Ruby program to check whether a number is within 10 of 100 or 200.
 
-# print("Input your number: ")
+# print('Input your number: ')
 # number = gets.to_i 
-# if number == 200
-#   pp true
-# elsif number.between?(10, 100)   
-#   pp true
-# else
-#   pp false
-# end
+
+# pp true ? number == 200 || number.between?(10, 100) : false
+
 ##############  Ex. 13 | End
 
 ##############  Ex. 14 | Start
@@ -162,18 +158,18 @@
 ##############  Ex. 16 | Start
 # Write a Ruby program to check three given integers and return their sum. However, If one of the values is the same as another of the values, it does not count towards the sum.
 
-# def sum(a, b, c)
-#   if a == b || a == c || b == c
-#     "Same values"
+# def sum(int_1, int_2, int_3)
+#   if int_1 == int_2 || int_1 == int_3 || int_2 == int_3
+#     'Same values'
 #   else
-#     a + b + c
+#     int_1 + int_2 + int_3
 #   end
 # end
 
-# pp sum(0,3,4)
-# pp sum(1,2,2)
-# pp sum(22,22,3)
-# pp sum(3,22,3)
+# pp sum(0, 3, 4)
+# pp sum(1, 2, 2)
+# pp sum(22, 22, 3)
+# pp sum(3, 22, 3)
 ##############  Ex. 16 | End
 
 ##############  Ex. 17 | Start
