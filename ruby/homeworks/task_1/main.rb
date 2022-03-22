@@ -131,7 +131,7 @@
 # print('Input your number: ')
 # number = gets.to_i 
 
-# pp true ? number == 200 || number.between?(10, 100) : false
+# pp number == 200 || number.between?(10, 100) 
 
 ##############  Ex. 13 | End
 
