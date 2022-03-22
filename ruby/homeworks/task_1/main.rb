@@ -28,7 +28,6 @@
 # pp "The area is #{area}"
 ##############  Ex. 4 | End
 
-
 ##############  Ex. 5 | Start
 # Write a Ruby program which accept the user's first and last name and print them in reverse order with a space between them.
 
@@ -49,7 +48,6 @@
 # pp File.expand_path(file_name)
 ##############  Ex. 6 | End
 
-
 ##############  Ex. 7 | Start
 # Write a Ruby program to print the following 'here document'. Write a Ruby program to accept a filename from the user print the extension of that.
 
@@ -63,36 +61,45 @@
 ##############  Ex. 8 | Start
 # Write a Ruby program to create a new string from a given string using the first three characters or whatever is there if the string is less than length 3. Return n copies of the string.
 
+# def n_copies(word)
+#   if word.length > 2 
+#     return word[...3]
+#   end
+  
+#   word * word.length
+# end
+
 # print 'Your word: '
 # word = gets.chomp
-
-# if word.length > 2 
-#   new_word = word[...3]
-#   pp new_word
-# else 
-#   pp word * word.length
-# end
+# pp n_copies(word)
 ##############  Ex. 8 | End
 
 ##############  Ex. 9 | Start
 # Write a Ruby program to test whether you are minor (Consider a child unless he or she is less than 18 years old.) or not.print "Your number: "
 
+# def is_minor(age)
+#   if age < 18
+#     return 'You are a minor'
+#   end
+  
+#   return 'You are not a minor'
+# end
+
 # print 'Input your age: '
 # age = gets.to_i
-
-# if age < 18
-#   pp 'You are a minor'
-# else
-#   pp 'You are not a minor'
-# end
+# pp is_minor(age)
 ##############  Ex. 9 | End
 
 ##############  Ex. 10 | Start
 # Write a Ruby program to compute the absolute difference between n and 33 and return double the absolute difference if n is over 33.
 
+# def absolute_diff(number)
+#    (33 - number).abs
+# end
+
 # print 'Input your number: '
 # number = gets.to_i
-# pp (33 - number).abs
+# pp absolute_diff(number)
 ##############  Ex. 10 | End
 
 ##############  Ex. 11 | Start
@@ -132,7 +139,6 @@
 # number = gets.to_i 
 
 # pp number == 200 || number.between?(10, 100) 
-
 ##############  Ex. 13 | End
 
 ##############  Ex. 14 | Start
@@ -147,7 +153,7 @@
 # Write a Ruby program to check two non-negative integer values and return true if they have the same last digit.
 
 # def same_last_digit(int_1, int_2)
-#   return true if int_1 % 10 == int_2 % 10  
+#   return true if int_1 % 10 == int_2 % 10
 #   false
 # end
 
@@ -160,10 +166,10 @@
 
 # def sum(int_1, int_2, int_3)
 #   if int_1 == int_2 || int_1 == int_3 || int_2 == int_3
-#     'Same values'
-#   else
-#     int_1 + int_2 + int_3
+#     return 'Same values'
 #   end
+
+#   int_1 + int_2 + int_3
 # end
 
 # pp sum(0, 3, 4)
@@ -186,16 +192,16 @@
 
 # def is_leap(year)
 #   if Date.leap?(year)
-#     pp "#{year} is leap year"
-#   elsif 
-#     pp "#{year} is not leap year"
-#   end
+#     return "#{year} is leap year"
+#   end 
+
+#   "#{year} is not leap year"
 # end
 
-# is_leap(2012)
-# is_leap(1500)
-# is_leap(1600)
-# is_leap(2020)
+# pp is_leap(2012)
+# pp is_leap(1500)
+# pp is_leap(1600)
+# pp is_leap(2020)
 ##############  Ex. 18 | End
 
 ##############  Ex. 19 | Start
@@ -231,7 +237,7 @@
 #     idx += 1
 #   end
 
-#   return false
+#   false
 # end
 
 # pp is_appears([1, 2, 3, 4])
