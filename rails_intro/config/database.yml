@@ -19,8 +19,8 @@ default: &default
 development:
   <<: *default
   database: <%= ENV["DB_NAME"] %>
-  host: <%= ENV["DB_HOST_DEV"] %>
-  port: <%= ENV["DB_PORT_DEV"] %>
+  host: <%= ENV["DB_HOST"] %>
+  port: <%= ENV["DB_PORT"] %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
