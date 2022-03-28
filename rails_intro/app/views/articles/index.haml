@@ -1,0 +1,7 @@
+.container
+  %h2.title-lg.mb All articles
+  - @articles.each do |article|
+    %p.mb-sm
+      = link_to "article #{article.id}: #{article.title}", article_path(article.id)
+  %p.mt
+    = link_to "Create new article", new_article_path, class: 'button button-main'

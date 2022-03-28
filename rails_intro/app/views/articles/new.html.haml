@@ -1,0 +1,9 @@
+.container
+  %h2.title-lg New article
+  = form_with model: @article do |form|
+    %p.mt= form.label :title
+    %p= form.text_field :title, class: 'form-text-field'
+    %p= form.label :body, 'article text'
+    %p= form.text_area :body, rows: 5, class: 'form-text-area'
+    %p.mt
+      = form.submit  class: 'button button-main'

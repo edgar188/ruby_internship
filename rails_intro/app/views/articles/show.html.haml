@@ -1,0 +1,10 @@
+.container
+  %h2.title-lg.mb
+    article #{@article.id}
+  %p.mb-sm= @article.body
+  .mt
+    = link_to fa_icon('pencil'), edit_article_path(@article), title: 'Update article'
+    = button_to fa_icon('trash-o'), article_path(@article), method: :delete, title: 'Delete article'
+  %p.mt
+    = link_to "All articles", articles_path, class: 'button button-main'
+
