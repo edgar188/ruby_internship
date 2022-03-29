@@ -1,0 +1,16 @@
+.container
+  %h2.title-lg 
+    District #{@district.id} editting
+  = form_with model: @district do |form|
+    %p.mt= form.label :name
+    %p= form.text_field :name, class: 'form-text-field'
+    %p.mt= form.label :phone
+    %p= form.text_field :phone, class: 'form-text-field'
+    %p.mt= form.label :mailing_address
+    %p= form.text_field :mailing_address, class: 'form-text-field'
+    %p.mt= form.label :notes, 'Notes text'
+    %p= form.text_area :notes, rows: 5, class: 'form-text-area'
+    %p.mt= form.label :status
+    %p= form.text_area :status, class: 'form-text-field'
+    %p.mt
+      = form.submit 'Save', class: 'button button-main'

@@ -1,0 +1,7 @@
+.container
+  %h2.title-lg.mb All districts
+  - @districts.each do |district|
+    %p.mb-sm
+      = link_to "district #{district.id}: #{district.name}", district_path(district.id)
+  %p.mt
+    = link_to "Create new district", new_district_path, class: 'button button-main'

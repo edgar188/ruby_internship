@@ -4,7 +4,9 @@
   %p.mb-sm= @article.body
   .mt
     = link_to fa_icon('pencil'), edit_article_path(@article), title: 'Update article'
-    = button_to fa_icon('trash-o'), article_path(@article), method: :delete, title: 'Delete article'
+    = form_tag(article_path(@article), method: :delete) do
+      = button_tag(type: 'submit') do
+        = content_tag(:i, nil, class: 'fa fa-trash')
   %p.mt
     = link_to "All articles", articles_path, class: 'button button-main'
 
