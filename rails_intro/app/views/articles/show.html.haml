@@ -2,11 +2,29 @@
   %h2.title-lg.mb
     article #{@article.id}
   %p.mb-sm= @article.body
+
+  -## BUTTONS
   .mt
     = link_to fa_icon('pencil'), edit_article_path(@article), title: 'Update article'
-    = form_tag(article_path(@article), method: :delete) do
+    = form_tag(article_path(@article), class: 'no-wrap', method: :delete) do
       = button_tag(type: 'submit') do
         = content_tag(:i, nil, class: 'fa fa-trash')
+
+  -## SHOW ALL ARTICLE ARTS FOR CURRENT ARTICLE 
+  %h2.title-lg.mt Article arts
+  - @article_arts.each do |article_art|
+    .mt
+      = article_art.id 
+      = ':'
+      = article_art.name
+      = form_tag(article_path(@article), class: 'no-wrap', method: :delete)  do
+        = button_tag(type: 'submit') do
+          = content_tag(:i, nil, class: 'fa fa-trash')
+
   %p.mt
     = link_to "All articles", articles_path, class: 'button button-main'
+
+
+
+
 

@@ -15,12 +15,15 @@ class DistrictsController < ApplicationController
   def create
     @district = District.new(district_params)
 
-    if @district.save
-      redirect_to @district
-    else
-      render :new
+    respond_to do |format|
+      if @district.save  
+        format.html { redirect_to districts_path(@district), notice: 'district was successfully created.' }
+        format.json { render :show, status: :created, location: @district }
+      else
+        format.html { render :new }
+        format.json { render json: @district.errors, status: :unprocessable_entity }
+      end
     end
-
   end
 
   def edit
