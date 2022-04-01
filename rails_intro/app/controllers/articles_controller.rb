@@ -6,10 +6,14 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article_arts = @article.article_arts.all
   end
 
   def new
     @article = Article.new
+  end
+
+  def edit
   end
 
   def create
@@ -20,26 +24,23 @@ class ArticlesController < ApplicationController
     else
       render :new
     end
-
-  end
-
-  def edit
   end
 
   def update
     @article.update(article_params)
-    redirect_to article_path(@article)
+    redirect_to article_path(@article), notice: 'Article edited.'
   end
 
   def destroy
     @article.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: 'Article deleted.'
   end
 
   private
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    ## Strong parameter
+    params.require(:article).permit(:title, :body, article_arts_attributes: [:id, :name] )
   end
 
   def set_article

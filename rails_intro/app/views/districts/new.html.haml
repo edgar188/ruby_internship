@@ -1,6 +1,9 @@
+= render 'shared/errors', object: @district
+
 .container
   %h2.title-lg New district
   = form_with model: @district do |form|
+
     %p.mt= form.label :name
     %p= form.text_field :name, class: 'form-text-field'
     %p.mt= form.label :phone
@@ -8,7 +11,7 @@
     %p.mt= form.label :mailing_address
     %p= form.text_field :mailing_address, class: 'form-text-field'
     %p.mt= form.label :notes, 'Notes text'
-    %p= form.text_area :notes, rows: 5, class: 'form-text-area'
+    %p= form.text_field :notes,  class: 'form-text-field'
     %p.mt= form.label :status
     %p= form.text_field :status, class: 'form-text-field', data: {autonumeric: {mDec: 0}}
     %p.mt

@@ -3,7 +3,21 @@
   = form_with model: @article do |form|
     %p.mt= form.label :title
     %p= form.text_field :title, class: 'form-text-field'
-    %p= form.label :body, 'article text'
-    %p= form.text_area :body, rows: 5, class: 'form-text-area'
+    %div
+      = form.label :body
+      %br/
+      = form.text_area :body
+      %br/
+      - @article.errors.full_messages_for(:body).each do |message|
+        %div= message
+        %hr/
+
+    -## CREATE NEW ARTICLE ART
+    %hr.mt 
+    %h2.title-lg.mt New article art
+    = form.fields_for 'article_arts_attributes[1]' do |ff|
+      %p.mt= ff.label :name
+      %p= ff.text_field :name, class: 'form-text-field'
+
     %p.mt
-      = form.submit  class: 'button button-main'
+      = form.submit class: 'button button-main'
