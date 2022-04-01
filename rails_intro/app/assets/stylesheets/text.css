@@ -1,17 +1,19 @@
 body {
   font-family: 'Trebuchet MS', sans-serif;
-  color: #03071E;
+  color: #03071e;
 }
 
-a, button {
-    color: #DC2F02;
+a,
+button {
+  color: #dc2f02;
 }
 
 .title-lg {
   font-size: 175%;
 }
 
-.title-md, .title {
+.title-md,
+.title {
   font-size: 150%;
 }
 
@@ -21,4 +23,9 @@ a, button {
 
 .text-sm {
   font-size: 80%;
+}
+
+.danger {
+  font-size: 14px;
+  color: red;
 }

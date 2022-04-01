@@ -1,16 +1,19 @@
 .container
   %h2.title-lg New article
+
+  - @article.errors.full_messages.each do |message|
+    %p.danger= message
+    %hr
+
   = form_with model: @article do |form|
-    -# %p.mt= form.label :title
     %p.mt= form.text_field :title, class: 'form-text-field', placeholder: 'title'
     %div
-      -# = form.label :body
-      %br/
+      %br
       = form.text_area :body, placeholder: 'Article text'
-      %br/
-      - @article.errors.full_messages_for(:body).each do |message|
-        %div= message
-        %hr/
+
+      %br
+      = form.fields_for :article_arts do |art|
+        = art.text_field :name, placeholder: 'Art name'
 
     -## CREATE NEW ARTICLE ART
     %hr.mt 
@@ -22,6 +25,8 @@
     -## ADD NEW FIELDS FOR ARTICLE ART
     #article_arts
 
-
     %p.mt.align-center
       = form.submit class: 'button button-main'
+
+
+= javascript_include_tag "controllers/articles"
