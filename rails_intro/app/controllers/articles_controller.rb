@@ -40,7 +40,7 @@ class ArticlesController < ApplicationController
 
   def article_params
     ## Strong parameter
-    params.require(:article).permit(:title, :body, article_arts_attributes: [:id, :name] )
+    params.require(:article).permit(:title, :body, article_arts_attributes: [:id, :name, :_destroy] )
   end
 
   def set_article

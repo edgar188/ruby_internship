@@ -1,12 +1,12 @@
 .container
   %h2.title-lg New article
   = form_with model: @article do |form|
-    %p.mt= form.label :title
-    %p= form.text_field :title, class: 'form-text-field'
+    -# %p.mt= form.label :title
+    %p.mt= form.text_field :title, class: 'form-text-field', placeholder: 'title'
     %div
-      = form.label :body
+      -# = form.label :body
       %br/
-      = form.text_area :body
+      = form.text_area :body, placeholder: 'Article text'
       %br/
       - @article.errors.full_messages_for(:body).each do |message|
         %div= message
@@ -15,9 +15,13 @@
     -## CREATE NEW ARTICLE ART
     %hr.mt 
     %h2.title-lg.mt New article art
-    = form.fields_for 'article_arts_attributes[1]' do |ff|
-      %p.mt= ff.label :name
-      %p= ff.text_field :name, class: 'form-text-field'
+    .align-center
+      = button_tag(type: 'submit', id: 'button_plus') do
+        = content_tag(:i, nil, class: 'fa fa-plus')
 
-    %p.mt
+    -## ADD NEW FIELDS FOR ARTICLE ART
+    #article_arts
+
+
+    %p.mt.align-center
       = form.submit class: 'button button-main'

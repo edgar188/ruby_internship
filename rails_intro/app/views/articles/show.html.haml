@@ -1,6 +1,5 @@
 .container
-  %h2.title-lg.mb
-    article #{@article.id}
+  %h2.title-lg.mb= @article.title
   %p.mb-sm= @article.body
 
   -## BUTTONS
@@ -17,9 +16,11 @@
       = article_art.id 
       = ':'
       = article_art.name
-      = form_tag(article_path(@article), class: 'no-wrap', method: :delete)  do
-        = button_tag(type: 'submit') do
-          = content_tag(:i, nil, class: 'fa fa-trash')
+
+      -## REMOVE ARTICLE ART 
+      -# = form_tag(article_article_arts_path(@article), class: 'no-wrap', method: :delete)  do
+      -#   = button_tag(type: 'submit') do
+      -#     = content_tag(:i, nil, class: 'fa fa-trash')
 
   %p.mt
     = link_to "All articles", articles_path, class: 'button button-main'
