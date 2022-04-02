@@ -1,31 +1,33 @@
-.container
-  %h2.title-lg.mb= @article.title
-  %p.mb-sm= @article.body
-
+.container.bg-info
+  - flash.each do |type, msg| 
+    %p.text-success= msg
+  %h2= "Title: #{@article.title}"
+  %p= "Text: #{@article.body}" 
   -## BUTTONS
-  .mt
-    = link_to fa_icon('pencil'), edit_article_path(@article), title: 'Update article'
-    = form_tag(article_path(@article), class: 'no-wrap', method: :delete) do
-      = button_tag(type: 'submit') do
-        = content_tag(:i, nil, class: 'fa fa-trash')
-
+  .container-sm{style: "display: flex; gap: 3px"}
+    %p
+      = link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning'
+    = form_tag(article_path(@article), method: :delete) do
+      = button_tag(type: 'submit', class: 'btn btn-danger') do
+        = content_tag(:strong, 'Delete')
+    %p
+      = link_to 'All articles', articles_path, class: 'btn btn-primary'
   -## SHOW ALL ARTICLE ARTS FOR CURRENT ARTICLE 
-  %h2.title-lg.mt Article arts
+  %h2.text-danger Article arts
   - @article_arts.each do |article_art|
     .mt
-      = article_art.id 
-      = ':'
-      = article_art.name
-
-      -## REMOVE ARTICLE ART 
-      -# = form_tag(article_article_arts_path(@article), class: 'no-wrap', method: :delete)  do
-      -#   = button_tag(type: 'submit') do
-      -#     = content_tag(:i, nil, class: 'fa fa-trash')
-
+      %p= "Name: #{article_art.name}"
+      %p= "Likes: 000"
+      .container-sm{style: "background: #e2f4cc;"}
+        = button_tag(type: 'button', id: 'button_plus', class: 'btn btn-danger btn-sm') do
+          = content_tag(:strong, '+')
+        %br
+        %br
+        %p= 'Comment 1' 
+        %hr{style: "margin: 3px 0; height: 1px; background: black;"}
+        %p= 'Comment 2'
+        %hr{style: "margin: 3px 0; height: 1px; background: black;"}
+        %p= 'Comment 3'
+      %hr{style: "margin: 5px 0; height: 3px; background: black;"}
   %p.mt
-    = link_to "All articles", articles_path, class: 'button button-main'
-
-
-
-
-
+    = link_to 'All articles', articles_path, class: 'btn btn-primary'

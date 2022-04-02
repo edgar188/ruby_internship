@@ -1,10 +1,9 @@
-.container
-  %h2.title-lg
+.container.bg-info
+  %h2
     Article editting #{@article.id}
   = form_with model: @article do |form|
-    %p.mt= form.label :title
-    %p= form.text_field :title, class: 'form-text-field'
+    %p= form.label :title
+    %p= form.text_field :title
     %p= form.label :body, 'Article text'
-    %p= form.text_area :body, rows: 5, class: 'form-text-area'
-    %p.mt
-      = form.submit 'Save', class: 'button button-main'
+    %p= form.text_area :body
+    %p= form.submit 'Save', class: 'btn btn-success'
