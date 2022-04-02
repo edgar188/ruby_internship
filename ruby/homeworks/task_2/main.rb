@@ -17,12 +17,8 @@
 #     12 => :December
 #   }
 
-#   if number < 1
-#     return 'Number should be greater than 1'
-#   elsif number > 12
-#     return 'Number should be less than 12'
-#   end
-
+#   return 'Number should be greater than 1' if number < 1
+#   return 'Number should be less than 12' if number > 12
 #   months[number]
 # end
 
@@ -51,8 +47,7 @@
 # Get a number. Return true if it contains 3 successive zeros, otherwise false.
 
 # def three_zeros(number)
-#   return true if number.to_s.include?('000')
-#   false
+#   number.to_s.include?('000')
 # end
 
 # print 'Please insert a number: '
@@ -136,12 +131,17 @@
 ##############  Ex. 8 | Start
 # Get a number. Return true if the number is more than 50 and less than 100 OR the number type is Float OR the number is equal to 0. Otherwise, return false.
 
-# def check_number(number)
-#   return true if number == 0 || number.class == Float || number.between?(50, 100)
-#   false
+# def to_float_or_int(str)
+#   return str.to_f if str.include?(".") || str.include?(",")
+#   str.to_i
 # end
 
-# print('Please insert a number: ')
-# number = gets.to_i
+# def check_number(number)
+#   number == 0 || number.class == Float || number.between?(50, 100)
+# end
+
+# print("Please insert a number: ")
+# number = to_float_or_int(gets)
+# pp acheck_number(number)
 # pp check_number(number)
 ##############  Ex. 8 | End
