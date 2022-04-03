@@ -53,7 +53,7 @@ class ArticleArtsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_art_params
-    params.require(:article_art).permit(:body, :article_id)
+    params.require(:article_art).permit(:article_id, :name, :likes)
   end
   
 end

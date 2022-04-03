@@ -15,19 +15,18 @@
   -## SHOW ALL ARTICLE ARTS FOR CURRENT ARTICLE 
   %h2.text-danger Article arts
   - @article_arts.each do |article_art|
-    .mt
-      %p= "Name: #{article_art.name}"
-      %p= "Likes: 000"
-      .container-sm{style: "background: #e2f4cc;"}
-        = button_tag(type: 'button', id: 'button_plus', class: 'btn btn-danger btn-sm') do
-          = content_tag(:strong, '+')
-        %br
-        %br
-        %p= 'Comment 1' 
-        %hr{style: "margin: 3px 0; height: 1px; background: black;"}
-        %p= 'Comment 2'
-        %hr{style: "margin: 3px 0; height: 1px; background: black;"}
-        %p= 'Comment 3'
-      %hr{style: "margin: 5px 0; height: 3px; background: black;"}
-  %p.mt
+    %p= "Name: #{article_art.name}"
+    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 0'
+    .container-sm{style: "background: #e2f4cc;"}
+      = button_tag(type: 'button', id: 'button_plus', class: 'btn btn-danger btn-sm') do
+        = content_tag(:strong, '+')
+      %br
+      %br
+      %p= 'Comment 1' 
+      %hr{style: "margin: 3px 0; height: 1px; background: black;"}
+      %p= 'Comment 2'
+      %hr{style: "margin: 3px 0; height: 1px; background: black;"}
+      %p= 'Comment 3'
+    %hr{style: "margin: 5px 0; height: 3px; background: black;"}
+  %p
     = link_to 'All articles', articles_path, class: 'btn btn-primary'

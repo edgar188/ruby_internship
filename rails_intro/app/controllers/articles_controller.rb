@@ -52,7 +52,7 @@ class ArticlesController < ApplicationController
     ## Strong parameter
     params.require(:article).permit(
       :title, :body, article_arts_attributes: [
-        :id, :name, :_destroy,
+        :id, :name, :likes, :_destroy,
         ],
     )
   end
