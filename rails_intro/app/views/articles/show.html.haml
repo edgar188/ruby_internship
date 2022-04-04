@@ -1,32 +1,32 @@
 .container.bg-info
+  -## MESSAGES
   - flash.each do |type, msg| 
     %p.text-success= msg
   %h2= "Title: #{@article.title}"
   %p= "Text: #{@article.body}" 
   -## BUTTONS
   .container-sm{style: "display: flex; gap: 3px"}
-    %p
-      = link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning'
+    %p= link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning'
+    %p= link_to 'All articles', articles_path, class: 'btn btn-primary'
     = form_tag(article_path(@article), method: :delete) do
       = button_tag(type: 'submit', class: 'btn btn-danger') do
         = content_tag(:strong, 'Delete')
-    %p
-      = link_to 'All articles', articles_path, class: 'btn btn-primary'
+        
   -## SHOW ALL ARTICLE ARTS FOR CURRENT ARTICLE 
   %h2.text-danger Article arts
   - @article_arts.each do |article_art|
+    %p= "ID: #{article_art.id}"
     %p= "Name: #{article_art.name}"
-    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 0'
-    .container-sm{style: "background: #e2f4cc;"}
-      = button_tag(type: 'button', id: 'button_plus', class: 'btn btn-danger btn-sm') do
-        = content_tag(:strong, '+')
-      %br
-      %br
-      %p= 'Comment 1' 
-      %hr{style: "margin: 3px 0; height: 1px; background: black;"}
-      %p= 'Comment 2'
-      %hr{style: "margin: 3px 0; height: 1px; background: black;"}
-      %p= 'Comment 3'
-    %hr{style: "margin: 5px 0; height: 3px; background: black;"}
-  %p
-    = link_to 'All articles', articles_path, class: 'btn btn-primary'
+    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 00000'
+    
+    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 00000'
+    
+    %h4 Comments
+    - article_art.article_art_comments.each do |article_art_comment|
+      #article_art_comments_list.container-sm{style: "background: #e2f4cc;"}
+        %p= "#{article_art_comment.body} "
+        %h6= "#{article_art_comment.created_at.to_date}"
+        %hr{style: "margin: 2px 0; height: .5px; background: black;"}
+    %hr{style: "margin: 3px 0; height: 3px; background: black;"}
+  %p= link_to 'All articles', articles_path, class: 'btn btn-primary'
+

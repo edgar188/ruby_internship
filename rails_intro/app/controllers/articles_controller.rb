@@ -4,6 +4,8 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
+
+    # @article_art_comments = @article.article_arts.find(params[:id]).article_art_comments
   end
 
   def show
@@ -47,12 +49,15 @@ class ArticlesController < ApplicationController
     ## Get article by id
     @article = Article.find(params[:id])
   end
-
+  
   def article_params
     ## Strong parameter
     params.require(:article).permit(
       :title, :body, article_arts_attributes: [
         :id, :name, :likes, :_destroy,
+          article_art_comments_attributes: [
+            :id, :body, :_destroy      
+          ]
         ],
     )
   end

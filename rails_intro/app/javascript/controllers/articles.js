@@ -1,28 +1,20 @@
-document.getElementById('button_plus').onclick = function () {
-  add();
+let new_article_arts_count = 0;
+
+function counter_increment() {
+  new_article_arts_count++;
+}
+
+document.getElementById('add_article_art').onclick = function () {
+  add_article_art();
   counter_increment();
 };
 
-let counter = 0;
-
-function counter_increment() {
-  counter++;
+function add_article_art() {
+  let code_block = `<div>
+    <input value="test" type="text" placeholder="Art name" name=article[article_arts_attributes][${new_article_arts_count}][name]>
+    <input value="${new_article_arts_count}" type="number" placeholder="Art likes" name=article[article_arts_attributes][${new_article_arts_count}][likes]> <br/><br/>
+    <input type="text" placeholder="Art comment" name=article[article_arts_attributes][${new_article_arts_count}][article_art_comments_attributes][${new_article_arts_count}][body]> <br/>
+    <hr style="margin: 3px 0; height: 3px; background: black;" />
+  </div=>`;
+  document.getElementById("article_arts_list").innerHTML += code_block
 }
-
-function add() {
-  let p = document.createElement('p');
-  // INPUT FIELD FOR ART NAME
-  let article_art_name = document.createElement('input');
-  article_art_name.setAttribute('type', 'text');
-  article_art_name.setAttribute('placeholder', 'Art name');
-  article_art_name.setAttribute('name', `article[article_arts_attributes][${counter}][name]`);
-  // INPUT FIELD FOR ART LIKES
-  let article_art_likes = document.createElement('input');
-  article_art_likes.setAttribute('type', 'number');
-  article_art_likes.setAttribute('placeholder', 'Art likes');
-  article_art_likes.setAttribute('likes', `article[article_arts_attributes][${counter}][likes]`);
-  p.appendChild(article_art_name);
-  p.appendChild(article_art_likes);  
-  document.getElementById('article_arts_list').appendChild(p);
-}
-

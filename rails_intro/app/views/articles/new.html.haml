@@ -2,24 +2,22 @@
   %h2 New article
   - @article.errors.full_messages.each do |message|
     %p.text-danger= message
-    %hr
+    %hr{style: "margin: 3px 0; height: 1px; background: black;"}
   = form_with model: @article do |form|
     %p= form.text_field :title, placeholder: 'title'
     %div
-      %br
-      = form.text_area :body, placeholder: 'Article text'
+      %br= form.text_area :body, placeholder: 'Article text'
       -## CREATE NEW ARTICLE ART
       %hr 
       %h2 New article art
       .d-flex.justify-content-center
-        = button_tag(type: 'button', id: 'button_plus', class: 'btn btn-danger btn-sm') do
+        = button_tag(type: 'button', id: 'add_article_art', class: 'btn btn-danger btn-sm') do
           = content_tag(:strong, '+')
       %br
       -## ADD NEW FIELDS FOR ARTICLE ART
       #article_arts_list        
     -## CREATE ARTICLE 
-    %p.mt.align-center
-      = form.submit class: 'btn btn-success'
+    %p.mt.align-center= form.submit class: 'btn btn-success'
 
 = javascript_include_tag "controllers/articles"
 
