@@ -5,8 +5,10 @@
   %h2= "Article art Name: #{@article_art.name}"
   %h3= "Article Title: #{@article_art.article.title}"
   %p= "LIkes: #{@article_art.likes}"
+
   -## BUTTONS
   .container-sm{style: "display: flex; gap: 3px"}
+    %p= link_to 'HOME', root_path, class: 'btn btn-info'
     %p= link_to 'Edit', edit_article_art_path(@article_art), class: 'btn btn-warning'
     %p= link_to 'All article arts', article_arts_path, class: 'btn btn-primary'  
     = form_tag(article_art_path(@article_art), method: :delete) do
@@ -20,4 +22,3 @@
       %hr{style: "margin: 2px 0; height: .5px; background: black;"}
   %hr{style: "margin: 5px 0; height: 3px; background: black;"}
   %p= link_to 'All article arts', article_arts_path, class: 'btn btn-primary'  
-  %p= link_to 'HOME', root_path, class: 'btn btn-info'

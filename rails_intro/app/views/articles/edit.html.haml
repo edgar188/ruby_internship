@@ -4,6 +4,7 @@
     %hr{style: "margin: 3px 0; height: 1px; background: black;"}
   %h2
     Edit Article  #{@article.id}
+  %p= link_to 'HOME', root_path, class: 'btn btn-info'
   = form_with model: @article do |form|
     %div
       %span= form.label :title

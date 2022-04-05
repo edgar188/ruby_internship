@@ -18,3 +18,4 @@ function add_article_art() {
   </div=>`;
   document.getElementById("article_arts_list").innerHTML += code_block
 }
+

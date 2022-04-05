@@ -2,13 +2,16 @@
   -## MESSAGES
   - flash.each do |type, msg| 
     %p.text-success= msg
+
   %h2= "Title: #{@article.title}"
   %p= "Text: #{@article.body}" 
   -## BUTTONS
   .container-sm{style: "display: flex; gap: 3px"}
+    %p= link_to 'HOME', root_path, class: 'btn btn-info'
     %p= link_to 'Edit', edit_article_path(@article), class: 'btn btn-warning'
     %p= link_to 'All articles', articles_path, class: 'btn btn-primary'
-    = form_tag(article_path(@article), method: :delete) do
+
+    = form_tag(article_path(@article), method: :delete, remote: true) do
       = button_tag(type: 'submit', class: 'btn btn-danger') do
         = content_tag(:strong, 'Delete')
         
@@ -17,14 +20,19 @@
   - @article_arts.each do |article_art|
     %p= "ID: #{article_art.id}"
     %p= "Name: #{article_art.name}"
-    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 0'
-    %h4 Comments
-    - article_art.article_art_comments.each do |article_art_comment|
-      #article_art_comments_list.container-sm{style: "background: #e2f4cc;"}
-        %p= "#{article_art_comment.body} "
-        %h6= "#{article_art_comment.created_at.to_date}"
-        %hr{style: "margin: 2px 0; height: .5px; background: black;"}
+    %span= article_art.likes != nil ? "#{article_art.likes}" : '0'
+    %button{type: 'submit', id: 'like_btn', style: 'border: none; background: none; color: red;' }
+      = icon('fa-solid', 'heart')
+      
+
+    - if article_art.article_art_comments.empty? 
+      = ''
+    - else 
+      %h4 Comments
+      - article_art.article_art_comments.each do |article_art_comment|
+        #article_art_comments_list.container-sm{style: "background: #e2f4cc;"}
+          %p= "#{article_art_comment.body} "
+          %h6= "#{article_art_comment.created_at.to_date}"
+          %hr{style: "margin: 2px 0; height: .5px; background: black;"}
     %hr{style: "margin: 3px 0; height: 3px; background: black;"}
   %p= link_to 'All articles', articles_path, class: 'btn btn-primary'
-  %p= link_to 'HOME', root_path, class: 'btn btn-info'
-
