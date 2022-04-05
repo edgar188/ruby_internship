@@ -17,10 +17,7 @@
   - @article_arts.each do |article_art|
     %p= "ID: #{article_art.id}"
     %p= "Name: #{article_art.name}"
-    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 00000'
-    
-    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 00000'
-    
+    %p= article_art.likes != nil ? "Likes: #{article_art.likes}" : 'Likes: 0'
     %h4 Comments
     - article_art.article_art_comments.each do |article_art_comment|
       #article_art_comments_list.container-sm{style: "background: #e2f4cc;"}
@@ -29,4 +26,5 @@
         %hr{style: "margin: 2px 0; height: .5px; background: black;"}
     %hr{style: "margin: 3px 0; height: 3px; background: black;"}
   %p= link_to 'All articles', articles_path, class: 'btn btn-primary'
+  %p= link_to 'HOME', root_path, class: 'btn btn-info'
 

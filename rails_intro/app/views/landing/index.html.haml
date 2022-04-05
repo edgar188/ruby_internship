@@ -1,0 +1,7 @@
+.container.bg-info
+  %span= link_to 'Articles', articles_path, class: 'btn btn-success'
+  %span= "Total count: #{@articles.count}"
+  %br/
+  %br/
+  %span= link_to 'Article arts', article_arts_path, class: 'btn btn-success'
+  %span= "Total count: #{@article_arts.count}"

@@ -4,3 +4,4 @@
     %p.h4.text-warning
       = link_to "Article #{article.id}: #{article.title}", article_path(article.id)
   %p= link_to "Create new article", new_article_path, class: 'btn btn-success'
+  %p= link_to 'HOME', root_path, class: 'btn btn-info'

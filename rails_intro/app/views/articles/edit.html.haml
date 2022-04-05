@@ -1,4 +1,7 @@
 .container.bg-info
+  - @article.errors.full_messages.each do |message|
+    %p.text-danger= message
+    %hr{style: "margin: 3px 0; height: 1px; background: black;"}
   %h2
     Edit Article  #{@article.id}
   = form_with model: @article do |form|
@@ -21,15 +24,6 @@
         %div{style: "background: #e2f4cc;"}
           %span= comment_form.label :body
           %span= comment_form.text_field :body
-
-        -## TODO 
-        -## DESTROY ARTICLE ART
-        -# = link_to "Delete Art", article_article_art_path(@article.article_art, @article_art), method: :delete 
-
-        -# = form_tag(article_article_art_path(@article_art), method: :delete) do
-        -#   = button_tag(type: 'button', class: 'btn btn-danger') do
-        -#     = content_tag(:strong, 'Delete')
-
       %hr{style: "margin: 5px 0; height: 3px; background: black;"}
 
     %p= form.submit 'Save', class: 'btn btn-success'

@@ -1,12 +1,14 @@
 class Article < ActiveRecord::Base
   
-  after_commit :say_hello
-  
   has_many :article_arts
+  
   accepts_nested_attributes_for :article_arts, allow_destroy: true
+  
   validates :title, presence: true
   validates :body, presence: true, length: { minimum: 2 }
-
+  
+  after_commit :say_hello
+  
   private
 
   def say_hello

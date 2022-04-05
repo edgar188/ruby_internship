@@ -4,8 +4,6 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article.all
-
-    # @article_art_comments = @article.article_arts.find(params[:id]).article_art_comments
   end
 
   def show
@@ -34,24 +32,24 @@ class ArticlesController < ApplicationController
     if @article.update(article_params)
       redirect_to article_path(@article), notice: "Article was successfully updated."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :bad_request
     end
   end
 
   def destroy
     @article.destroy
-    redirect_to root_path, notice: 'Article was successfully destroyed.'
+    redirect_to articles_path, notice: 'Article was successfully destroyed.'
   end
 
   private
 
+  ## Get article by id
   def set_article
-    ## Get article by id
     @article = Article.find(params[:id])
   end
   
+  ## Strong parameter
   def article_params
-    ## Strong parameter
     params.require(:article).permit(
       :title, :body, article_arts_attributes: [
         :id, :name, :likes, :_destroy,
@@ -61,5 +59,5 @@ class ArticlesController < ApplicationController
         ],
     )
   end
-
+  
 end
