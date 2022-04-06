@@ -4,7 +4,16 @@
     %p.text-success= msg
   %h2= "Article art Name: #{@article_art.name}"
   %h3= "Article Title: #{@article_art.article.title}"
-  %p= "LIkes: #{@article_art.likes}"
+  -# %p= "LIkes: #{@article_art.likes}"
+
+  -## LIKE UNLIKE BUTTONS
+  %div{style: "display: flex; gap: 3px; margin-bottom: 5px; "}
+    = button_to like_article_art_path(@article_art), class: 'btn btn-secondary', method: :patch, remote: true do
+      = icon('fa-solid', 'thumbs-up')
+      = @article_art.get_upvotes.size 
+    = button_to unlike_article_art_path(@article_art), class: 'btn btn-secondary', method: :patch, remote: true do
+      = icon('fa-solid', 'thumbs-down')
+      = @article_art.get_downvotes.size 
 
   -## BUTTONS
   .container-sm{style: "display: flex; gap: 3px"}

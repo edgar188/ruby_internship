@@ -6,11 +6,10 @@ Rails.application.routes.draw do
   resources :articles do
     resources :article_arts do
       
-      # member do
-      #   # patch :like
-      #   patch :like 
-      #   patch :dislike
-      # end
+      member do
+        patch 'like', to: 'article_arts#upvote'
+        patch 'unlike', to: 'article_arts#downvote'
+      end
       
       resources :article_art_comments
     end
@@ -18,9 +17,12 @@ Rails.application.routes.draw do
 
   resources :article_arts do 
     member do
-      # patch :like
-      patch :like 
-      patch :dislike
+      # patch :like 
+      # patch :dislike
+
+      patch 'like', to: 'article_arts#upvote'
+      patch 'unlike', to: 'article_arts#downvote'
+
     end
   end
   

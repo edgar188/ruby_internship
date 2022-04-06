@@ -20,11 +20,17 @@
   - @article_arts.each do |article_art|
     %p= "ID: #{article_art.id}"
     %p= "Name: #{article_art.name}"
-    %span= article_art.likes != nil ? "#{article_art.likes}" : '0'
-    %button{type: 'submit', id: 'like_btn', style: 'border: none; background: none; color: red;' }
-      = icon('fa-solid', 'heart')
-      
 
+    -## LIKE UNLIKE BUTTONS
+    %div{style: "display: flex; gap: 3px; margin-bottom: 5px; "}
+      = button_to like_article_article_art_path(article_art), class: 'btn btn-secondary', method: :patch, remote: true do
+        = icon('fa-solid', 'thumbs-up')
+        = article_art.get_upvotes.size
+
+      = button_to unlike_article_article_art_path(article_art), class: 'btn btn-secondary', method: :patch, remote: true do
+        = icon('fa-solid', 'thumbs-down')
+        = article_art.get_downvotes.size
+  
     - if article_art.article_art_comments.empty? 
       = ''
     - else 

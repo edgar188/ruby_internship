@@ -11,7 +11,6 @@ class ArticleArtsController < ApplicationController
 
   def new
     @article_art = ArticleArt.new
-    # @article.article_arts.build
   end
 
   def edit
@@ -40,6 +39,24 @@ class ArticleArtsController < ApplicationController
     redirect_to article_arts_path, notice: 'Article art was successfully destroyed.'
   end
 
+  def upvote
+    @article_art = ArticleArt.find(params[:id])
+    @article_art.upvote_from current_user
+
+    respond_to do |format|
+      format.js { render 'article_arts' }
+    end
+  end
+  
+  def downvote
+    @article_art = ArticleArt.find(params[:id])
+    @article_art.downvote_from current_user
+
+    respond_to do |format|
+      format.js { render 'article_arts' }
+    end
+  end
+  
   private
 
   def set_article_art

@@ -1,4 +1,5 @@
 class DistrictsController < ApplicationController
+
   before_action :set_district, only: %i[update show destroy edit]
 
   def index
@@ -45,8 +46,8 @@ class DistrictsController < ApplicationController
     params.require(:district).permit(:name, :phone, :mailing_address, :notes, :status )
   end
 
+  ## Get district by id
   def set_district
-    ## Get district by id
     @district = District.find(params[:id])
   end
   

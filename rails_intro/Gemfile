@@ -21,6 +21,10 @@ gem 'devise-i18n'
 # Make sure Bootstrap 4 is installed, either as a Ruby gem or using CDN
 gem 'devise-bootstrap-views', '~> 1.0'
 
+
+# Rails gem to allowing records to be votable
+gem 'acts_as_votable', '~> 0.13.2'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', "6.1.5"
 
