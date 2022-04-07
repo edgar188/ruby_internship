@@ -19,15 +19,15 @@
   %h2.text-danger Article arts
   - @article_arts.each do |article_art|
     %p= "ID: #{article_art.id}"
-    %p= "Name: #{article_art.name}"
+    %p= "Name: #{article_art.name} 000"
 
     -## LIKE UNLIKE BUTTONS
     %div{style: "display: flex; gap: 3px; margin-bottom: 5px; "}
-      = button_to like_article_article_art_path(article_art), class: 'btn btn-secondary', method: :patch, remote: true do
+      = button_to like_article_art_path(article_art), class: 'btn btn-secondary', method: :patch, remote: true do
         = icon('fa-solid', 'thumbs-up')
         = article_art.get_upvotes.size
 
-      = button_to unlike_article_article_art_path(article_art), class: 'btn btn-secondary', method: :patch, remote: true do
+      = button_to unlike_article_art_path(article_art), class: 'btn btn-secondary', method: :patch, remote: true do
         = icon('fa-solid', 'thumbs-down')
         = article_art.get_downvotes.size
   

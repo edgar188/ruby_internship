@@ -2,29 +2,27 @@
   - @article.errors.full_messages.each do |message|
     %p.text-danger= message
     %hr{style: "margin: 3px 0; height: 1px; background: black;"}
-  %h2
-    Edit Article  #{@article.id}
+  %h2 Edit Article  #{@article.id}
   %p= link_to 'HOME', root_path, class: 'btn btn-info'
   = form_with model: @article do |form|
     %div
-      %span= form.label :title
-      %span= form.text_field :title
+      = form.label :title
+      = form.text_field :title
     %div
-      %h5= form.label :body, 'Article text'
-      %span= form.text_area :body
+      = form.label :body, 'Text'
+      = form.text_area :body
     %h3 Article arts
     = form.fields_for :article_arts do |art_form| 
-      %div
-        %span= art_form.label :name
-        %span= art_form.text_field :name
-      %div
-        %span= art_form.label :likes
-        %span= art_form.text_field :likes
+      %span= 'Delete: '
+      = art_form.check_box :_destroy
+      %div{style: "margin-top: 5px"}
+        = art_form.label :name
+        = art_form.text_field :name
       .container-sm{style: "background: #e2f4cc; margin-top: 5px"} Comments
       = art_form.fields_for :article_art_comments do |comment_form|
         %div{style: "background: #e2f4cc;"}
-          %span= comment_form.label :body
-          %span= comment_form.text_field :body
+          = comment_form.label :body
+          = comment_form.text_field :body
       %hr{style: "margin: 5px 0; height: 3px; background: black;"}
-
     %p= form.submit 'Save', class: 'btn btn-success'
+= javascript_include_tag "controllers/remove_article_art"
