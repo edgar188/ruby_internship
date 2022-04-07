@@ -7,9 +7,7 @@
     %div
       %span= form.label :name
       %span= form.text_field :name
-    -# %div
-    -#   %span= form.label :likes
-    -#   %span= form.text_field :likes
+
     .container-sm{style: "background: #e2f4cc; margin-top: 5px"} Comments
     = form.fields_for :article_art_comments do |comment_form|
       %div{style: "background: #e2f4cc;"}

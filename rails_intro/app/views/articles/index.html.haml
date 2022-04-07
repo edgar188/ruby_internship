@@ -1,6 +1,5 @@
 .container.bg-info
   %h2 All articles
-  %p= link_to 'HOME', root_path, class: 'btn btn-info'
   - @articles.each do |article|
     %p.h4.text-warning
       = link_to "Article #{article.id}: #{article.title}", article_path(article.id)

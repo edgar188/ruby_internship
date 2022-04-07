@@ -3,7 +3,6 @@
     %p.text-danger= message
     %hr{style: "margin: 3px 0; height: 1px; background: black;"}
   %h2 Edit Article  #{@article.id}
-  %p= link_to 'HOME', root_path, class: 'btn btn-info'
   = form_with model: @article do |form|
     %div
       = form.label :title
@@ -25,4 +24,3 @@
           = comment_form.text_field :body
       %hr{style: "margin: 5px 0; height: 3px; background: black;"}
     %p= form.submit 'Save', class: 'btn btn-success'
-= javascript_include_tag "controllers/remove_article_art"

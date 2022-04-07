@@ -1,0 +1,9 @@
+<%= content_tag "div", id: "upvote-#{@article_art.id}" do %>
+  <%= button_to upvote_article_art_path(@article_art), method: :patch, remote: true, data: { disable_with: "voting..." } do %>
+    <% if current_user.voted_up_on? @article_art %>
+      <i class="fas fa-thumbs-up"></i>
+    <% else %>
+     <i class="fas fa-thumbs-down"></i>
+    <% end %>
+  <% end %>
+<% end %>

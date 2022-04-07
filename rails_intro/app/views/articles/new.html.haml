@@ -1,6 +1,5 @@
 .container.bg-info
   %h2 New article
-  %p= link_to 'HOME', root_path, class: 'btn btn-info'
   - @article.errors.full_messages.each do |message|
     %p.text-danger= message
     %hr{style: "margin: 3px 0; height: 1px; background: black;"}

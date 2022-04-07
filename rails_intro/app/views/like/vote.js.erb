@@ -1,0 +1,3 @@
+document.getElementById("upvote-<%= @article_art.id %>").innerHTML = "<%= j render "like/upvote_link", article_art: @article_art %>";
+document.getElementById("downvote-<%= @article_art.id %>").innerHTML = "<%= j render "like/downvote_link", article_art: @article_art %>";
+document.getElementById("votes-score-<%= @article_art.id %>").innerHTML = "<%= j render "like/votes_score", article_art: @article_art %>";
