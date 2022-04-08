@@ -35,7 +35,7 @@
       %h4 Comments
       - article_art.article_art_comments.each do |article_art_comment|
         #article_art_comments_list.container-sm{style: "background: #e2f4cc;"}
-          %p= "#{article_art_comment.body} "
-          %h6= "#{article_art_comment.created_at.to_date}"
+          %p.h4= "#{article_art_comment.body} "
+          %h6= "Created #{time_ago_in_words(article_art_comment.created_at)} Ago"
           %hr{style: "margin: 2px 0; height: .5px; background: black;"}
     %hr{style: "margin: 3px 0; height: 3px; background: black;"}

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         patch 'unlike', to: 'article_arts#downvote'
       end
       
-      resources :article_art_comments
+      # resources :article_art_comments
     end
   end
 
@@ -20,6 +20,8 @@ Rails.application.routes.draw do
       patch 'like', to: 'article_arts#upvote'
       patch 'unlike', to: 'article_arts#downvote'
     end
+
+    resources :article_art_comments
   end
   
   resources :users, only: [:show, :edit, :update]
