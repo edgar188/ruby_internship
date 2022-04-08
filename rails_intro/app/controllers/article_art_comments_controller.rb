@@ -1,0 +1,3 @@
+class ArticleArtCommentsController < ApplicationController
+
+end

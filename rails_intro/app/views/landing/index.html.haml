@@ -1,0 +1,12 @@
+.container.bg-info
+  -if !user_signed_in?
+    %h3= "Total Articles count: #{@articles.count}"
+    %h3= "Total Article arts count: #{@article_arts.count}"
+    %h3= "Please sign in to continue"
+  -else
+    %span= link_to 'Articles', articles_path, class: 'btn btn-success'
+    %span= "Total count: #{@articles.count}"
+    %br/
+    %br/
+    %span= link_to 'Article arts', article_arts_path, class: 'btn btn-success'
+    %span= "Total count: #{@article_arts.count}"

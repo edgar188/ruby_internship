@@ -1,6 +1,29 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  
+  devise_for :users
+  root "landing#index"
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :articles do
+    resources :article_arts do
+      
+      member do
+        patch 'like', to: 'article_arts#upvote'
+        patch 'unlike', to: 'article_arts#downvote'
+      end
+      
+      # resources :article_art_comments
+    end
+  end
+
+  resources :article_arts do 
+    member do
+      patch 'like', to: 'article_arts#upvote'
+      patch 'unlike', to: 'article_arts#downvote'
+    end
+
+    resources :article_art_comments
+  end
+  
+  resources :users, only: [:show, :edit, :update]
+  resources :districts
 end

@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title RailsIntro
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_importmap_tags
+  %body{style: "background: #f1eee2;"}
+    %div.bg-light
+      .container-fluid{style: "margin: 10px 55px;"}
+        .navbar-header
+          %ul.nav.navbar-nav
+            = link_to 'Home', root_path, class: 'btn btn-primary'
+            -if user_signed_in?
+              = link_to 'Articles', articles_path, class: 'btn btn-info'
+              = link_to 'Article arts', article_arts_path, class: 'btn btn-info'
+        %ul.nav.navbar-nav.navbar-right
+          -if user_signed_in?
+            %li.h4= current_user.email
+            %li{style: "margin: 0 5px;"}
+              = button_to 'Log out', destroy_user_session_path, class: 'btn btn-info', method: :delete
+            = link_to 'Settings', edit_user_registration_path, class: 'btn btn-info' 
+          -else
+            = link_to 'Sign up', new_user_registration_path, class: 'btn btn-info'      
+            = link_to 'Sign in', new_user_session_path, class: 'btn btn-info'
+      = yield

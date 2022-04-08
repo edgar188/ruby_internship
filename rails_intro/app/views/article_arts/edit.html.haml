@@ -1,0 +1,18 @@
+.container.bg-info
+  - @article_art.errors.full_messages.each do |message|
+    %p.text-danger= message
+    %hr{style: "margin: 3px 0; height: 1px; background: black;"}
+  %h2 Edit Article #{@article_art.id}
+  = form_with model: @article_art do |form| 
+    %div
+      %span= form.label :name
+      %span= form.text_field :name
+
+    .container-sm{style: "background: #e2f4cc; margin-top: 5px"} Comments
+    = form.fields_for :article_art_comments do |comment_form|
+      %div{style: "background: #e2f4cc;"}
+        %span= comment_form.label :body
+        %span= comment_form.text_field :body
+    %hr{style: "margin: 5px 0; height: 3px; background: black;"}
+    %p= form.submit 'Save', class: 'btn btn-success'
+

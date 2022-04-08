@@ -1,0 +1,11 @@
+.container
+  %h2.title-lg.mb
+    district #{@district.id}
+  %p.mb-sm= @district.name
+  .mt
+    = link_to fa_icon('pencil'), edit_district_path(@district), title: 'Update district'
+    = form_tag(district_path(@district), method: :delete) do
+      = button_tag(type: 'submit') do
+        = content_tag(:i, nil, class: 'fa fa-trash') 
+  %p.mt
+    = link_to "All districts", districts_path, class: 'button button-main'
