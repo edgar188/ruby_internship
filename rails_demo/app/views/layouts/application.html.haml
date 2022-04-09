@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %title RailsDemo
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    -# = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    %p#notice.bg-success= notice 
+    %p#alert.bg-danger= alert 
+    .container{style: "margin: 10px 55px; display: flex; gap: 15px"}
+      = link_to 'Home', root_path, class: 'btn btn-primary'
+      -if user_signed_in?
+        %h4= current_user.first_name  
+        = button_to 'Log out', destroy_user_session_path, class: 'btn btn-info', method: :delete
+        = link_to 'Account', edit_user_registration_path, class: 'btn btn-info'
+      -else
+        = link_to 'Sign up', new_user_registration_path, class: 'btn btn-info'   
+        = link_to 'Sign in', new_user_session_path, class: 'btn btn-info'
+    = yield

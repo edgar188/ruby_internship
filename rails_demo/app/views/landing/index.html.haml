@@ -1,0 +1,6 @@
+.container.bg-info
+  -if !user_signed_in?
+    %h3= 'Total 500 cars'
+    %h3= 'Please sign in to continue'
+  -else
+    %h3= 'Youre signed in'
