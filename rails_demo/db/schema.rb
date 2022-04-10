@@ -14,11 +14,13 @@ ActiveRecord::Schema.define(version: 2022_04_08_162506) do
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "role", limit: 1, default: 1, null: false
-    t.string "first_name", null: false
-    t.string "last_name", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.string "email", null: false
-    t.integer "gender", limit: 1, default: 1, null: false
-    t.date "birth_date", null: false
+    t.integer "gender", limit: 1, default: 0, null: false
+    t.date "birth_date"
+    t.string "country"
+    t.string "phone"
     t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
