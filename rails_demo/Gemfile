@@ -17,6 +17,8 @@ gem 'html2haml', '~> 2.2'
 gem 'bootstrap', '~> 5.1'
 # AutoStripAttributes helps to remove unnecessary whitespaces from ActiveRecord or ActiveModel attributes.
 gem "auto_strip_attributes", "~> 2.6"
+# Active Admin is a framework for creating administration style interfaces.
+gem 'activeadmin'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'
