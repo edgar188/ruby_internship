@@ -17,28 +17,29 @@
       -# / Navigation
       %nav.navbar.navbar-expand-lg.navbar-light
         .container.px-4.px-lg-5
-          = link_to 'Logo', root_path, class: 'nav-link active' 
-          %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
-            %span.navbar-toggler-icon
           #navbarSupportedContent.collapse.navbar-collapse
             %ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4
               %li.nav-item
                 = link_to 'Home', root_path, class: 'nav-link active'  
-              %li.nav-item
-                %a.nav-link{:href => "#!"} About
               %li.nav-item.dropdown
                 %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"} Profile
-                %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+                %ul.dropdown-menu
                   -if user_signed_in? 
-                    = link_to 'Account', profile_page_path, class: 'dropdown-item'
-                    = button_to 'Log out', destroy_user_session_path, class: 'dropdown-item', method: :delete
+                    = link_to profile_page_path, class: 'dropdown-item' do
+                      Account
+                      %i.bi-person-circle.ml-8
+                    %hr.dropdown-divider/
+                    = button_to destroy_user_session_path, class: 'dropdown-item', method: :delete do
+                      Log out
+                      %i.bi-box-arrow-right.ml-8
                   -else
-                    %li
-                      = link_to 'Sign in', new_user_session_path, class: 'dropdown-item'
-                    %li
-                      %hr.dropdown-divider/
-                    %li
-                      = link_to 'Sign up', new_user_registration_path, class: 'dropdown-item'
+                    = link_to new_user_session_path, class: 'dropdown-item' do
+                      Sign in    
+                      %i.bi-box-arrow-in-right.ml-8
+                    %hr.dropdown-divider/
+                    = link_to new_user_registration_path, class: 'dropdown-item' do
+                      Sign up    
+                      %i.bi-person-plus-fill.ml-8
             %form.d-flex
               %button.btn.btn-outline-dark{:type => "submit"}
                 %i.bi-cart-fill.me-1
@@ -59,3 +60,4 @@
     %script{:src => "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"}
     -# / Core theme JS
     %script{:src => "js/scripts.js"}
+

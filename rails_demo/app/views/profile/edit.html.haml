@@ -1,5 +1,11 @@
 = form_for(current_user, url: registration_path(current_user), html: { method: :put }) do |f|
   -# = render "devise/shared/error_messages", current_user: current_user
+  .form-group.row
+    %label.col-sm-2.col-form-label Avatar
+    .col-sm-10
+      - if current_user.avatar.present?
+        %small Current: #{current_user.avatar.filename.to_s}
+      = f.file_field :avatar, class: "form-control"
   %fieldset.form-group
   .row
     %legend.col-form-label.col-sm-2.pt-0 Role
