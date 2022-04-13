@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
 
-  ActiveAdmin.routes(self)
   root "landing#index"
 
   scope :profile do
+    resources :profile, only: [:edit, :update] 
     get '/' => 'profile#index', as: :profile_page 
-    get 'edit' => 'profile#edit', as: :edit_profile_page    
-    patch 'edit' => 'profile#update'
+    get 'edit/account' => 'profile#edit', as: :edit_user_account
 
     devise_scope :user do
       get 'edit/password' => 'devise/registrations#edit', as: :edit_user_registration
@@ -15,5 +14,6 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+  ActiveAdmin.routes(self)
 
 end
