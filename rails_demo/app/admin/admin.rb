@@ -15,7 +15,7 @@ ActiveAdmin.register Admin do
   end
 
   filter :email
-  filter :first_name.to_s + 'gago'
+  filter :first_name
   filter :last_name
   filter :show_full_name
   filter :current_sign_in_at
