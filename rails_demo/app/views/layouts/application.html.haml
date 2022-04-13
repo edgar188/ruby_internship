@@ -12,47 +12,11 @@
     -# / Bootstrap icons
     %link{:href => "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css", :rel => "stylesheet"}/
   %body
-    -# / Header
-    %header.py-2{style: 'background: #e8e6e6'}
-      -# / Navigation
-      %nav.navbar.navbar-expand-lg.navbar-light
-        .container.px-4.px-lg-5
-          #navbarSupportedContent.collapse.navbar-collapse
-            %ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4
-              %li.nav-item
-                = link_to 'Home', root_path, class: 'nav-link active'  
-              %li.nav-item.dropdown
-                %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"} Profile
-                %ul.dropdown-menu
-                  -if user_signed_in? 
-                    = link_to profile_page_path, class: 'dropdown-item' do
-                      Account
-                      %i.bi-person-circle.ml-8
-                    %hr.dropdown-divider/
-                    = button_to destroy_user_session_path, class: 'dropdown-item', method: :delete do
-                      Log out
-                      %i.bi-box-arrow-right.ml-8
-                  -else
-                    = link_to new_user_session_path, class: 'dropdown-item' do
-                      Sign in    
-                      %i.bi-box-arrow-in-right.ml-8
-                    %hr.dropdown-divider/
-                    = link_to new_user_registration_path, class: 'dropdown-item' do
-                      Sign up    
-                      %i.bi-person-plus-fill.ml-8
-            %form.d-flex
-              %button.btn.btn-outline-dark{:type => "submit"}
-                %i.bi-cart-fill.me-1
-                Cart
-                %span.badge.bg-dark.text-white.ms-1.rounded-pill 0
-    -if flash[:notice]
-      .alert.alert-success
-        %p#notice= notice
-    -if flash[:alert]
-      .alert.alert-danger
-        %p#alert= alert
+    = render 'shared/menu'
+    = render 'shared/messages'
+
     -# / Section
-    %section.py-5
+    %section.py-1
       .container.px-4.px-lg-5.mt-5
  
         = yield

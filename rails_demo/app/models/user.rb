@@ -1,37 +1,33 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  # Include default devise modules.
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  # Include User validations
+  include Validations::User
+  # Include User modules
+  include Modules::User
 
   has_one_attached :avatar
 
-  auto_strip_attributes :first_name, :last_name, :email, :phone,  squish: true
+  auto_strip_attributes :first_name, :last_name, :email, :phone, squish: true
 
   validates_presence_of :first_name, :last_name
-  validates :first_name, :last_name, length: { maximum: 255 }
+  validates_length_of :first_name, :last_name, maximum: 255
+  validate :validate_role, unless: -> { self.role.nil? }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
-  
+  validate :validate_gender, unless: -> { self.gender.nil? }
+  validate :validate_birth_date, unless: -> { self.birth_date.nil? }
+  validate :validate_country, unless: -> { self.country.nil? }
+  validates :phone, numericality: true, length: { minimum: 9, maximum: 20 }, unless: -> { self.phone.nil? }
+
+  enum role: {
+    buyer: 0,
+    seller: 1
+  }
+
   enum gender: {
     no_select: 0,
     male: 1,
     female: 2
-  }
-
-  enum role: {
-    seller: 1,
-    buyer: 2
-  }
-
-  GENDER = {
-    no_select: 'No select',
-    male: 'Male',
-    female: 'Female'
-  }
-
-  ROLE = {
-    seller: 'Seller',
-    buyer: 'Buyer'
   }
 
 end
