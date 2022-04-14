@@ -13,8 +13,6 @@ ActiveAdmin.register User do
     column :birth_date
     column :country
     column :phone
-    # column :current_sign_in_at
-    # column :sign_in_count
     column :created_at
     actions
   end
@@ -44,6 +42,7 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
     end
+    
     f.actions
   end
 

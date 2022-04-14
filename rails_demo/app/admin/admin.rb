@@ -6,16 +6,12 @@ ActiveAdmin.register Admin do
     id_column
     column :email
     column "Full name", :show_full_name
-    # column :first_name
-    # column :last_name
-    # column :current_sign_in_at
-    # column :sign_in_count
     column :created_at
     actions
   end
 
   filter :email
-  filter :first_name.to_s + 'gago'
+  filter :first_name
   filter :last_name
   filter :show_full_name
   filter :current_sign_in_at
@@ -30,6 +26,7 @@ ActiveAdmin.register Admin do
       f.input :password
       f.input :password_confirmation
     end
+
     f.actions
   end
 

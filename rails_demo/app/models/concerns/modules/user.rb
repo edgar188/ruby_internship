@@ -11,9 +11,10 @@ module Modules::User
     buyer: 'Buyer',
     seller: 'Seller'
   }
-  
+
+  # Class methods will be defined here
   class_methods do
-    # ..............
+    
   end
 
   # A method that returns the value of the role attribute.
