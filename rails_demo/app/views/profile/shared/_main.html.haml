@@ -1,12 +1,15 @@
 .container.bootstrap.snippets.bootdey
-  = link_to 'Edit', edit_user_account_path, class: 'btn btn-secondary mb-2'   
-  = link_to 'Edit password', edit_user_registration_path, class: 'btn btn-secondary mb-2'
+  - if user == current_user 
+    .d-flex
+      = link_to 'Edit', edit_user_account_path, class: 'btn btn-secondary mb-2 '   
+      = link_to 'Edit password', edit_user_registration_path, class: 'btn btn-secondary mb-2 ml-1'
+      = button_to "Delete account", registration_path(current_user), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mb-2 ml-1', method: :delete
 
   .panel-body.inf-content
     .row
       .col-md-4
-        - if current_user.has_avatar?
-          = image_tag(current_user.avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+        - if user.has_avatar?
+          = image_tag(user.avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
         - else
           = image_tag('avatar.png', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
       .col-md-6
@@ -19,53 +22,126 @@
                     %span.glyphicon.glyphicon-user.text-primary
                     Role
                 %td.text-primary
-                  = current_user.show_role
+                  = user.show_role
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-cloud.text-primary
                     Full name
                 %td.text-primary
-                  = current_user.show_full_name
+                  = user.show_full_name
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Email
                 %td.text-primary
-                  = current_user.email
+                  = user.email
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Gender
                 %td.text-primary
-                  = current_user.show_gender
+                  = user.show_gender
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Birth date
                 %td.text-primary
-                  = current_user.show_birth_date
+                  = user.show_birth_date
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Country
                 %td.text-primary
-                  = current_user.show_country
+                  = user.show_country
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Phone
                 %td.text-primary
-                  = current_user.show_phone
+                  = user.show_phone
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-calendar.text-primary
                     Created
                 %td.text-primary
-                  = current_user.show_create_date
+                  = user.show_create_date
+
+
+-# .container.bootstrap.snippets.bootdey
+-#   = link_to 'Edit', edit_user_account_path, class: 'btn btn-secondary mb-2'   
+-#   = link_to 'Edit password', edit_user_registration_path, class: 'btn btn-secondary mb-2'
+
+-#   .panel-body.inf-content
+-#     .row
+-#       .col-md-4
+-#         - if current_user.has_avatar?
+-#           = image_tag(current_user.avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+-#         - else
+-#           = image_tag('avatar.png', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+-#       .col-md-6
+-#         .table-responsive
+-#           %table.table.table-user-information
+-#             %tbody
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-user.text-primary
+-#                     Role
+-#                 %td.text-primary
+-#                   = current_user.show_role
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-cloud.text-primary
+-#                     Full name
+-#                 %td.text-primary
+-#                   = current_user.show_full_name
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-envelope.text-primary
+-#                     Email
+-#                 %td.text-primary
+-#                   = current_user.email
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-envelope.text-primary
+-#                     Gender
+-#                 %td.text-primary
+-#                   = current_user.show_gender
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-envelope.text-primary
+-#                     Birth date
+-#                 %td.text-primary
+-#                   = current_user.show_birth_date
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-envelope.text-primary
+-#                     Country
+-#                 %td.text-primary
+-#                   = current_user.show_country
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-envelope.text-primary
+-#                     Phone
+-#                 %td.text-primary
+-#                   = current_user.show_phone
+-#               %tr
+-#                 %td
+-#                   %strong
+-#                     %span.glyphicon.glyphicon-calendar.text-primary
+-#                     Created
+-#                 %td.text-primary
+-#                   = current_user.show_create_date
