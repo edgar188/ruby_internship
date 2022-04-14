@@ -14,11 +14,9 @@
   %body
     = render 'shared/menu'
     = render 'shared/messages'
-
     -# / Section
     %section.py-1
       .container.px-4.px-lg-5.mt-5
- 
         = yield
     -# / Bootstrap core JS
     %script{:src => "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"}

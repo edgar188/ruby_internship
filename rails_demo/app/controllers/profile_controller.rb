@@ -8,6 +8,7 @@ class ProfileController < ApplicationController
   
   def update
     @user = User.find(params[:id])
+
     if @user.update(user_params)
       redirect_to profile_page_path, notice: 'Your account has been updated successfully.'
     else
@@ -28,8 +29,7 @@ class ProfileController < ApplicationController
       :birth_date, 
       :country, 
       :phone, 
-      :avatar, 
-      :password
+      :avatar
       )
   end
   

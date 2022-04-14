@@ -12,12 +12,12 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
   validates_length_of :first_name, :last_name, maximum: 255
-  validate :validate_role, unless: -> { self.role.nil? }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
+  validates :phone, numericality: true, length: { minimum: 9, maximum: 20 }, unless: -> { self.phone.nil? }
+  validate :validate_role, unless: -> { self.role.nil? }
   validate :validate_gender, unless: -> { self.gender.nil? }
   validate :validate_birth_date, unless: -> { self.birth_date.nil? }
   validate :validate_country, unless: -> { self.country.nil? }
-  validates :phone, numericality: true, length: { minimum: 9, maximum: 20 }, unless: -> { self.phone.nil? }
 
   enum role: {
     buyer: 0,
