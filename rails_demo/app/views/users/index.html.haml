@@ -1,16 +1,25 @@
-%table.table.table-striped
-  %thead
-    %tr
-      %th{scope: 'col'} Full name
-      %th{scope: 'col'} Email
-      %th{scope: 'col'} Gender
-      %th{scope: 'col'} Birth date
-      %th{scope: 'col'} Role
-  %tbody
-    - @users.each do |user|
-      %tr.link
-        %td= link_to "#{user.show_full_name}", "#{users_path}/#{user.id}"
-        %td= user.email
-        %td= user.show_gender
-        %td= user.show_birth_date
-        %td= user.show_role
+-if user_signed_in?
+  = form_with(url: users_path, method: "GET") do |form|
+    = form.text_field :query
+    = form.submit 'Search', name: nil
+  %table.table.table-striped
+    %thead
+      %tr
+        %th{scope: 'col'} Full name
+        %th{scope: 'col'} Email
+        %th{scope: 'col'} Gender
+        %th{scope: 'col'} Birth date
+        %th{scope: 'col'} Role
+    %tbody
+      - @users.each do |user|
+        %tr.link
+          %td= link_to "#{user.show_full_name}", "#{users_path}/#{user.id}"
+          %td= user.email
+          %td= user.show_gender
+          %td= user.show_birth_date
+          %td= user.show_role
+          
+-else
+  %h3= 'You are not signed in'
+
+
