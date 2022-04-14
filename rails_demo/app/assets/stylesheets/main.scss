@@ -1,0 +1,19 @@
+.inf-content {
+  border: 1px solid #dddddd;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  box-shadow: 7px 7px 7px rgba(0, 0, 0, 0.3);
+}
+
+.ml-1 {
+  margin-left: ($spacer * .25) !important;
+}
+
+.ml-8 {
+  margin-left: ($spacer * 2) !important;
+}
+
+.mb-2 {
+  margin-bottom: ($spacer * .50) !important;
+}

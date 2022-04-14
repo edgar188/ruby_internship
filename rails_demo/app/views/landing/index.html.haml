@@ -1,0 +1,8 @@
+.container
+  -if user_signed_in?
+    %h3= 'Landing'
+    %h3= 'Youre signed in'
+    %h3= 'Total 500 cars'
+  -else
+    %h3= 'Total 500 cars'
+    %h3= 'Please sign in to continue'

@@ -30,4 +30,9 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: 'Hello world'
+  wrong_role: 'Not a valid'
+  wrong_gender: 'Not a valid'
+  wrong_birth_date: 'Not a valid date'
+  wrong_age: 'You should be over 10 years old'
+  wrong_country: 'Not a valid'

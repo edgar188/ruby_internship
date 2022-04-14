@@ -1,0 +1,26 @@
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = render "devise/shared/error_messages", resource: resource
+  .form-group.row
+    %label.col-sm-2.col-form-label First name
+    .col-sm-10
+      = f.text_field :first_name, autofocus: true, autocomplete: "first_name", class: 'form-control'
+  .form-group.row
+    %label.col-sm-2.col-form-label Last name
+    .col-sm-10
+      = f.text_field :last_name, autofocus: true, autocomplete: "last_name", class: 'form-control'
+  .form-group.row
+    %label.col-sm-2.col-form-label Email
+    .col-sm-10
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+  .form-group.row
+    %label.col-sm-2.col-form-label Password
+    .col-sm-10
+      = f.password_field :password, autocomplete: "new-password", class: 'form-control'
+  .form-group.row
+    %label.col-sm-2.col-form-label Password confirmation
+    .col-sm-10
+      = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control'
+  %br/
+  %br/
+  .actions
+    = f.submit "Sign up", class: 'btn btn-primary'

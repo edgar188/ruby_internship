@@ -1,0 +1,7 @@
+-if flash[:msg] 
+  .alert.alert-danger
+    #error_explanation
+      %ul
+        - flash[:msg].each do |key, value|
+          - value.each do |message|
+            %li= message
