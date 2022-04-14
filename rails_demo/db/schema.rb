@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_11_140554) do
+ActiveRecord::Schema.define(version: 2022_04_14_141439) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2022_04_11_140554) do
     t.date "birth_date"
     t.string "country"
     t.string "phone"
+    t.integer "balance", default: 0
     t.string "encrypted_password", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
