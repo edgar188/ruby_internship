@@ -2,9 +2,9 @@ class UsersController < ApplicationController
 
   def index
     if params[:query].present?
-      @users = User.where("first_name LIKE ?", "%#{params[:query]}%")
+      @users = User.where("first_name LIKE ?", "%#{params[:query]}%").paginate(page: params[:page], per_page: 4)
     else
-      @users = User.all
+      @users = User.all.paginate(page: params[:page], per_page: 4)
     end
   end
 
