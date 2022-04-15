@@ -14,7 +14,42 @@ module Modules::User
 
   # Class methods will be defined here
   class_methods do
-    
+    def paginate_data(params)
+      users = self.all
+      
+      if ApplicationRecord::to_boolean(params[:gender])
+        users = users.where(gender: params[:gender])
+      end
+
+      if ApplicationRecord::to_boolean(params[:balance])
+        users = users.where(balance: params[:balance])
+      end
+
+      # ...
+      search_query = "CONCAT(first_name, ' ', last_name) LIKE :query OR CONCAT(last_name, ' ', first_name) LIKE :query OR email LIKE :query"
+      users = users.where(search_query, query: "%#{params[:query]}%") if params[:query].present?
+
+      case params[:sort_by]
+      when 'full_name'
+        users = users.order("first_name #{params[:sort_type] || :DESC}, last_name #{params[:sort_type] || :ASC}")
+      when 'gender'
+        users = users.order(Arel.sql([1, 2, 0].map { |type| "gender=#{type} #{params[:sort_type] || :ASC}" }.join(', ')))
+      when 'role'
+        users = users.order(Arel.sql([0, 1].map { |type| "role=#{type} #{params[:sort_type] || :ASC}" }.join(', ')))
+      else
+        users = users.order("#{params[:sort_by] || :first_name} #{params[:sort_type] || :ASC}")
+      end
+      
+      # ...
+      users = users.paginate(
+        page: params[:page] || ApplicationRecord::PAGE, 
+        per_page: params[:per_page] || ApplicationRecord::PER_PAGE
+      ) unless ApplicationRecord::to_boolean(params[:all])
+      # ...
+      count = users.count
+      users = { result: users, count: count }
+      users
+    end
   end
 
   # A method that returns the value of the role attribute.
