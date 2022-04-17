@@ -1,16 +1,15 @@
 class UsersController < ApplicationController
 
+  before_action :set_user, only: [:show]
+
   def index
-    if params[:query].present?
-      @users = User.where("first_name LIKE ?", "%#{params[:query]}%").paginate(page: params[:page], per_page: 4)
-    else
-      @users = User.all.paginate(page: params[:page], per_page: 4)
-    end
+    @users = User.paginate_data(params)[:result]
   end
 
   def show
-    @user = User.find(params[:id])
   end
+
+  private
 
   def user_params
     params.require(:user).permit(
@@ -25,5 +24,10 @@ class UsersController < ApplicationController
       :avatar
       )
   end
-    
+
+  def set_user
+    @user = User.find_by_id(params[:id]) or
+      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found  
+  end
+
 end

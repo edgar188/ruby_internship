@@ -1,6 +1,4 @@
--# / Header
 %header.py-2{style: 'background: #e8e6e6'}
-  -# / Navigation
   %nav.navbar.navbar-expand-lg.navbar-light
     .container.px-4.px-lg-5
       #navbarSupportedContent.collapse.navbar-collapse
@@ -11,7 +9,7 @@
             %li.nav-item
             = link_to 'Users', users_path, class: 'nav-link '   
           %li.nav-item.dropdown
-            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"} Profile
+            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded": "false", "data-bs-toggle": "dropdown", href: "#", role: "button"} Profile
             %ul.dropdown-menu
               -if user_signed_in? 
                 = link_to profile_page_path, class: 'dropdown-item' do
@@ -29,8 +27,8 @@
                 = link_to new_user_registration_path, class: 'dropdown-item' do
                   Sign up    
                   %i.bi-person-plus-fill.ml-8
-        %form.d-flex
-          %button.btn.btn-outline-dark{:type => "submit"}
-            %i.bi-cart-fill.me-1
-            Cart
-            %span.badge.bg-dark.text-white.ms-1.rounded-pill 0
+        -# %form.d-flex
+        -#   %button.btn.btn-outline-dark{:type => "submit"}
+        -#     %i.bi-cart-fill.me-1
+        -#     Cart
+        -#     %span.badge.bg-dark.text-white.ms-1.rounded-pill 0

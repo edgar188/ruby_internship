@@ -23,6 +23,8 @@ gem 'activeadmin'
 gem 'will_paginate', '~> 3.1.0'
 # This gem integrates the Twitter Bootstrap pagination component with the will_paginate pagination gem. Supports Rails and Sinatra.
 gem 'will_paginate-bootstrap', '~> 1.0'
+# Promise based HTTP client for the browser.
+gem 'axios_rails', '~> 0.14.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'

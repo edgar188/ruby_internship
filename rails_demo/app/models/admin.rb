@@ -1,8 +1,7 @@
 class Admin < ActiveRecord::Base
-  # Include default devise modules
+  # Include modules
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
-  # Include User modules
-  include Modules::User
+  include Modules::Admin
 
   validates_presence_of :first_name, :last_name
   validates_length_of :first_name, :last_name, maximum: 255

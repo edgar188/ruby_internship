@@ -1,25 +1,51 @@
 -if user_signed_in?
-  = form_with(url: users_path, method: "GET") do |form|
-    = form.text_field :query
-    = form.submit 'Search', name: nil
-  %table.table.table-striped
-    %thead
-      %tr
-        %th{scope: 'col'} Full name
-        %th{scope: 'col'} Email
-        %th{scope: 'col'} Gender
-        %th{scope: 'col'} Birth date
-        %th{scope: 'col'} Role
-    %tbody
-      - @users.each do |user|
-        %tr.link
-          %td= link_to "#{user.show_full_name}", "#{users_path}/#{user.id}"
-          %td= user.email
-          %td= user.show_gender
-          %td= user.show_birth_date
-          %td= user.show_role
+  .d-flex.justify-content-end.mb-2
+    = link_to 'Reset', users_path, class: 'btn btn-outline-warning'
+
+  .d-flex.justify-content-end.mb-2
+    = form_with(url: users_path, method: 'GET', class: 'd-flex search_users') do |form|
+      = form.text_field :query, placeholder: 'Search...', class: 'form-control rounded'
+  %hr/
+  .d-flex.mb-2
+    = form_tag '', method: :get do
+      %h6 Select Role
+      .d-flex.flex-column
+        .d-flex
+          = radio_button_tag(:role, :buyer) 
+          = label_tag(:role, 'Buyer') 
+        .d-flex.mb-2
+          = radio_button_tag(:role, :seller)
+          = label_tag(:role, 'Seller')
+      %h6 Select Gender
+      .d-flex.flex-column
+        .d-flex
+          = radio_button_tag(:gender, :no_select) 
+          = label_tag(:gender, 'No select')
+        .d-flex
+          = radio_button_tag(:gender, :male) 
+          = label_tag(:gender, 'Male')
+        .d-flex
+          = radio_button_tag(:gender, :female) 
+          = label_tag(:gender, 'Female')
+      %br/
+      = submit_tag 'Filter', class: 'btn btn-secondary'
+    %table#users_table.table.table-striped.ml-8
+      %thead
+        %tr
+          %th= sortable 'full_name', 'Full name'
+          %th= sortable 'email', 'Email'
+          %th= sortable 'gender', 'Gender'
+          %th= sortable 'birth_date', 'Birth date'
+          %th= sortable 'role', 'Role'
+      %tbody
+        - @users.each do |user|
+          %tr.link
+            %td= link_to "#{user.show_full_name}", "#{users_path}/#{user.id}"
+            %td= user.email
+            %td= user.show_gender
+            %td= user.show_birth_date
+            %td= user.show_role
+
   = will_paginate @users, renderer: BootstrapPagination::Rails
 -else
   %h3= 'You are not signed in'
-
-

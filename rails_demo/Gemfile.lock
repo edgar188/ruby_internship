@@ -78,6 +78,7 @@ GEM
       activerecord (>= 4.0)
     autoprefixer-rails (10.4.2.0)
       execjs (~> 2)
+    axios_rails (0.14.0)
     bcrypt (3.1.17)
     bindex (0.8.1)
     bootsnap (1.11.1)
@@ -305,6 +306,7 @@ PLATFORMS
 DEPENDENCIES
   activeadmin
   auto_strip_attributes (~> 2.6)
+  axios_rails (~> 0.14.0)
   bootsnap (>= 1.4.4)
   bootstrap (~> 5.1)
   byebug
