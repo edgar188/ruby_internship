@@ -1,10 +1,9 @@
 -if user_signed_in?
   .d-flex.justify-content-end.mb-2
     = link_to 'Reset', users_path, class: 'btn btn-outline-warning'
-
   .d-flex.justify-content-end.mb-2
-    = form_with(url: users_path, method: 'GET', class: 'd-flex search_users') do |form|
-      = form.text_field :query, placeholder: 'Search...', class: 'form-control rounded'
+    = form_with(url: users_path, method: 'GET', class: 'd-flex', remote: true) do |form|
+      = form.text_field :query, placeholder: 'Search...', class: 'form-control rounded', id: 'users_search', remote: true
   %hr/
   .d-flex.mb-2
     = form_tag '', method: :get do
@@ -28,24 +27,25 @@
           = radio_button_tag(:gender, :female) 
           = label_tag(:gender, 'Female')
       %br/
-      = submit_tag 'Filter', class: 'btn btn-secondary'
-    %table#users_table.table.table-striped.ml-8
-      %thead
-        %tr
-          %th= sortable 'full_name', 'Full name'
-          %th= sortable 'email', 'Email'
-          %th= sortable 'gender', 'Gender'
-          %th= sortable 'birth_date', 'Birth date'
-          %th= sortable 'role', 'Role'
-      %tbody
-        - @users.each do |user|
-          %tr.link
-            %td= link_to "#{user.show_full_name}", "#{users_path}/#{user.id}"
-            %td= user.email
-            %td= user.show_gender
-            %td= user.show_birth_date
-            %td= user.show_role
 
-  = will_paginate @users, renderer: BootstrapPagination::Rails
+      -# %label.form-label{:for => "customRange1"} Example range
+
+      -# .range
+      -#   %input#multi6.multi-range{:type => "range"}/
+ 
+          
+      = submit_tag 'Filter', class: 'btn btn-secondary'
+    = render 'users_list', remote: true
+  = will_paginate @users[:result], renderer: BootstrapPagination::Rails
 -else
   %h3= 'You are not signed in'
+
+%h6 Select Age Range
+%div{"data-role" => "rangeslider", style: 'width: 20%'}
+  -# %label{:for => "range-1a"} Rangeslider:
+  %input#range-1a{"data-popup-enabled" => "true", "data-show-value" => "true", :max => "100", :min => "0", :name => "range-1a", :type => "range", :value => "0"}/
+  -# %label{:for => "range-1b"} Rangeslider:
+  %input#range-1b{"data-popup-enabled" => "true", "data-show-value" => "true", :max => "100", :min => "0", :name => "range-1b", :type => "range", :value => "80"}/
+
+= javascript_include_tag 'axios_handler.js'
+= javascript_include_tag 'users.js'

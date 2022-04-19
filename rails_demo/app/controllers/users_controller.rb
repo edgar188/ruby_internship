@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
 
+  before_action :set_users, only: [:index, :search]
   before_action :set_user, only: [:show]
 
   def index
-    @users = User.paginate_data(params)[:result]
+  end
+
+  def search
+    render json: @users, status: :ok
   end
 
   def show
@@ -24,10 +28,14 @@ class UsersController < ApplicationController
       :avatar
       )
   end
+  
+  def set_users
+    @users = User.paginate_data(params)
+  end
 
   def set_user
-    @user = User.find_by_id(params[:id]) or
-      render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found  
+    @user = User.find_by_id(params[:id])
+    render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found if @user.nil?
   end
 
 end

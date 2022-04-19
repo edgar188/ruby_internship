@@ -1,8 +1,8 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.action_mailer.default_url_options = { host: ENV["DB_HOST"] , port: ENV["DB_PORT"] }
 
   # Settings specified here will take precedence over those in config/application.rb.
 
