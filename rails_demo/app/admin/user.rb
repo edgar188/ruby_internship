@@ -17,6 +17,21 @@ ActiveAdmin.register User do
     actions
   end
 
+  show do |item|
+    attributes_table do
+      row :id
+      row :role
+      row :first_name
+      row :last_name
+      row :email
+      row :gender
+      row :birth_date
+      row :country
+      row :phone
+      row :created_at
+    end
+  end
+
   filter :role
   filter :first_name
   filter :last_name

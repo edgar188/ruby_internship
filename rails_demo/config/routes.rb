@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  resources :categories do
+    resources :items
+  end
+
   root 'landing#index'
 
   scope :profile do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_16_053609) do
+ActiveRecord::Schema.define(version: 2022_04_19_122431) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -68,6 +68,33 @@ ActiveRecord::Schema.define(version: 2022_04_16_053609) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "parrent_id"
+    t.string "name", null: false
+    t.json "owner"
+    t.json "options"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["parrent_id"], name: "index_categories_on_parrent_id"
+  end
+
+  create_table "items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "category_id", null: false
+    t.string "owner_type"
+    t.bigint "owner_id"
+    t.string "title", null: false
+    t.text "description"
+    t.float "price", default: 0.0, null: false
+    t.integer "countity", default: 0, null: false
+    t.integer "ratting", limit: 1, default: 0, null: false
+    t.integer "state", limit: 1, default: 0, null: false
+    t.json "options"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["owner_type", "owner_id"], name: "index_items_on_owner"
+  end
+
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "role", limit: 1, default: 0, null: false
     t.string "first_name"
@@ -90,4 +117,5 @@ ActiveRecord::Schema.define(version: 2022_04_16_053609) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "items", "categories", on_delete: :cascade
 end

@@ -10,6 +10,17 @@ ActiveAdmin.register Admin do
     actions
   end
 
+  show do |item|
+    attributes_table do
+      row :id
+      row :email
+      row :first_name
+      row :last_name
+      row :show_full_name
+      row :created_at
+    end
+  end
+
   filter :email
   filter :first_name
   filter :last_name
