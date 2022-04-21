@@ -1,8 +1,8 @@
 class ApplicationController < ActionController::Base
-
   rescue_from ActiveRecord::RecordNotFound, with: :notfound
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
+  before_action :set_current_user, if: :user_signed_in?
 
   protected
 
@@ -35,8 +35,16 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_current_user
+    Current.user = current_user
+  end
+
   def notfound
     render file: 'public/404.html', status: :not_found, layout: false
   end
 
+end
+
+def set_current_user
+  Current.user = current_user
 end

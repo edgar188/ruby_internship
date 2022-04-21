@@ -13,7 +13,7 @@ module UsersHelper
   end
     
   def arrow(column)
-    return '' if params[:sort_by] != column
+    return '' unless params[:sort_by] == column
     arrow = params[:sort_type] == 'asc' ? 'down' : 'up'
     image_tag("#{arrow}.png", size: '15x15')
   end

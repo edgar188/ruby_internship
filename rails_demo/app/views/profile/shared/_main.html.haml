@@ -2,7 +2,7 @@
   - if user == current_user 
     .d-flex
       = link_to 'Edit', edit_user_account_path, class: 'btn btn-secondary mb-2 '   
-      = link_to 'Edit password', edit_user_registration_path, class: 'btn btn-secondary mb-2 ml-1'
+      = link_to 'Edit password', edit_user_account_password_path, class: 'btn btn-secondary mb-2 ml-1'
       = button_to 'Delete account', registration_path(current_user), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mb-2 ml-1', method: :delete
   .panel-body.inf-content
     .row
