@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
   
   def set_users
-    @users = User.all_except(current_user).paginate_data(params)
+    @users = User.paginate_data(params)
   end
 
   def set_user

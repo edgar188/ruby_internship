@@ -74,7 +74,7 @@ module Modules::User
       ) unless to_boolean(params[:all])
 
       # Get users and users count
-      users = { result: users, count: count }
+      users = { result: users.all_except(Current.user), count: count }
       users
     end
   end
