@@ -1,9 +1,7 @@
 class User < ActiveRecord::Base
-  # Include default devise modules.
+  # Include modules.
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
-  # Include User validations
   include Validations::User
-  # Include User modules
   include Modules::User
 
   has_one_attached :avatar
@@ -29,5 +27,5 @@ class User < ActiveRecord::Base
     male: 1,
     female: 2
   }
-
+  
 end
