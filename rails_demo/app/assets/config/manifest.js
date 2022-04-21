@@ -5,3 +5,4 @@
 //= require axios
 //= require jquery
 //= require jquery_ujs 
+//= link helpers/axios_handler.js

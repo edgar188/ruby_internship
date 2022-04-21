@@ -18,6 +18,7 @@ module Modules::User
     scope :with_gender, -> (gender) { where(gender: gender) }
     scope :with_birth_date, -> (min_age, max_age) { where("YEAR(birth_date) BETWEEN ? AND ?", min_age, max_age)}
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
+    scope :all_except, ->(user) { where.not(id: user) }
   end
 
   # Class methods will be defined here
@@ -40,9 +41,14 @@ module Modules::User
         users = users.with_gender(params[:gender])
       end
 
+      # It's a method that returns the age of the user.
+      def get_age(age)
+        DateTime.current.to_date.year - age.to_i
+      end
+
       # Filter users by age
-      min_age = DateTime.current.to_date.year - params[:min_age].to_i
-      max_age = DateTime.current.to_date.year - params[:max_age].to_i
+      min_age = get_age(params[:min_age])
+      max_age = get_age(params[:max_age])
       users = users.with_birth_date(max_age, min_age) unless params[:min_age].nil? && params[:max_age].nil? 
  
       # Search users by first_name, last_name and email
