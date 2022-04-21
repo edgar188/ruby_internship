@@ -18,7 +18,7 @@ module Modules::User
     scope :with_gender, -> (gender) { where(gender: gender) }
     scope :with_birth_date, -> (min_age, max_age) { where("YEAR(birth_date) BETWEEN ? AND ?", min_age, max_age)}
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
-    scope :all_except, ->(user) { where.not(id: user) }
+    scope :except_current_user, -> (id) { where.not(id: id) }
   end
 
   # Class methods will be defined here
@@ -30,6 +30,9 @@ module Modules::User
       def to_boolean(value)
         ActiveModel::Type::Boolean.new.cast(value).present?
       end
+
+      # Filter out current user
+      users = users.except_current_user(Current.user.id)
 
       # Filter users by role
       if to_boolean(params[:role])
@@ -74,7 +77,7 @@ module Modules::User
       ) unless to_boolean(params[:all])
 
       # Get users and users count
-      users = { result: users.all_except(Current.user), count: count }
+      users = { result: users, count: count }
       users
     end
   end
