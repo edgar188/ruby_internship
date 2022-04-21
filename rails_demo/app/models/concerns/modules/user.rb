@@ -1,6 +1,7 @@
 module Modules::User
   extend ActiveSupport::Concern
   include Modules::Constants
+  include Modules::Helpers
 
   GENDER = {
     no_select: 'No select',
@@ -26,21 +27,16 @@ module Modules::User
     def paginate_data(params)
       users = self.all
 
-      # A method that is used to convert a value to boolean.
-      def to_boolean(value)
-        ActiveModel::Type::Boolean.new.cast(value).present?
-      end
-
       # Filter out current user
       users = users.except_current_user(Current.user.id)
 
       # Filter users by role
-      if to_boolean(params[:role])
+      if Modules::Helpers::to_boolean(params[:role])
         users = users.with_role(params[:role])
       end
 
       # Filter users by gender
-      if to_boolean(params[:gender])
+      if Modules::Helpers::to_boolean(params[:gender])
         users = users.with_gender(params[:gender])
       end
 
@@ -74,7 +70,7 @@ module Modules::User
       users = users.paginate(
         page: params[:page] || Modules::Constants::PAGE, 
         per_page: params[:per_page] || Modules::Constants::PER_PAGE
-      ) unless to_boolean(params[:all])
+      ) unless Modules::Helpers::to_boolean(params[:all])
 
       # Get users and users count
       users = { result: users, count: count }
