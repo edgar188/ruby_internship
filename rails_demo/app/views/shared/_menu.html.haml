@@ -1,15 +1,19 @@
-%header.py-2{style: 'background: #e8e6e6'}
-  %nav.navbar.navbar-expand-lg.navbar-light
-    .container.px-4.px-lg-5
-      #navbarSupportedContent.collapse.navbar-collapse
-        %ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4
+%header
+  %nav.navbar.navbar-expand-md.navbar-dark.bg-dark{style: 'padding: 10px 90px '}
+    .container-fluid
+      .navbar-collapse.collapse.w-100.order-1.order-md-0.dual-collapse2
+        %ul.navbar-nav.me-auto
           %li.nav-item
-            = link_to 'Home', root_path, class: 'nav-link active'  
+            = link_to 'Home', root_path, class: 'nav-link active' 
           - if user_signed_in?
             %li.nav-item
-            = link_to 'Users', users_path, class: 'nav-link '
-          %li.nav-item.dropdown
-            %a#navbarDropdown.nav-link.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#', role: 'button'} Profile
+              = link_to 'Users', users_path, class: 'nav-link'
+          %li.nav-item
+          = link_to 'Categories', categories_path, class: 'nav-link'
+      .navbar-collapse.collapse.w-100.order-3.dual-collapse2
+        %ul.navbar-nav.ms-auto
+          %li.nav-item.dropdown.align-baseline.align-right
+            %a.nav-link.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#', role: 'button'} Profile
             %ul.dropdown-menu
               -if user_signed_in? 
                 = link_to profile_page_path, class: 'dropdown-item' do
@@ -27,8 +31,3 @@
                 = link_to new_user_registration_path, class: 'dropdown-item' do
                   Sign up    
                   %i.bi-person-plus-fill.ml-8
-        -# %form.d-flex
-        -#   %button.btn.btn-outline-dark{:type => "submit"}
-        -#     %i.bi-cart-fill.me-1
-        -#     Cart
-        -#     %span.badge.bg-dark.text-white.ms-1.rounded-pill 0

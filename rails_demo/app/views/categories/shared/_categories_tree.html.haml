@@ -1,0 +1,21 @@
+%ul.tree
+  %li
+    -# - @categories[:result].each do |category|
+
+    %input#c1{checked: "checked", type: "checkbox"}/
+    %label.tree_label{for: "c1"} 
+      -# =link_to "#{category.show_name}"
+    %ul
+      %li
+        %input#c2{checked: "checked", type: "checkbox"}/
+        %label.tree_label{for: "c2"} Level 1
+        %ul
+          %li
+            %span.tree_label Level 2
+          %li
+            %span.tree_label Level 2
+
+
+
+      -# %tr
+      -#   %td= link_to "#{category.show_name}", "#{categories_path}/#{category.id}"

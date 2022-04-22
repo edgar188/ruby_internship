@@ -1,0 +1,6 @@
+.container
+  -if user_signed_in?
+    = link_to 'New Category', new_category_path, class: 'btn btn-secondary mb-2'
+  -else
+  = render 'categories/shared/categories_list'
+= will_paginate @categories[:result], renderer: BootstrapPagination::Rails
