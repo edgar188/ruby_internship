@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
-  rescue_from ActiveRecord::RecordNotFound, with: :notfound
+  
+  before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_logged_in_user, if: :user_signed_in?
   protect_from_forgery with: :exception
-  before_action :set_current_user, if: :user_signed_in?
+  rescue_from ActiveRecord::RecordNotFound, with: :notfound
 
   protected
 
@@ -34,17 +36,13 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def set_current_user
-    Current.user = current_user
+  
+  def set_logged_in_user
+    ApplicationRecord.set_logged_in_user(@current_user)
   end
 
   def notfound
     render file: 'public/404.html', status: :not_found, layout: false
   end
 
-end
-
-def set_current_user
-  Current.user = current_user
 end

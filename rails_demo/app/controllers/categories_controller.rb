@@ -20,12 +20,6 @@ class CategoriesController < ApplicationController
     
     @category = Category.new(category_params)
     
-    # @category.owner = { 
-    #   id: current_user.id, 
-    #   type: current_user.class.name, 
-    #   full_name: current_user.show_full_name 
-    # } 
-    
     # Get options array
     @category.options = { options: params.require(:options) }
 

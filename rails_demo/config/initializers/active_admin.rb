@@ -1,4 +1,7 @@
 ActiveAdmin.setup do |config|
+
+  config.skip_before_action :authenticate_user!
+
   # == Site Title
   #
   # Set the title that is displayed on the main layout
@@ -91,7 +94,7 @@ ActiveAdmin.setup do |config|
   #
   # This setting changes the method which Active Admin calls
   # (within the application controller) to return the currently logged in user.
-  # config.current_user_method = :current_admin
+  # config.current_user_method = :current_adminx
 
   # == Logging Out
   #
@@ -109,7 +112,7 @@ ActiveAdmin.setup do |config|
   # link. For example :get, :delete, :put, etc..
   #
   # Default:
-  # config.logout_link_method = :get
+  config.logout_link_method = :delete
 
   # == Root
   #
