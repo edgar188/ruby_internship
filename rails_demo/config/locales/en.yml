@@ -36,3 +36,5 @@ en:
   wrong_birth_date: 'Not a valid date.'
   wrong_age: 'You should be over 10 years old.'
   wrong_country: 'Not a valid.'
+  wrong_level: 'Should be less than 3.'
+  wrong_option: 'Is too short (minimum is 3 characters).'

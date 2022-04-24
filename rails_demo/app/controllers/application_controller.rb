@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_logged_in_user, if: :user_signed_in?
   protect_from_forgery with: :exception
+  before_action :set_logged_in_user, if: :user_signed_in?
   rescue_from ActiveRecord::RecordNotFound, with: :notfound
 
   protected
@@ -39,6 +39,10 @@ class ApplicationController < ActionController::Base
   
   def set_logged_in_user
     ApplicationRecord.set_logged_in_user(@current_user)
+  end
+
+  def current_user?(user)
+    user == @current_user.id
   end
 
   def notfound

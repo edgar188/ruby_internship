@@ -16,7 +16,7 @@ class ProfileController < ApplicationController
       redirect_to profile_page_path, notice: 'Your account has been updated successfully.'
     else
       flash[:msg] = { message: @user.errors.full_messages }
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 

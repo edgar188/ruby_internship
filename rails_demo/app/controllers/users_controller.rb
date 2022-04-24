@@ -6,11 +6,11 @@ class UsersController < ApplicationController
   def index
   end
 
+  def show
+  end
+  
   def search
     render json: @users, status: :ok
-  end
-
-  def show
   end
 
   private

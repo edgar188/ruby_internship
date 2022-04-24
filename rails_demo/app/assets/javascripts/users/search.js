@@ -5,7 +5,7 @@ window.onload = function () {
   let users_search = document.getElementById('users_search');
 
   function render_users(data) {
-    let users = data['result']
+    let users = data['result'];
     let users_count_new = users.length;
 
     // Show users count
@@ -14,7 +14,7 @@ window.onload = function () {
       users_count.textContent = 'NO RESULT';
     } else {
       users_count.textContent = `Total ${users_count_new} users`;
-      users_table.className = 'd-block table table-striped ml-8';
+      users_table.className = 'table table-striped ml-8';
     }
 
     // Hide elements
@@ -26,7 +26,7 @@ window.onload = function () {
     for (let i = 0; i < users_count_new; i++) {
       let user = users[i];
       let row = users_table.insertRow(1);
-      row.className = 'link'
+      row.className = 'link';
       let full_name = row.insertCell(0);
       let email = row.insertCell(1);
       let gender = row.insertCell(2);

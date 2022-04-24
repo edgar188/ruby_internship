@@ -1,4 +1,5 @@
 module ApplicationHelper
+  
   def sortable(column, title = nil)
     title ||= column.titleize
     direction = column == params[:sort_by] && params[:sort_type] == 'asc' ? 'desc' : 'asc'
@@ -16,4 +17,5 @@ module ApplicationHelper
     arrow = params[:sort_type] == 'asc' ? 'down' : 'up'
     image_tag("#{arrow}.png", size: '15x15')
   end
+
 end

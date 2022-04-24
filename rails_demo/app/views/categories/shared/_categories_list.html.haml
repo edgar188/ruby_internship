@@ -1,16 +1,12 @@
-%table#categories_table.table.table-striped.ml-8
+%table#categories_table.table.table-striped
   %thead
     %tr
       %th= sortable 'name', 'Name'
-      %th= 'Parent'
-      %th= 'Level'
-      %th= 'Owner full name'
+      %th= sortable 'owner', 'Owner'
       %th= 'Options'
-  %tbody
+  %tbody#categories_table_body
     - @categories[:result].each do |category|
       %tr.link{'data-category_id': category.id}
         %td= link_to "#{category.show_name}", "#{categories_path}/#{category.id}"
-        %td= category.show_parrent
-        %td= category.level
         %td= category.show_owner_full_name
-        %td= select_tag :options, options_for_select((category.show_options))
+        %td#options_list= select_tag :options, options_for_select((category.show_options))

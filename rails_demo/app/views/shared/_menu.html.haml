@@ -1,33 +1,35 @@
-%header
-  %nav.navbar.navbar-expand-md.navbar-dark.bg-dark{style: 'padding: 10px 90px '}
-    .container-fluid
-      .navbar-collapse.collapse.w-100.order-1.order-md-0.dual-collapse2
-        %ul.navbar-nav.me-auto
+%nav.navbar.navbar-expand-md.navbar-dark.bg-dark{style: 'padding: 10px 90px '}
+  .container-fluid
+    .navbar-collapse
+      %ul.navbar-nav.me-auto
+        %li.nav-item
+          = link_to 'Home', root_path, class: 'nav-link active' 
+        - if user_signed_in?
           %li.nav-item
-            = link_to 'Home', root_path, class: 'nav-link active' 
-          - if user_signed_in?
-            %li.nav-item
-              = link_to 'Users', users_path, class: 'nav-link'
-            %li.nav-item
-            = link_to 'Categories', categories_path, class: 'nav-link'
-      .navbar-collapse.collapse.w-100.order-3.dual-collapse2
-        %ul.navbar-nav.ms-auto
-          %li.nav-item.dropdown.align-baseline.align-right
-            %a.nav-link.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#', role: 'button'} Profile
-            %ul.dropdown-menu
-              -if user_signed_in? 
-                = link_to profile_page_path, class: 'dropdown-item' do
-                  Account
-                  %i.bi-person-circle.ml-8
-                %hr.dropdown-divider/
-                = button_to destroy_user_session_path, class: 'dropdown-item', method: :delete do
-                  Log out
-                  %i.bi-box-arrow-right.ml-8
-              -else
-                = link_to new_user_session_path, class: 'dropdown-item' do
-                  Sign in    
-                  %i.bi-box-arrow-in-right.ml-8
-                %hr.dropdown-divider/
-                = link_to new_user_registration_path, class: 'dropdown-item' do
-                  Sign up    
-                  %i.bi-person-plus-fill.ml-8
+            = link_to 'Users', users_path, class: 'nav-link'
+          %li.nav-item
+          = link_to 'Categories', categories_path, class: 'nav-link'
+    .navbar-collapse
+      %ul.navbar-nav.ms-auto
+        %li.nav-item.dropdown.align-baseline.align-right
+          -if user_signed_in? 
+            %a.nav-link.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#', role: 'button'}= current_user.show_full_name
+          - else
+            %a.nav-link.dropdown-toggle{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#', role: 'button'} Login
+          %ul.dropdown-menu
+            -if user_signed_in? 
+              = link_to profile_page_path, class: 'dropdown-item' do
+                Account
+                %i.bi-person-circle.ml-8
+              %hr.dropdown-divider/
+              = button_to destroy_user_session_path, class: 'dropdown-item', method: :delete do
+                Log out
+                %i.bi-box-arrow-right.ml-8
+            -else
+              = link_to new_user_session_path, class: 'dropdown-item' do
+                Sign in    
+                %i.bi-box-arrow-in-right.ml-8
+              %hr.dropdown-divider/
+              = link_to new_user_registration_path, class: 'dropdown-item' do
+                Sign up    
+                %i.bi-person-plus-fill.ml-8

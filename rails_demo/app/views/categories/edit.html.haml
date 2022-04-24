@@ -1,0 +1,7 @@
+= form_for(@category, url:  category_path(@category), html: { method: :put }) do |f|
+  = render partial: 'shared/error_messages', resource: @category
+  .form-group.row.mb-2
+    .col-sm-10
+      = f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control', placeholder: 'Name'
+  .actions
+    = f.submit 'Update', class: 'btn btn-primary mb-2'

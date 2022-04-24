@@ -1,5 +1,5 @@
 = form_for(current_user, url: profile_path(current_user), html: { method: :put }) do |f|
-  = render partial: 'profile/shared/error_messages', resource: current_user
+  = render partial: 'shared/error_messages', resource: current_user
   .form-group.row.mb-2
     %label.col-sm-2.col-form-label Avatar
     .col-sm-10
@@ -56,4 +56,4 @@
       %small Format: 077112233
       = f.number_field :phone, type: 'tel', class: 'form-control'
   .actions
-    = f.submit 'Update', class: 'btn btn-primary'
+    = f.submit 'Update', class: 'btn btn-primary mb-2'

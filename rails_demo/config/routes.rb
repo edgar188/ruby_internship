@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   resources :categories do
     resources :items
+
+    collection do
+      get :search
+    end
   end
 
   root 'landing#index'
@@ -26,6 +30,5 @@ Rails.application.routes.draw do
       get :search
     end
   end
-
 
 end

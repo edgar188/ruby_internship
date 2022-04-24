@@ -1,7 +1,5 @@
-.container.bootstrap.snippets.bootdey
+.bootstrap.snippets.bootdey
   .d-flex
-    -# = link_to 'Edit Category', edit_category_path, class: 'btn btn-secondary mb-2 '   
-      -# = button_to 'Delete account', registration_path(current_user), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mb-2 ml-1', method: :delete
   .panel-body.inf-content
     .row
       .col-md-4
@@ -28,20 +26,6 @@
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
-                    Owner id
-                %td.text-primary
-                  = @category.show_owner_id
-              %tr
-                %td
-                  %strong
-                    %span.glyphicon.glyphicon-envelope.text-primary
-                    Owner type
-                %td.text-primary
-                  = @category.show_owner_type
-              %tr
-                %td
-                  %strong
-                    %span.glyphicon.glyphicon-envelope.text-primary
                     Owner full name
                 %td.text-primary
                   = @category.show_owner_full_name
@@ -51,5 +35,4 @@
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Options
                 %td.text-primary
-                  = select_tag :options, options_for_select((@category.show_options))
-             
+                  = select_tag :options, options_for_select((@category.show_options))   
