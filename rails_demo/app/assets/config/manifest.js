@@ -8,6 +8,7 @@
 //= link categories/options.js
 //= link categories/search.js
 //= link items/search.js
+//= link items/images_slider.js
 
 //= require axios
 //= require jquery

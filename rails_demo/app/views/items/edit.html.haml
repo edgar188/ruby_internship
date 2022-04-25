@@ -1,6 +1,10 @@
 = form_for(@item, url:  item_path(@item), html: { method: :put }) do |f|
   = render partial: 'shared/error_messages', resource: @item
   .form-group.row.mb-2
+    %label.col-sm-2.col-form-label Avatar
+    .col-sm-10
+      = f.file_field :images, multiple: true, class: 'form-control'
+  .form-group.row.mb-2
     %legend.col-form-label.col-sm-2.pt-0 Title
     .col-sm-10
       = f.text_field :title, autofocus: true, autocomplete: 'title', class: 'form-control', placeholder: 'Title'

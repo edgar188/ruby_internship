@@ -3,7 +3,18 @@
   .panel-body.inf-content
     .row
       .col-md-4
-        = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+        - if @item.images.attached? && @item.images.count == 1
+          = image_tag(@item.images.first, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 100%')
+        - elsif @item.images.attached? && @item.images.count > 1
+          #slider
+            %a.control_next{:href => "#"} >>
+            %a.control_prev{:href => "#"} <<
+            %ul
+              - @item.images.each do |image|
+                %li
+                  = image_tag(image, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 100%')
+        - else
+          = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
       .col-md-6
         .table-responsive
           %table.table.table-user-information
@@ -65,3 +76,5 @@
                     State
                 %td.text-primary
                   = @item.show_state  
+
+= javascript_include_tag 'items/images_slider'

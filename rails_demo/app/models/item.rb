@@ -2,6 +2,8 @@ class Item < ApplicationRecord
   # Include modules.
   include Validations::Item
   include Modules::Item
+
+  has_many_attached :images
     
   belongs_to :owner, polymorphic: true
   belongs_to :category, dependent: :destroy

@@ -33,7 +33,7 @@ window.onload = function () {
       let count = row.insertCell(2);
       let date_modified = row.insertCell(3);
       title.innerHTML = `<td><a href="items/${item.id}"> ${item.title} </a> </td> `;
-      price.innerHTML = `<td>${item.price} $</td>`;
+      price.innerHTML = `<td>$ ${item.price}</td>`;
       count.innerHTML = `<td>${item.countity}</td>`;
       date_modified.innerHTML = `<td>${item.updated_at.split('T')[0]}</td>`;
     }

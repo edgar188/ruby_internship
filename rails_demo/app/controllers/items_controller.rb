@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
 
   def update
     # Get options array
-    @item.options = { options: params.require(:options) }
+    # @item.options = { options: params.require(:options) }
 
     if @item.update(item_params)
       redirect_to item_path(@item), notice: 'Item was successfully updated.'
@@ -62,7 +62,8 @@ class ItemsController < ApplicationController
       :countity,
       :ratting,
       :state,
-      :options
+      :options,
+      images: []
     )
   end  
 
