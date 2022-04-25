@@ -31,6 +31,7 @@
 
 en:
   hello: 'Hello world.'
+  negative_value: "can't be negaive value."
   wrong_role: 'Not a valid.'
   wrong_gender: 'Not a valid.'
   wrong_birth_date: 'Not a valid date.'
@@ -38,3 +39,7 @@ en:
   wrong_country: 'Not a valid.'
   wrong_level: 'Should be less than 3.'
   wrong_option: 'Is too short (minimum is 3 characters).'
+  wrong_state: 'Not a valid.'
+  wrong_countity: "can't be less than 1."
+  
+  

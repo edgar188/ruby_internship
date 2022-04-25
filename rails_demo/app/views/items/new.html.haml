@@ -1,0 +1,45 @@
+= form_with model: @item do |f|
+  = render partial: 'shared/error_messages', resource: @item
+  -# .form-group.row.mb-2
+  -#   .col-sm-10
+  -#     = f.number_field :category_id, class: 'form-control', placeholder: 'Category id'
+
+  .form-group.row.mb-2
+    %label.col-sm-2.col-form-label Category
+    .col-sm-10
+      .select.form-select.mb-3{'aria-label': '.form-select-lg example'}
+        = f.select :category_id, Category.all.map { |cat| [cat.name, cat.id] }
+
+  .form-group.row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Title
+    .col-sm-10
+      = f.text_field :title, autofocus: true, autocomplete: 'title', class: 'form-control', placeholder: 'Title'
+  .form-group.row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Description
+    .col-sm-10
+      = f.text_area :description, class: 'form-control', placeholder: 'Description'
+  .form-group.row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Price $
+    .col-sm-10
+      = f.number_field :price, class: 'form-control', placeholder: 'Price'
+  .form-group.row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Count
+    .col-sm-10
+      = f.number_field :countity, class: 'form-control', placeholder: 'Countity'
+  .form-group.row.mb-2
+    %label.col-sm-2.col-form-label Ratting
+    .col-sm-10
+      .select.form-select.mb-3{'aria-label': '.form-select-lg example'}
+        = f.select :ratting, options_for_select((0..5)), class: 'mb-2', include_blank: false
+  .row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 State
+    .col-sm-10
+      .form-check 
+        = f.radio_button :state, 'normal', class: 'gridRadios1 form-check-input'
+        = f.label :state, 'Normal', class: 'label form-check-label'
+      .form-check 
+        = f.radio_button :state, 'speedily', class: 'gridRadios1 form-check-input'
+        = f.label :state, 'Speedily', class: 'label form-check-label'
+
+  .actions
+    = f.submit 'Create', class: 'btn btn-primary mb-2'

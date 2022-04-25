@@ -6,7 +6,7 @@ module Modules::Category
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
   end
 
-  # Class methods will be defined here
+  # Class methods
   class_methods do
     def paginate_data(params)
       categories = Category.all
@@ -30,19 +30,23 @@ module Modules::Category
     end
   end
 
+  # It's showing the name of the category.
   def show_name
     self.name
   end
 
+  # It's showing the name of the parrent category.
   def show_parrent
     return Modules::Constants::EMPTY unless self.parrent 
     self.parrent.name if self.parrent 
   end
 
+  # It's showing the full name of the owner of the category.
   def show_owner_full_name
     self.owner['full_name']
   end
 
+  # It's showing the options of the category.
   def show_options
     options = self.options['options'].to_a
 
@@ -51,6 +55,7 @@ module Modules::Category
     end
   end
 
+  # It's getting the level of the category.
   def level
     return 0 if self.parrent_id.nil?
     c = self

@@ -5,10 +5,10 @@
       = f.text_field :first_name, autofocus: true, autocomplete: 'first_name', class: 'form-control', placeholder: 'First name'
   .form-group.row.mb-2
     .col-sm-10
-      = f.text_field :last_name, autofocus: true, autocomplete: 'last_name', class: 'form-control', placeholder: 'Last name'
+      = f.text_field :last_name, autocomplete: 'last_name', class: 'form-control', placeholder: 'Last name'
   .form-group.row.mb-2
     .col-sm-10
-      = f.email_field :email, autofocus: true, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
+      = f.email_field :email, autocomplete: 'email', class: 'form-control', placeholder: 'Email'
   .form-group.row.mb-2
     .col-sm-10
       = f.password_field :password, autocomplete: 'new-password', class: 'form-control', placeholder: 'Password'

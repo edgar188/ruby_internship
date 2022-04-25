@@ -7,15 +7,15 @@
         %small Current: #{current_user.avatar.filename.to_s}
       = f.file_field :avatar, class: 'form-control'
   %fieldset.form-group
-  .row.mb-2
-    %legend.col-form-label.col-sm-2.pt-0 Role
-    .col-sm-10
-      .form-check 
-        = f.radio_button :role, 'buyer', class: 'gridRadios1 form-check-input'
-        = f.label :role, 'Buyer', class: 'label form-check-label'
-      .form-check 
-        = f.radio_button :role, 'seller', class: 'gridRadios1 form-check-input'
-        = f.label :role, 'Seller', class: 'label form-check-label'
+    .row.mb-2
+      %legend.col-form-label.col-sm-2.pt-0 Role
+      .col-sm-10
+        .form-check 
+          = f.radio_button :role, 'buyer', class: 'gridRadios1 form-check-input'
+          = f.label :role, 'Buyer', class: 'label form-check-label'
+        .form-check 
+          = f.radio_button :role, 'seller', class: 'gridRadios1 form-check-input'
+          = f.label :role, 'Seller', class: 'label form-check-label'
   .form-group.row.mb-2
     %label.col-sm-2.col-form-label First name
     .col-sm-10

@@ -7,6 +7,7 @@
 //= link categories/categories_tree.js
 //= link categories/options.js
 //= link categories/search.js
+//= link items/search.js
 
 //= require axios
 //= require jquery

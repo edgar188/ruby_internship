@@ -1,4 +1,9 @@
 .d-flex
-  %div{style: 'min-width: 25%'}
+  %div{style: 'min-width: 20%'}
     = render 'categories/shared/categories_tree'
-  .container{style: 'min-width: 75%; background: #faf7f7'}
+  %div{style: 'min-width: 60%; background: #faf7f7'}
+    = render 'items/shared/item_carts'
+  %div{style: 'min-width: 20%;'}
+    %h2 filters
+    -# = render 'items/shared/item_carts'
+    

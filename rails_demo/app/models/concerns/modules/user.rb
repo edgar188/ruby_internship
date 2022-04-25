@@ -22,7 +22,7 @@ module Modules::User
     scope :except_current_user, -> (id) { where.not(id: id) }
   end
 
-  # Class methods will be defined here
+  # Class methods
   class_methods do
     def paginate_data(params)
       users = self.all

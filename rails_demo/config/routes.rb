@@ -1,13 +1,5 @@
 Rails.application.routes.draw do
-
-  resources :categories do
-    resources :items
-
-    collection do
-      get :search
-    end
-  end
-
+  
   root 'landing#index'
   devise_for :users
 
@@ -26,6 +18,18 @@ Rails.application.routes.draw do
   end
   
   resources :users, only: [:index, :show] do
+    collection do
+      get :search
+    end
+  end
+
+  resources :categories do
+    collection do
+      get :search
+    end
+  end
+
+  resources :items do
     collection do
       get :search
     end
