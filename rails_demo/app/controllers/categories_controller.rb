@@ -11,6 +11,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
+    redirect_to root_path if @logged_in_user.role == 'buyer'
     @category = Category.new
   end
 
@@ -21,10 +22,10 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     
     # Get options array
-    @category.options = { options: params.require(:options) }
-
+    @category.options = params.require(:options)
+    
     if @category.save
-      redirect_to @category, notice: 'Category was successfully created.'
+      redirect_to @category, notice: t('created', obj: 'Category')
     else
       flash[:msg] = { message: @category.errors.full_messages }
       render :new, status: :bad_request
@@ -32,9 +33,10 @@ class CategoriesController < ApplicationController
   end
 
   def update
-
+    @category.options = params.require(:options)
+    
     if @category.update(category_params)
-      redirect_to category_path(@category), notice: 'Category was successfully updated.'
+      redirect_to category_path(@category), notice: t('updated', obj: 'Category')
     else
       flash[:msg] = { message: @category.errors.full_messages }
       render :edit, status: :bad_request
@@ -43,7 +45,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to categories_path, notice: 'Category was successfully destroyed.'
+    redirect_to categories_path, notice: t('destroyed', obj: 'Category')
   end
 
   def search
@@ -73,8 +75,9 @@ class CategoriesController < ApplicationController
   # Checking if the current user is the owner of the category.
   def correct_user
     @category = Category.find_by_id(params[:id])
-    unless current_user?(@category.owner['id'])
-      redirect_to categories_path, alert: 'You are not allowed to update this category.'
+
+    unless @logged_in_user.id == @category.owner['id']
+      redirect_to categories_path, alert: t('not_allowed', obj: 'Category')
     end
   end
   

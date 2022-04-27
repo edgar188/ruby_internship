@@ -96,8 +96,8 @@ a {
   margin-bottom: (25px) !important;
 }
 
-.p-10 {
-  margin-bottom: (10px) !important;
+.pr-80 {
+  padding-right: (400px) !important;
 }
 
 .d-none {
@@ -106,6 +106,18 @@ a {
 
 .d-block {
   display: block;
+}
+
+.mw-20 {
+  min-width: 20%;
+}
+
+.mw-60 {
+  min-width: 60%;
+}
+
+.v-a-top {
+  vertical-align: top;
 }
 
 .c-pointer {

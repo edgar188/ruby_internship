@@ -11,8 +11,8 @@ module Validations::Category
   end
 
   # Validating the options of the category.
-  def validate_option
-    self.options['options'].each do |option|
+  def validate_options
+    self.options.each do |option|
       if option.length < 3
         self.errors.add(:option, I18n.t(:wrong_option))
       end

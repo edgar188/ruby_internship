@@ -9,6 +9,7 @@ module Modules::Item
 
   included do
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
+    scope :with_category, -> (category_id) { where(category_id: category_id) }
     scope :with_price, -> (min_price, max_price) { where("price <= ? AND price >= ?", min_price, max_price)}
   end
   
@@ -19,7 +20,12 @@ module Modules::Item
 
       # Get current_user items
       if Modules::Helpers::to_boolean(params[:owner])
-        items = items.where(:owner => ApplicationRecord.class_variable_get(:@@logged_in_user).id)
+        items = items.where(owner: ApplicationRecord.class_variable_get(:@@logged_in_user).id)
+      end
+      
+      # Filter items by category
+      if Modules::Helpers::to_boolean(params[:category_id])
+        items = items.with_category(params[:category_id])
       end
 
       # Filter items by price
@@ -71,13 +77,4 @@ module Modules::Item
     self.updated_at.to_date
   end
 
-  # It's showing the options of the item.
-  def show_options
-    options = self.options['options'].to_a
-
-    options.each do |option|
-      option
-    end
-  end
-  
 end

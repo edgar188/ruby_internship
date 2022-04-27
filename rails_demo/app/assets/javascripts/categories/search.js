@@ -42,13 +42,12 @@ window.onload = function () {
       </td> `;
 
       let options_list_select = document.querySelector('#options_list  select');
-      console.log(options_list_select);
-      let options_aa = category.options.options;
+      let options_array = category.options;
       options_list_select.innerHTML = '';
 
       // Looping through the options and adding them to the select element.
-      for (let j = 0; j < options_aa.length; j++) {
-        let opt = options_aa[j];
+      for (let j = 0; j < options_array.length; j++) {
+        let opt = options_array[j];
         options_list_select.innerHTML += '<option value="' + opt + '">' + opt + '</option>';
       }
     }

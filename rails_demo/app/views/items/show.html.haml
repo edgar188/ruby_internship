@@ -4,6 +4,4 @@
       = link_to 'Edit', edit_item_path, class: 'btn btn-secondary mb-2 '   
       = button_to 'Delete', item_path(@item), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mb-2 ml-1', method: :delete
 
-  = render 'items/shared/cart'
--else
-  %h3= 'You are not signed in'
+= render 'items/shared/cart'

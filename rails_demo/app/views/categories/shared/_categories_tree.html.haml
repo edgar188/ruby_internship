@@ -1,16 +1,11 @@
-- root_categories = []
-
-- @categories.each do |category|
-  - root_categories << category if category.level == 0 
- 
 %ul#my_ul
-  - root_categories.each.with_index do |root_cat, index|
+  - @root_categories.each.with_index do |root_cat, index|
     %li
       - if root_cat.childs.present? 
         %span.caret= ''
       %span= link_to "#{root_cat.show_name}", "#{categories_path}/#{root_cat.id}/items"
       %ul.nested
-        - root_categories[index].childs.each.with_index do |sub_cat, index_2|
+        - @root_categories[index].childs.each.with_index do |sub_cat, index_2|
           %li
             - if sub_cat.childs.present? 
               %span.caret= ''

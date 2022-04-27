@@ -1,68 +1,14 @@
-.col-md-9
+.col-md-9.mx-auto
   .row.product-list
-    .col-md-4
-      %section.panel
-        .pro-img-box
-          %img{:alt => "", :src => "https://via.placeholder.com/250x220/FFB6C1/000000"}/
-          %a.adtocart{:href => "#"}
-            %i.fa.fa-shopping-cart
-        .panel-body.text-center
-          %h4
-            %a.pro-title{:href => "#"}
-              Leopard Shirt Dress
-          %p.price $300.00
-    .col-md-4
-      %section.panel
-        .pro-img-box
-          %img{:alt => "", :src => "https://via.placeholder.com/250x220/6495ED/000000"}/
-          %a.adtocart{:href => "#"}
-            %i.fa.fa-shopping-cart
-        .panel-body.text-center
-          %h4
-            %a.pro-title{:href => "#"}
-              Leopard Shirt Dress
-          %p.price $300.00
-    .col-md-4
-      %section.panel
-        .pro-img-box
-          %img{:alt => "", :src => "https://via.placeholder.com/250x220/FF7F50/000000"}/
-          %a.adtocart{:href => "#"}
-            %i.fa.fa-shopping-cart
-        .panel-body.text-center
-          %h4
-            %a.pro-title{:href => "#"}
-              Leopard Shirt Dress
-          %p.price $300.00
-    .col-md-4
-      %section.panel
-        .pro-img-box
-          %img{:alt => "", :src => "https://via.placeholder.com/250x220/00BFFF/000000"}/
-          %a.adtocart{:href => "#"}
-            %i.fa.fa-shopping-cart
-        .panel-body.text-center
-          %h4
-            %a.pro-title{:href => "#"}
-              Leopard Shirt Dress
-          %p.price $300.00
-    .col-md-4
-      %section.panel
-        .pro-img-box
-          %img{:alt => "", :src => "https://via.placeholder.com/250x220/00CED1/000000"}/
-          %a.adtocart{:href => "#"}
-            %i.fa.fa-shopping-cart
-        .panel-body.text-center
-          %h4
-            %a.pro-title{:href => "#"}
-              Leopard Shirt Dress
-          %p.price $300.00
-    .col-md-4
-      %section.panel
-        .pro-img-box
-          %img{:alt => "", :src => "https://via.placeholder.com/250x220/9400D3/000000"}/
-          %a.adtocart{:href => "#"}
-            %i.fa.fa-shopping-cart
-        .panel-body.text-center
-          %h4
-            %a.pro-title{:href => "#"}
-              Leopard Shirt Dress
-          %p.price $300.00
+
+    - @items[:result].each do |item|
+      .col-md-4
+        %section.panel.border.mb-2.rounded
+          .pro-img-box
+            - if item.images.attached?
+              = image_tag(item.images.first, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 150px; height: 150px;')
+            - else 
+              = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+          .panel-body.text-center
+            %h4= link_to "#{item.show_title}", "#{items_path}/#{item.id}"
+            %p= "$ #{item.price}"

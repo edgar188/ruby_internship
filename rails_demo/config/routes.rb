@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   end
 
   resources :categories do
+    resources :items
+
     collection do
       get :search
     end

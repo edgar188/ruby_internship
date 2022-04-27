@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_items, only: [:index, :search]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
 
   def index
   end
@@ -11,6 +12,8 @@ class ItemsController < ApplicationController
   end
 
   def new
+    redirect_to root_path if @logged_in_user.role == 'buyer'
+    @categories = Category.paginate_data(params)
     @item = Item.new
   end
 
@@ -19,9 +22,10 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    @item.options = params.require(:options)
 
     if @item.save
-      redirect_to root_path, notice: 'Item was successfully created.'
+      redirect_to root_path, notice: t('created', obj: 'Item')
     else
       flash[:msg] = { message: @item.errors.full_messages }
       render :new, status: :bad_request
@@ -29,11 +33,10 @@ class ItemsController < ApplicationController
   end
 
   def update
-    # Get options array
-    # @item.options = { options: params.require(:options) }
+    @item.options = params.require(:options)
 
     if @item.update(item_params)
-      redirect_to item_path(@item), notice: 'Item was successfully updated.'
+      redirect_to item_path(@item), notice: t('updated', obj: 'Item')
     else
       flash[:msg] = { message: @item.errors.full_messages }
       render :edit, status: :bad_request
@@ -42,7 +45,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to items_path, notice: 'Item was successfully destroyed.'
+    redirect_to items_path, notice: t('destroyed', obj: 'Item')
   end
 
   def search
@@ -76,11 +79,10 @@ class ItemsController < ApplicationController
     render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found if @item.nil?
   end
 
-  # Checking if the current user is the owner of the category.
   def correct_user
     @item = Item.find_by_id(params[:id])
-    unless current_user?(@item.owner.id)
-      redirect_to items_path, alert: 'You are not allowed to update this item.'
+    unless @logged_in_user.id == @item.owner.id
+      redirect_to items_path, alert: t('not_allowed', obj: 'Item')
     end
   end
   

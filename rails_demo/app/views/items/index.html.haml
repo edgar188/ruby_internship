@@ -15,7 +15,7 @@
           %input{name: 'owner', type: 'checkbox', value: current_user.id}
           %span.h6 My items
       %br
-      %h6 Price
+      %h6 Price range
       = number_field_tag :min_price, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select min price'
       = number_field_tag :max_price, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select max price'
       = submit_tag 'Filter',  class: 'btn btn-secondary'

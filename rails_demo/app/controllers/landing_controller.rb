@@ -3,7 +3,15 @@ class LandingController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @categories = Category.all
+    @items = Item.paginate_data(params)
+    @categories = Category.paginate_data(params)
+    
+    @root_categories = []
+    
+    @categories[:result].each do |category|
+      @root_categories << category if category.level == 0
+    end
+
   end
 
 end

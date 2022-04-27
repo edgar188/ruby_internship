@@ -7,8 +7,8 @@
           = image_tag(@item.images.first, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 100%')
         - elsif @item.images.attached? && @item.images.count > 1
           #slider
-            %a.control_next{:href => "#"} >>
-            %a.control_prev{:href => "#"} <<
+            %a.control_next{href: '#'} >>
+            %a.control_prev{href: '#'} <<
             %ul
               - @item.images.each do |image|
                 %li
@@ -76,5 +76,12 @@
                     State
                 %td.text-primary
                   = @item.show_state  
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    Options
+                %td.text-primary
+                  = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] }) 
 
 = javascript_include_tag 'items/images_slider'

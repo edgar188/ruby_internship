@@ -30,6 +30,12 @@
         .form-check 
           = f.radio_button :state, 'speedily', class: 'gridRadios1 form-check-input'
           = f.label :state, 'Speedily', class: 'label form-check-label'
-
+  .form-group.row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Options
+    .col-sm-10
+      - @item.options.each do |option|
+        .d-flex.justify-content-between
+          %b.mr-2.mt-2.mw-20= "#{option.first}"
+          = f.text_field :options, value: option.last, class: 'form-control mb-2', name: "options[#{option.first}]"
   .actions
     = f.submit 'Update', class: 'btn btn-primary mb-2'

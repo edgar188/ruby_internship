@@ -48,7 +48,7 @@ module Modules::Category
 
   # It's showing the options of the category.
   def show_options
-    options = self.options['options'].to_a
+    options = self.options.to_a
 
     options.each do |option|
       option
@@ -58,12 +58,12 @@ module Modules::Category
   # It's getting the level of the category.
   def level
     return 0 if self.parrent_id.nil?
-    c = self
+    ctg = self
     lvl = 0
 
-    while c.parrent_id.present?
+    while ctg.parrent_id.present?
       lvl +=1
-      c = c.parrent
+      ctg = ctg.parrent
     end
 
     lvl
