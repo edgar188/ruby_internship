@@ -11,6 +11,7 @@
 //= link items/images_slider.js
 //= link items/select_categories.js
 //= link items/select_options.js
+//= link cart/add_to_cart.js
 
 //= require axios
 //= require jquery

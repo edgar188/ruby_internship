@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   
+  resources :carts, only: [:index]
+
   root 'landing#index'
   devise_for :users
-
   devise_for :admins, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 

@@ -116,10 +116,23 @@ a {
   min-width: 60%;
 }
 
+.bg-none {
+  background: none;
+  border: none;
+}
+
 .v-a-top {
   vertical-align: top;
 }
 
 .c-pointer {
   cursor: pointer;
+}
+
+.ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
