@@ -1,6 +1,5 @@
 .col-md-9.mx-auto
   .row.product-list
-
     - @items[:result].each do |item|
       .col-md-4
         %section.panel.border.mb-2.rounded
@@ -10,5 +9,5 @@
             - else 
               = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
           .panel-body.text-center
-            %h4= link_to "#{item.show_title}", "#{items_path}/#{item.id}"
+            %h4= link_to "#{item.title}", "#{items_path}/#{item.id}"
             %p= "$ #{item.price}"

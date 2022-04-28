@@ -52,14 +52,9 @@ module Modules::Item
     end
   end
 
-  # It's showing the title of the item.
-  def show_title
-    self.title
-  end
-
   # It's showing the category of the item.
   def show_category
-    Category.find_by_id(self.category_id).name
+    self.category.name
   end
 
   # It's showing the full name of the owner of the item.
@@ -75,6 +70,10 @@ module Modules::Item
   # It's showing the date of the last modification of the item.
   def show_modified_date
     self.updated_at.to_date
+  end
+
+  def correct_user?
+    ApplicationRecord.class_variable_get(:@@logged_in_user).id == self.owner.id    
   end
 
 end

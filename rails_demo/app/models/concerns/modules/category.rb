@@ -30,11 +30,6 @@ module Modules::Category
     end
   end
 
-  # It's showing the name of the category.
-  def show_name
-    self.name
-  end
-
   # It's showing the name of the parrent category.
   def show_parrent
     return Modules::Constants::EMPTY unless self.parrent 
@@ -44,15 +39,6 @@ module Modules::Category
   # It's showing the full name of the owner of the category.
   def show_owner_full_name
     self.owner['full_name']
-  end
-
-  # It's showing the options of the category.
-  def show_options
-    options = self.options.to_a
-
-    options.each do |option|
-      option
-    end
   end
 
   # It's getting the level of the category.
@@ -67,6 +53,11 @@ module Modules::Category
     end
 
     lvl
+  end
+
+  def correct_user?
+    ApplicationRecord.class_variable_get(
+      :@@logged_in_user).id == self.owner['id'] unless self.owner['type'] == 'Admin'
   end
 
 end

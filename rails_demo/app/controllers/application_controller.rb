@@ -38,7 +38,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_logged_in_user
-    @logged_in_user = ApplicationRecord.set_logged_in_user(@current_user)
+    ApplicationRecord.set_logged_in_user(@current_user)
   end
 
   def notfound

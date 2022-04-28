@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
 
   before_action :set_items, only: [:index, :search]
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_categories, only: [:new, :create]
+  before_action :set_correct_user, only: [:edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
 
@@ -12,8 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    redirect_to root_path if @logged_in_user.role == 'buyer'
-    @categories = Category.paginate_data(params)
+    redirect_to root_path if current_user.role == :buyer
     @item = Item.new
   end
 
@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
     @item.options = params.require(:options)
 
     if @item.save
-      redirect_to root_path, notice: t('created', obj: 'Item')
+      redirect_to root_path, notice: t(:created, obj: 'Item')
     else
       flash[:msg] = { message: @item.errors.full_messages }
       render :new, status: :bad_request
@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
     @item.options = params.require(:options)
 
     if @item.update(item_params)
-      redirect_to item_path(@item), notice: t('updated', obj: 'Item')
+      redirect_to item_path(@item), notice: t(:updated, obj: 'Item')
     else
       flash[:msg] = { message: @item.errors.full_messages }
       render :edit, status: :bad_request
@@ -45,7 +45,7 @@ class ItemsController < ApplicationController
 
   def destroy
     @item.destroy
-    redirect_to items_path, notice: t('destroyed', obj: 'Item')
+    redirect_to items_path, notice: t(:destroyed, obj: 'Item')
   end
 
   def search
@@ -79,11 +79,17 @@ class ItemsController < ApplicationController
     render file: "#{Rails.root}/public/404.html", layout: false, status: :not_found if @item.nil?
   end
 
-  def correct_user
+  def set_categories
+    @categories = Category.paginate_data(params)
+  end
+
+  def set_correct_user
     @item = Item.find_by_id(params[:id])
-    unless @logged_in_user.id == @item.owner.id
-      redirect_to items_path, alert: t('not_allowed', obj: 'Item')
+
+    unless @item.correct_user?
+      redirect_to items_path, alert: t(:not_allowed, obj: 'Item')
     end
+    
   end
   
 end
