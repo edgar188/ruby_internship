@@ -1,1 +1,22 @@
-%h1 cart 
+- total_price = 0
+.col-md-9.mx-auto
+  .row.product-list
+    - @cart.each do |item|
+      - total_price += item.price 
+      .col-md-2
+        %section.panel.border.mb-2.rounded
+          .pro-img-box
+            - if item.images.attached?
+              = image_tag(item.images.first, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 150px; height: 120px;')
+            - else 
+              = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+          .panel-body.text-center
+            %h5.ellipsis= link_to "#{item.show_title}", "#{items_path}/#{item.id}"
+            %p.ellipsis= "$ #{item.price}"
+            
+            - if @cart.include?(item) 
+              = button_to 'Remove from cart', remove_from_cart_path(item), method: :delete 
+            - else 
+              = button_to 'Add to cart', add_to_cart_path(item) , class: 'add_to_cart_btn'
+              
+    %h2= "Total Price: #{total_price}" 

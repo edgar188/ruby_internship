@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   
-  resources :carts, only: [:index]
+  resources :carts
+
+  post 'items/add_to_cart/:id', to: 'items#add_to_cart', as: 'add_to_cart'
+  delete 'items/remove_from_cart/:id', to: 'items#remove_from_cart', as: 'remove_from_cart'
 
   root 'landing#index'
   devise_for :users

@@ -7,6 +7,7 @@ class Item < ApplicationRecord
     
   belongs_to :owner, polymorphic: true
   belongs_to :category, dependent: :destroy
+  has_one :cart
 
   before_validation :set_owner, on: :create
   

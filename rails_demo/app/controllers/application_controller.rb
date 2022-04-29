@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   before_action :set_logged_in_user, if: :user_signed_in?
   rescue_from ActiveRecord::RecordNotFound, with: :notfound
 
+  before_action :initialize_session
+  before_action :load_cart
+
   protected
 
   def configure_permitted_parameters
@@ -43,6 +46,16 @@ class ApplicationController < ActionController::Base
 
   def notfound
     render file: 'public/404.html', status: :not_found, layout: false
+  end
+
+  # Empty cart = empty array
+  def initialize_session
+    session[:cart] ||= [] 
+  end
+
+  def load_cart
+    @cart = Item.where(id: session[:cart])
+    @items_count = Item.where(id: session[:cart]).length()
   end
 
 end

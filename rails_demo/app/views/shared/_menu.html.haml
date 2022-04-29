@@ -18,7 +18,7 @@
             = button_to carts_path, method: :get, class: 'btn btn-outline-light' do
               %i.bi-cart-fill.me-1
               Cart
-              %span#items_counter.badge.bg-dark.text-white.ms-1.rounded-pill 0
+              %span#items_counter.badge.bg-dark.text-white.ms-1.rounded-pill= @items_count
 
         %li.nav-item.dropdown.align-baseline.align-right
           -if user_signed_in? 
@@ -42,5 +42,3 @@
               = link_to new_user_registration_path, class: 'dropdown-item' do
                 Sign up    
                 %i.bi-person-plus-fill.ml-8
-
-= javascript_include_tag 'cart/add_to_cart'

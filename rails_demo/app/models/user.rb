@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   include Validations::User
   include Modules::User
 
+  has_one :cart
   has_one_attached :avatar
 
   auto_strip_attributes :first_name, :last_name, :email, :phone, squish: true
@@ -18,6 +19,8 @@ class User < ActiveRecord::Base
   validate :validate_country, unless: -> { self.country.nil? }
   validate :avatar_type, unless: -> { self.avatar.nil? }
 
+  after_create :init_cart
+
   enum role: {
     buyer: 0,
     seller: 1
@@ -28,5 +31,9 @@ class User < ActiveRecord::Base
     male: 1,
     female: 2
   }
+
+  def init_cart
+    Cart.create(user: self)
+  end
   
 end

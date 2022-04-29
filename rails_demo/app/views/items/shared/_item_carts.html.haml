@@ -11,8 +11,10 @@
           .panel-body.text-center
             %h5.ellipsis= link_to "#{item.show_title}", "#{items_path}/#{item.id}"
             %p.ellipsis= "$ #{item.price}"
-            %button.add_to_cart_btn.btn.btn-default.btn-sm.border.mb-2{type: 'button'}
-              %i.h5.bi-cart-plus-fill
-              %b Add to Cart
+            
+            - if @cart.include?(item) 
+              = button_to 'Remove from cart', remove_from_cart_path(item), method: :delete 
+            - else 
+              = button_to 'Add to cart', add_to_cart_path(item) , class: 'add_to_cart_btn'
 
 = javascript_include_tag 'cart/add_to_cart'
