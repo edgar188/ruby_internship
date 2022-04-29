@@ -13,10 +13,10 @@ class ProfileController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.update(user_params)
-      redirect_to profile_page_path, notice: 'Your account has been updated successfully.'
+      redirect_to profile_page_path, notice: t(:updated, obj: 'Profile')
     else
       flash[:msg] = { message: @user.errors.full_messages }
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 

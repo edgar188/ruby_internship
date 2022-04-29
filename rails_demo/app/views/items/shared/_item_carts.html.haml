@@ -1,0 +1,13 @@
+.col-md-9.mx-auto
+  .row.product-list
+    - @items[:result].each do |item|
+      .col-md-4
+        %section.panel.border.mb-2.rounded
+          .pro-img-box
+            - if item.images.attached?
+              = image_tag(item.images.first, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 150px; height: 150px;')
+            - else 
+              = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+          .panel-body.text-center
+            %h4= link_to "#{item.title}", "#{items_path}/#{item.id}"
+            %p= "$ #{item.price}"

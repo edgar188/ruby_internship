@@ -1,19 +1,20 @@
 module Validations::User
   extend ActiveSupport::Concern
+  include Validations::Variables
 
   private
 
   # It checks if the role is buyer or seller.
   def validate_role
     unless self.role.to_sym == :buyer || self.role.to_sym == :seller 
-      self.errors.add(:role, I18n.t(:wrong_role))
+      self.errors.add(:role, I18n.t(:not_valid))
     end
   end
 
   # It checks if the gender is male, female or no_select.
   def validate_gender
     unless self.gender.to_sym == :no_select || self.gender.to_sym == :male || self.gender.to_sym == :female 
-      self.errors.add(:gender, I18n.t(:wrong_gender))
+      self.errors.add(:gender, I18n.t(:not_valid))
     end
   end
 
@@ -33,7 +34,14 @@ module Validations::User
     countries = ['No select', 'Armenia', 'Russia', 'USA', 'UK']
     
     if countries.exclude?(self.country)
-      self.errors.add(:country, I18n.t(:wrong_country))
+      self.errors.add(:country, I18n.t(:not_valid))
+    end
+  end
+
+  # Checking the type of the avatar.
+  def avatar_type
+    unless avatar.content_type.in?(Validations::Variables::VALID_IMAGE_TYPES)
+      errors.add(:avatar, I18n.t(:not_valid_file))
     end
   end
   

@@ -6,15 +6,17 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
-    %script{src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'}
+    -# = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     %script{src: 'https://unpkg.com/axios/dist/axios.min.js'}
-    %link{href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css', rel: 'stylesheet'}/
-
-  %body
-    = render 'shared/menu'
-    = render 'shared/messages'
-    %section
-      .container.px-4.px-lg-5
-        = yield
+    %script{src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'}
     %script{src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'}
+    %link{href: 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css', rel: 'stylesheet'}/
+  %body
+    %header
+      = render 'shared/menu'
+    = render 'shared/messages'
+    %main
+      .container
+        = yield
+    %footer.bg-dark
+      %h3.text-white.text-center Footer

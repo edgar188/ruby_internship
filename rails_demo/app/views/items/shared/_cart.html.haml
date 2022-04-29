@@ -1,0 +1,87 @@
+.bootstrap.snippets.bootdey
+  .d-flex
+  .panel-body.inf-content
+    .row
+      .col-md-4
+        - if @item.images.attached? && @item.images.count == 1
+          = image_tag(@item.images.first, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 100%')
+        - elsif @item.images.attached? && @item.images.count > 1
+          #slider
+            %a.control_next{href: '#'} >>
+            %a.control_prev{href: '#'} <<
+            %ul
+              - @item.images.each do |image|
+                %li
+                  = image_tag(image, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 100%')
+        - else
+          = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
+      .col-md-6
+        .table-responsive
+          %table.table.table-user-information
+            %tbody
+              %tr
+              %td
+                %strong
+                  %span.glyphicon.glyphicon-user.text-primary
+                  Title
+              %td.text-primary
+                = @item.title
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-cloud.text-primary
+                    Category 
+                %td.text-primary
+                  = @item.show_category
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    Owner
+                %td.text-primary
+                  = @item.show_owner_full_name
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    Description
+                %td.text-primary
+                  = @item.description
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    Price
+                %td.text-primary
+                  = @item.price 
+                  %b $                       
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    Count
+                %td.text-primary
+                  = @item.countity              
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    Ratting
+                %td.text-primary
+                  = @item.ratting              
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    State
+                %td.text-primary
+                  = @item.show_state  
+              %tr
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-envelope.text-primary
+                    Options
+                %td.text-primary
+                  = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] }) 
+
+= javascript_include_tag 'items/images_slider'

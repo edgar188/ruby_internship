@@ -11,5 +11,8 @@
  * It is generally better to create a new file per style scope.
  *
  */
- @import "bootstrap";
- @import "main";
+@import 'bootstrap';
+@import 'global';
+@import 'landing';
+@import 'categories_tree'; 
+@import 'images_slider'; 

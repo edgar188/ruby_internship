@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-
+  
   root 'landing#index'
   devise_for :users
+
+  devise_for :admins, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   scope :profile do
@@ -21,5 +23,18 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :categories do
+    resources :items
+
+    collection do
+      get :search
+    end
+  end
+
+  resources :items do
+    collection do
+      get :search
+    end
+  end
 
 end

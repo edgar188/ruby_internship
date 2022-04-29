@@ -22,13 +22,18 @@ module Modules::User
     scope :except_current_user, -> (id) { where.not(id: id) }
   end
 
-  # Class methods will be defined here
+  # Class methods
   class_methods do
     def paginate_data(params)
       users = self.all
 
+      # It's a method that returns the age of the user.
+      def get_age(age)
+        DateTime.current.to_date.year - age.to_i
+      end
+
       # Filter out current user
-      users = users.except_current_user(Current.user.id)
+      users = users.except_current_user(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
 
       # Filter users by role
       if Modules::Helpers::to_boolean(params[:role])
@@ -40,16 +45,13 @@ module Modules::User
         users = users.with_gender(params[:gender])
       end
 
-      # It's a method that returns the age of the user.
-      def get_age(age)
-        DateTime.current.to_date.year - age.to_i
+      # Filter users by age
+      if Modules::Helpers::to_boolean(params[:min_age] && params[:max_age])
+        min_age = get_age(params[:min_age])
+        max_age = get_age(params[:max_age])
+        users = users.with_birth_date(max_age, min_age)
       end
 
-      # Filter users by age
-      min_age = get_age(params[:min_age])
-      max_age = get_age(params[:max_age])
-      users = users.with_birth_date(max_age, min_age) unless params[:min_age].nil? && params[:max_age].nil? 
- 
       # Search users by first_name, last_name and email
       search_query = "CONCAT(first_name, ' ', last_name) LIKE :query OR CONCAT(last_name, ' ', first_name) LIKE :query OR email LIKE :query"
       users = users.with_query(search_query, params[:query]) if params[:query].present?

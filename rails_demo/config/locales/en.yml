@@ -31,8 +31,16 @@
 
 en:
   hello: 'Hello world.'
-  wrong_role: 'Not a valid.'
-  wrong_gender: 'Not a valid.'
+  negative_value: "can't be negaive value."
+  not_valid: 'Not a valid.'
+  not_valid_file: 'Not a valid file format.'
   wrong_birth_date: 'Not a valid date.'
   wrong_age: 'You should be over 10 years old.'
-  wrong_country: 'Not a valid.'
+  wrong_level: 'Should be less than 3.'
+  wrong_option: 'Is too short (minimum is 3 characters).'
+  wrong_countity: "can't be less than 1."
+  created: "%{obj} was successfully created."
+  updated: "%{obj} was successfully updated."
+  destroyed: "%{obj} was successfully destroyed."
+  not_destroyed: "Not destroyed."
+  not_allowed: "You are not allowed to update this %{obj}."

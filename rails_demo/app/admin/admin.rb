@@ -1,5 +1,5 @@
 ActiveAdmin.register Admin do
-  permit_params :email, :first_name, :last_name, :show_full_name, :password, :password_confirmation
+  permit_params :email, :first_name, :last_name, :password, :password_confirmation
 
   index do
     selectable_column
@@ -8,6 +8,17 @@ ActiveAdmin.register Admin do
     column "Full name", :show_full_name
     column :created_at
     actions
+  end
+
+  show do |item|
+    attributes_table do
+      row :id
+      row :email
+      row :first_name
+      row :last_name
+      row :show_full_name
+      row :created_at
+    end
   end
 
   filter :email
