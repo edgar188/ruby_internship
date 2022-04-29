@@ -12,16 +12,14 @@ class Category < ApplicationRecord
   validates_length_of :name, minimum: 2, maximum: 255
   validate :validate_level, unless: -> { self.level.nil? }
   validate :validate_options
+  validate :validate_user_role
 
   def set_owner
-    self.errors.add(:role, I18n.t(:wrong_role)) if @@logged_in_user.role == 'buyer'
-    user = @@logged_in_user
-
     self.assign_attributes(
       owner: {
-        id: user.id, 
-        type: user.class.name, 
-        full_name: user.show_full_name 
+        id: @@logged_in_user.id, 
+        type: @@logged_in_user.class.name, 
+        full_name: @@logged_in_user.show_full_name 
       }
     )
   end

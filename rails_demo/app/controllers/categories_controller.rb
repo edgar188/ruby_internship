@@ -1,8 +1,8 @@
 class CategoriesController < ApplicationController
 
   before_action :set_categories, only: [:index, :search]
-  before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :check_correct_user, only: [:edit, :update, :destroy]
 
   def index
   end
@@ -11,7 +11,7 @@ class CategoriesController < ApplicationController
   end
 
   def new
-    redirect_to root_path if @logged_in_user.role == 'buyer'
+    redirect_to root_path if current_user.buyer?
     @category = Category.new
   end
 
@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
     @category.options = params.require(:options)
     
     if @category.save
-      redirect_to @category, notice: t('created', obj: 'Category')
+      redirect_to @category, notice: t(:created, obj: 'Category')
     else
       flash[:msg] = { message: @category.errors.full_messages }
       render :new, status: :bad_request
@@ -36,7 +36,7 @@ class CategoriesController < ApplicationController
     @category.options = params.require(:options)
     
     if @category.update(category_params)
-      redirect_to category_path(@category), notice: t('updated', obj: 'Category')
+      redirect_to category_path(@category), notice: t(:updated, obj: 'Category')
     else
       flash[:msg] = { message: @category.errors.full_messages }
       render :edit, status: :bad_request
@@ -44,8 +44,11 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy
-    redirect_to categories_path, notice: t('destroyed', obj: 'Category')
+    unless @category.destroy
+      return redirect_to categories_path, alert: t(:not_destroyed)
+    end
+
+    redirect_to categories_path, notice: t(:destroyed, obj: 'Category')
   end
 
   def search
@@ -73,11 +76,9 @@ class CategoriesController < ApplicationController
   end
 
   # Checking if the current user is the owner of the category.
-  def correct_user
-    @category = Category.find_by_id(params[:id])
-
-    unless @logged_in_user.id == @category.owner['id']
-      redirect_to categories_path, alert: t('not_allowed', obj: 'Category')
+  def check_correct_user
+    unless @category.correct_user?
+      redirect_to categories_path, alert: t(:not_allowed, obj: 'Category')
     end
   end
   

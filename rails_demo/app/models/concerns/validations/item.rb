@@ -1,5 +1,6 @@
 module Validations::Item
   extend ActiveSupport::Concern
+  include Validations::Variables
 
   private
 
@@ -43,9 +44,15 @@ module Validations::Item
   # Checking the type of the image.
   def images_type
     self.images.each do |image|
-      unless image.content_type.in?(%w(image/jpeg image/jpg image/png))
+      unless image.content_type.in?(Validations::Variables::VALID_IMAGE_TYPES)
         errors.add(:images, I18n.t(:not_valid_file))
       end
+    end
+  end
+
+  def validate_user_role
+    if ApplicationRecord.class_variable_get(:@@logged_in_user).role == 'buyer'
+      self.errors.add(:role, I18n.t(:not_valid)) 
     end
   end
 

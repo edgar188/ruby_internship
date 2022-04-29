@@ -3,16 +3,16 @@
     %li
       - if root_cat.childs.present? 
         %span.caret= ''
-      %span= link_to "#{root_cat.show_name}", "#{categories_path}/#{root_cat.id}/items"
+      %span= link_to "#{root_cat.name}", "#{categories_path}/#{root_cat.id}/items"
       %ul.nested
         - @root_categories[index].childs.each.with_index do |sub_cat, index_2|
           %li
             - if sub_cat.childs.present? 
               %span.caret= ''
-            %span= link_to "#{sub_cat.show_name}", "#{categories_path}/#{sub_cat.id}/items"
+            %span= link_to "#{sub_cat.name}", "#{categories_path}/#{sub_cat.id}/items"
             %ul.nested
               - sub_cat.childs.each do |sub_sub_cat|
                 %li
-                  %span= link_to "#{sub_sub_cat.show_name}", "#{categories_path}/#{sub_sub_cat.id}/items"
+                  %span= link_to "#{sub_sub_cat.name}", "#{categories_path}/#{sub_sub_cat.id}/items"
 
 = javascript_include_tag 'categories/categories_tree'

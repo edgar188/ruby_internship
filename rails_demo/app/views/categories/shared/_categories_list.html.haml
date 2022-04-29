@@ -7,6 +7,6 @@
   %tbody#categories_table_body
     - @categories[:result].each do |category|
       %tr.link{'data-category_id': category.id}
-        %td= link_to "#{category.show_name}", "#{categories_path}/#{category.id}"
+        %td= link_to "#{category.name}", "#{categories_path}/#{category.id}"
         %td= category.show_owner_full_name
-        %td#options_list= select_tag :options, options_for_select((category.show_options))
+        %td#options_list= select_tag :options, options_for_select((category.options))

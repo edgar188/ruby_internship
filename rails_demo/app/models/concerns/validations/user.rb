@@ -1,5 +1,6 @@
 module Validations::User
   extend ActiveSupport::Concern
+  include Validations::Variables
 
   private
 
@@ -39,7 +40,7 @@ module Validations::User
 
   # Checking the type of the avatar.
   def avatar_type
-    unless avatar.content_type.in?(%w(image/jpeg image/jpg image/png))
+    unless avatar.content_type.in?(Validations::Variables::VALID_IMAGE_TYPES)
       errors.add(:avatar, I18n.t(:not_valid_file))
     end
   end

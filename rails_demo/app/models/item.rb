@@ -18,6 +18,7 @@ class Item < ApplicationRecord
   validate :validate_ratting, unless: -> { self.ratting.nil? }
   validate :validate_state, unless: -> { self.ratting.nil? }
   validate :validate_options
+  validate :validate_user_role
   validate :images_type
 
   enum state: {
@@ -26,13 +27,7 @@ class Item < ApplicationRecord
   }
 
   def set_owner
-    self.errors.add(:role, I18n.t(:wrong_role)) if @@logged_in_user.role == 'buyer'
-    user = @@logged_in_user
-
-    self.assign_attributes(
-      owner_type: user,
-      owner: user,
-    )
+    self.assign_attributes(owner: @@logged_in_user)
   end
 
 end

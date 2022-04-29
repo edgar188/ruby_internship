@@ -4,14 +4,8 @@ class LandingController < ApplicationController
 
   def index
     @items = Item.paginate_data(params)
-    @categories = Category.paginate_data(params)
-    
-    @root_categories = []
-    
-    @categories[:result].each do |category|
-      @root_categories << category if category.level == 0
-    end
-
+    @categories = Category.paginate_data(params) 
+    @root_categories = @categories[:result].select { |c| c.level == 0 } 
   end
 
 end
