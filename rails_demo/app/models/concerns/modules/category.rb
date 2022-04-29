@@ -38,6 +38,13 @@ module Modules::Category
 
   # It's showing the full name of the owner of the category.
   def show_owner_full_name
+    if self.owner['type'] == 'User'
+      record = User.find_by_id([self.owner['id']])
+    else 
+      record = Admin.find_by_id([self.owner['id']])
+    end
+    
+    return record.show_full_name unless record.nil?
     self.owner['full_name']
   end
 
@@ -56,8 +63,9 @@ module Modules::Category
   end
 
   def correct_user?
-    ApplicationRecord.class_variable_get(
-      :@@logged_in_user).id == self.owner['id'] unless self.owner['type'] == 'Admin'
+    unless self.owner['type'] == 'Admin'
+      ApplicationRecord.class_variable_get(:@@logged_in_user).id == self.owner['id']
+    end
   end
 
 end

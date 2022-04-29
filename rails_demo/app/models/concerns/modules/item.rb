@@ -73,7 +73,7 @@ module Modules::Item
   end
 
   def correct_user?
-    ApplicationRecord.class_variable_get(:@@logged_in_user).id == self.owner.id    
+    ApplicationRecord.class_variable_get(:@@logged_in_user) == self.owner
   end
 
 end

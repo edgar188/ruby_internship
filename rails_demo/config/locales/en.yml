@@ -42,4 +42,5 @@ en:
   created: "%{obj} was successfully created."
   updated: "%{obj} was successfully updated."
   destroyed: "%{obj} was successfully destroyed."
+  not_destroyed: "Not destroyed."
   not_allowed: "You are not allowed to update this %{obj}."

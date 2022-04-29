@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
 
-  before_action :set_items, only: [:index, :search]
-  before_action :set_categories, only: [:new, :create]
-  before_action :set_correct_user, only: [:edit, :update, :destroy]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:show]
+  before_action :set_items, only: [:index, :search]
+  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_categories, only: [:new, :create]
+  before_action :check_correct_user, only: [:edit, :update, :destroy]
 
   def index
   end
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    redirect_to root_path if current_user.role == :buyer
+    redirect_to root_path if current_user.buyer?
     @item = Item.new
   end
 
@@ -44,7 +44,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
+    unless @item.destroy
+      return redirect_to items_path, alert: t(:not_destroyed)
+    end
+    
     redirect_to items_path, notice: t(:destroyed, obj: 'Item')
   end
 
@@ -83,13 +86,10 @@ class ItemsController < ApplicationController
     @categories = Category.paginate_data(params)
   end
 
-  def set_correct_user
-    @item = Item.find_by_id(params[:id])
-
+  def check_correct_user
     unless @item.correct_user?
       redirect_to items_path, alert: t(:not_allowed, obj: 'Item')
     end
-    
   end
   
 end
