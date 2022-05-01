@@ -6,8 +6,8 @@ class Item < ApplicationRecord
   has_many_attached :images
     
   belongs_to :owner, polymorphic: true
-  belongs_to :category, dependent: :destroy
-  has_one :cart
+  belongs_to :category
+  has_many :user_items
 
   before_validation :set_owner, on: :create
   

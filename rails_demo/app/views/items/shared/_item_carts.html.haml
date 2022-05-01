@@ -11,10 +11,9 @@
           .panel-body.text-center
             %h5.ellipsis= link_to "#{item.title}", "#{items_path}/#{item.id}"
             %p.ellipsis= "$ #{item.price}"
-            
-            - if @cart.include?(item) 
-              = button_to 'Remove from cart', remove_from_cart_path(item), method: :delete 
-            - else 
-              = button_to 'Add to cart', add_to_cart_path(item) , class: 'add_to_cart_btn'
-
-= javascript_include_tag 'cart/add_to_cart'
+            - if user_signed_in?
+              = form_for @user_item do |f|
+                = f.hidden_field :user_id, value: current_user.id
+                = f.hidden_field :item_id, value: item.id
+                = button_tag(type: 'submit', class: 'btn btn-outline-dark') do
+                  %i.bi-bag-plus-fill

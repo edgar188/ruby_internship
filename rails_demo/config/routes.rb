@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :carts
-
-  post 'items/add_to_cart/:id', to: 'items#add_to_cart', as: 'add_to_cart'
-  delete 'items/remove_from_cart/:id', to: 'items#remove_from_cart', as: 'remove_from_cart'
-
   root 'landing#index'
   devise_for :users
   devise_for :admins, ActiveAdmin::Devise.config
@@ -40,5 +35,9 @@ Rails.application.routes.draw do
       get :search
     end
   end
+
+  get 'user_items/ordered' => 'user_items#index'
+  get 'user_items' => 'user_items#show'
+  resources :user_items
 
 end
