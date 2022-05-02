@@ -5,10 +5,8 @@ class ItemMailer < ApplicationMailer
     @item = params[:item]
     
     mail(
-      from: 'vahe_2@example.com',
-      to: 'sedrakyanvahe5@gmail.com', 
+      to: ENV['MAIL_TO'], 
       cc: Admin.all.pluck(:email), 
-      bcc: 'gago@mailinator.com', 
       subject: 'New item created'
     )
   end

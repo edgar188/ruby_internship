@@ -21,6 +21,8 @@ class Item < ApplicationRecord
   validate :validate_user_role
   validate :images_type
 
+  after_create :send_mail
+
   enum state: {
     normal: 0,
     speedily: 1

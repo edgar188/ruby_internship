@@ -10,6 +10,7 @@ class Category < ApplicationRecord
   before_validation :set_owner, on: :create
 
   validates_length_of :name, minimum: 2, maximum: 255
+  validates_uniqueness_of :name
   validate :validate_level, unless: -> { self.level.nil? }
   validate :validate_options
   validate :validate_user_role

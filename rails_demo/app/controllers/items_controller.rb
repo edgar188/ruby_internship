@@ -28,7 +28,6 @@ class ItemsController < ApplicationController
     @item.options = params.require(:options)
 
     if @item.save
-      ItemMailer.with(user: current_user, item: @item).item_created.deliver_now
       redirect_to item_path(@item), notice: t(:created, obj: 'Item')
     else
       flash[:msg] = { message: @item.errors.full_messages }
