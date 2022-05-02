@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   validate :validate_gender, unless: -> { self.gender.nil? }
   validate :validate_birth_date, unless: -> { self.birth_date.nil? }
   validate :validate_country, unless: -> { self.country.nil? }
+  validate :validate_balance
   validate :avatar_type, if: -> { self.avatar.present? }
 
   enum role: {

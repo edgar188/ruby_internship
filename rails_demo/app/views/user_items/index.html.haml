@@ -1,7 +1,7 @@
 .d-flex
   .col-md-9.mx-auto
     .row.product-list    
-      - @user_items.each do |user_item|
+      - @user_items[:result].each do |user_item|
         .col-md-2
           %section.panel.border.mb-2.rounded
             .pro-img-box
@@ -13,5 +13,4 @@
               %h5.ellipsis= link_to "#{user_item.item.title}", "#{items_path}/#{user_item.item.id}"
               %b.ellipsis= "$ #{user_item.item.price}"
               %b= user_item.show_date
-
-  %h5= "Ordered Items Count: #{@user_items.size}"
+    = will_paginate @user_items[:result], renderer: BootstrapPagination::Rails

@@ -2,7 +2,7 @@
 .d-flex
   .col-md-9.mx-auto
     .row.product-list
-      - @user_items.each do |user_item|
+      - @user_items[:result].each do |user_item|
         - total_price += user_item.item.price 
         .col-md-2
           %section.panel.border.mb-2.rounded
@@ -23,7 +23,8 @@
                     %i.bi-cart-check-fill
                 = button_to user_item_path(user_item), class: 'btn btn-outline-danger', method: :delete do
                   %i.bi-cart-dash-fill
+    = will_paginate @user_items[:result], renderer: BootstrapPagination::Rails
+
   %div
     %h5= "My Balance: #{@my_balance} $"
     %h5= "Total Price: #{total_price} $"
-    %h5= "Total Items Count: #{@user_items.size}"
