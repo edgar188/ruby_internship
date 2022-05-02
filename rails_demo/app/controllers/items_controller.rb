@@ -10,6 +10,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item.views += 1 
+    @item.save
   end
 
   def new

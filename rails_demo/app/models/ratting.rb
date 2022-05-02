@@ -1,0 +1,3 @@
+class Ratting < ApplicationRecord
+  
+end
