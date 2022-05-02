@@ -14,14 +14,4 @@ class Category < ApplicationRecord
   validate :validate_options
   validate :validate_user_role
 
-  def set_owner
-    self.assign_attributes(
-      owner: {
-        id: @@logged_in_user.id, 
-        type: @@logged_in_user.class.name, 
-        full_name: @@logged_in_user.show_full_name 
-      }
-    )
-  end
-
 end

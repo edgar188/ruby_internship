@@ -5,10 +5,6 @@
         = link_to 'Edit', edit_user_account_path, class: 'btn btn-secondary mb-2'   
         = link_to 'Edit password', edit_user_account_password_path, class: 'btn btn-secondary mb-2 ml-1'
         = button_to 'Delete account', registration_path(current_user), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mb-2 ml-1', method: :delete
-      .d-flex
-        = button_to user_items_ordered_path, method: :get, class: 'btn btn-outline-dark' do
-          %i.bi-cart-check.me-1
-          Order history
   .panel-body.inf-content
     .row
       .col-md-4

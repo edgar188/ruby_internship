@@ -12,6 +12,8 @@
             %h5.ellipsis= link_to "#{item.title}", "#{items_path}/#{item.id}"
             %p.ellipsis= "$ #{item.price}"
             %i.bi-eye-fill= item.views
+            %br/
+            %i.bi-star-fill= item.rating
             - if user_signed_in?
               = form_for @user_item do |f|
                 = f.hidden_field :user_id, value: current_user.id

@@ -19,13 +19,25 @@
         .table-responsive
           %table.table.table-user-information
             %tbody
+              - if user_signed_in?
+                %tr
+                  %td
+                    %strong
+                      %span.glyphicon.glyphicon-envelope.text-primary
+                      Rate
+                  %td.text-primary
+                    = form_with model: @rating do |f|
+                      = f.hidden_field :user_id, value: current_user.id
+                      = f.hidden_field :item_id, value: @item.id
+                      = f.select :value, options_for_select((0..5))
+                      = f.submit 'Rate', class: 'btn btn-primary'
               %tr
-              %td
-                %strong
-                  %span.glyphicon.glyphicon-user.text-primary
-                  Title
-              %td.text-primary
-                = @item.title
+                %td
+                  %strong
+                    %span.glyphicon.glyphicon-user.text-primary
+                    Title
+                %td.text-primary
+                  = @item.title
               %tr
                 %td
                   %strong
@@ -73,9 +85,9 @@
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
-                    Ratting
+                    Rating
                 %td.text-primary
-                  = @item.ratting              
+                  = @item.rating              
               %tr
                 %td
                   %strong

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_one_attached :avatar
   has_many :user_items
+  has_many :ratings
 
   auto_strip_attributes :first_name, :last_name, :email, :phone, squish: true
 

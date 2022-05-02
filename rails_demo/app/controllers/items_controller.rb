@@ -11,7 +11,8 @@ class ItemsController < ApplicationController
 
   def show
     @item.views += 1 
-    @item.save
+    @item.save 
+    @rating = Rating.new
   end
 
   def new
@@ -69,7 +70,7 @@ class ItemsController < ApplicationController
       :description,
       :price,
       :countity,
-      :ratting,
+      :rating,
       :state,
       :options,
       images: []

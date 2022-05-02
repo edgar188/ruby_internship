@@ -8,6 +8,7 @@ class Item < ApplicationRecord
   belongs_to :owner, polymorphic: true
   belongs_to :category
   has_many :user_items
+  has_many :ratings
 
   before_validation :set_owner, on: :create
   
@@ -15,8 +16,7 @@ class Item < ApplicationRecord
   validates_length_of :title, minimum: 2, maximum: 255
   validate :validate_price, unless: -> { self.price.nil? }
   validate :validate_countity, unless: -> { self.countity.nil? }
-  validate :validate_ratting, unless: -> { self.ratting.nil? }
-  validate :validate_state, unless: -> { self.ratting.nil? }
+  validate :validate_state, unless: -> { self.state.nil? }
   validate :validate_options
   validate :validate_user_role
   validate :images_type
@@ -25,9 +25,5 @@ class Item < ApplicationRecord
     normal: 0,
     speedily: 1
   }
-
-  def set_owner
-    self.assign_attributes(owner: @@logged_in_user)
-  end
-
+    
 end

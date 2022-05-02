@@ -85,8 +85,23 @@ module Modules::Item
     self.updated_at.to_date
   end
 
+  # It's checking if the current user is the owner of the item.
   def correct_user?
     ApplicationRecord.class_variable_get(:@@logged_in_user) == self.owner
+  end
+
+  # It's setting the owner of the item.
+  def set_owner
+    self.assign_attributes(owner: ApplicationRecord.class_variable_get(:@@logged_in_user))
+  end
+
+  # Calculating the average of the ratings of the item.
+  def rating
+    if self.ratings.blank?
+      @average_rating = 0
+    else
+      @average_rating = self.ratings.average(:value).round(2)
+    end
   end
 
 end

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
   root 'landing#index'
   devise_for :users
   devise_for :admins, ActiveAdmin::Devise.config
@@ -39,5 +40,6 @@ Rails.application.routes.draw do
   get 'user_items/ordered' => 'user_items#index'
   get 'user_items' => 'user_items#show'
   resources :user_items
+  resources :ratings
 
 end
