@@ -15,11 +15,11 @@
       %ul.navbar-nav.ms-auto
         -if user_signed_in? 
           %li.nav-item
-            = button_to user_items_path, method: :get, class: 'btn btn-outline-light' do
+            = button_to  user_items_path, method: :get, class: 'btn btn-outline-light' do
               %i.bi-cart-fill.me-1
               Cart
           %li
-          = button_to user_items_ordered_path, method: :get, class: 'btn btn-outline-light ml-1' do
+          = button_to order_history_user_items_path, method: :get, class: 'btn btn-outline-light ml-1' do
             %i.bi-clock-history
             Order history
         %li.nav-item.dropdown.align-baseline.align-right

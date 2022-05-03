@@ -10,6 +10,8 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item.view_increment
+    @rating = Rating.new
   end
 
   def new
@@ -25,7 +27,7 @@ class ItemsController < ApplicationController
     @item.options = params.require(:options)
 
     if @item.save
-      redirect_to root_path, notice: t(:created, obj: 'Item')
+      redirect_to item_path(@item), notice: t(:created, obj: 'Item')
     else
       flash[:msg] = { message: @item.errors.full_messages }
       render :new, status: :bad_request
@@ -66,7 +68,7 @@ class ItemsController < ApplicationController
       :description,
       :price,
       :countity,
-      :ratting,
+      :rating,
       :state,
       :options,
       images: []
@@ -83,7 +85,7 @@ class ItemsController < ApplicationController
   end
 
   def set_categories
-    @categories = Category.paginate_data(params)
+    @categories = Category.paginate_data(params.merge(all: true))
   end
 
   def check_correct_user

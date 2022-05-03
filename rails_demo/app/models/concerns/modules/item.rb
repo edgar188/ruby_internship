@@ -85,8 +85,33 @@ module Modules::Item
     self.updated_at.to_date
   end
 
+  # It's checking if the current user is the owner of the item.
   def correct_user?
     ApplicationRecord.class_variable_get(:@@logged_in_user) == self.owner
+  end
+
+  # It's setting the owner of the item.
+  def set_owner
+    self.assign_attributes(owner: ApplicationRecord.class_variable_get(:@@logged_in_user))
+  end
+
+  # Calculating the average of the ratings of the item.
+  def rating
+    self.ratings.present? ? self.ratings.average(:value).round(2) : 0
+  end
+
+  # It's incrementing the views of the item.
+  def view_increment
+    views = self.views + 1
+    self.update_columns(views: views)
+  end
+  
+  # It's sending an email when created the item.
+  def send_mail
+    ItemMailer.with(
+      user: ApplicationRecord.class_variable_get(:@@logged_in_user),
+      item: self
+    ).item_created.deliver_now
   end
 
 end

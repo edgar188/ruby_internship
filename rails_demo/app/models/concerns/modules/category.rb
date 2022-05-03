@@ -62,10 +62,22 @@ module Modules::Category
     lvl
   end
 
+  # It's checking if the logged in user is the owner of the category.
   def correct_user?
     unless self.owner['type'] == 'Admin'
       ApplicationRecord.class_variable_get(:@@logged_in_user).id == self.owner['id']
     end
+  end
+
+  # It's setting the owner of the category.
+  def set_owner
+    self.assign_attributes(
+      owner: {
+        id: ApplicationRecord.class_variable_get(:@@logged_in_user).id, 
+        type: ApplicationRecord.class_variable_get(:@@logged_in_user).class.name, 
+        full_name: ApplicationRecord.class_variable_get(:@@logged_in_user).show_full_name 
+      }
+    )
   end
 
 end

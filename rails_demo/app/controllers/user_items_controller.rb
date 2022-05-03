@@ -3,11 +3,15 @@ class UserItemsController < ApplicationController
   before_action :set_user_item, only: [:edit, :update, :destroy]
 
   def index
-    @user_items = current_user.user_items.paginate_data(params.merge(ordered: 'on'))
+    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: 'on'))
   end
 
   def show
-    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: 'on'))
+    redirect_to user_items_path
+  end
+
+  def order_history
+    @user_items = current_user.user_items.paginate_data(params.merge(ordered: 'on'))
   end
 
   def new

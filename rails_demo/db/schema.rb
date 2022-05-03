@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_27_180056) do
+ActiveRecord::Schema.define(version: 2022_05_02_164346) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -86,13 +86,23 @@ ActiveRecord::Schema.define(version: 2022_04_27_180056) do
     t.text "description"
     t.float "price", default: 0.0, null: false
     t.integer "countity", default: 0, null: false
-    t.integer "ratting", limit: 1, default: 0, null: false
+    t.integer "views", default: 0
     t.integer "state", limit: 1, default: 0, null: false
     t.json "options"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_items_on_category_id"
     t.index ["owner_type", "owner_id"], name: "index_items_on_owner"
+  end
+
+  create_table "ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.integer "value"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_ratings_on_item_id"
+    t.index ["user_id"], name: "index_ratings_on_user_id"
   end
 
   create_table "user_items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -128,6 +138,8 @@ ActiveRecord::Schema.define(version: 2022_04_27_180056) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "categories", on_delete: :cascade
+  add_foreign_key "ratings", "items", on_delete: :cascade
+  add_foreign_key "ratings", "users", on_delete: :cascade
   add_foreign_key "user_items", "items", on_delete: :cascade
   add_foreign_key "user_items", "users", on_delete: :cascade
 end

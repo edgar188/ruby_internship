@@ -1,6 +1,6 @@
 ActiveAdmin.register Item do
   permit_params :category_id, :owner_type, :owner_id, :title, :description, 
-                :price, :countity, :ratting, :state, :options
+                :price, :countity, :state, :options
   
   index do
     selectable_column
@@ -12,7 +12,6 @@ ActiveAdmin.register Item do
     column :description 
     column :price
     column :countity
-    column :ratting 
     column :state 
     column :options
     actions
@@ -28,7 +27,6 @@ ActiveAdmin.register Item do
       row :description 
       row :price
       row :countity
-      row :ratting 
       row :state 
       row :options
       row :created_at
@@ -42,7 +40,6 @@ ActiveAdmin.register Item do
   filter :description 
   filter :price
   filter :countity
-  filter :ratting 
   filter :state 
   filter :options
   filter :current_sign_in_at
@@ -58,7 +55,6 @@ ActiveAdmin.register Item do
       f.input :description 
       f.input :price
       f.input :countity
-      f.input :ratting 
       f.input :state 
       f.input :options
     end

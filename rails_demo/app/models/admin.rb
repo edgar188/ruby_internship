@@ -1,5 +1,4 @@
 class Admin < ActiveRecord::Base
-  # Include modules
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   include Modules::Admin
 
