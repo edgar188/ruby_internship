@@ -100,6 +100,12 @@ module Modules::Item
     self.ratings.present? ? self.ratings.average(:value).round(2) : 0
   end
 
+  # It's incrementing the views of the item.
+  def view_increment
+    views = self.views + 1
+    self.update_columns(views: views)
+  end
+  
   # It's sending an email when created the item.
   def send_mail
     ItemMailer.with(

@@ -10,8 +10,7 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item.views += 1 
-    @item.save 
+    @item.view_increment
     @rating = Rating.new
   end
 
