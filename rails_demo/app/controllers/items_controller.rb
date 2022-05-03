@@ -86,7 +86,7 @@ class ItemsController < ApplicationController
   end
 
   def set_categories
-    @categories = Category.paginate_data(params)
+    @categories = Category.paginate_data(params.merge(all: true))
   end
 
   def check_correct_user
