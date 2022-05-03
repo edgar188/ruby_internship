@@ -91,5 +91,5 @@ class ItemsController < ApplicationController
       redirect_to items_path, alert: t(:not_allowed, obj: 'Item')
     end
   end
-  
+
 end

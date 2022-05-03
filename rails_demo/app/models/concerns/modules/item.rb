@@ -9,18 +9,26 @@ module Modules::Item
 
   included do
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
-    scope :with_category, -> (category_id) { where(category_id: category_id) }
+    scope :with_current, -> { where(owner: ApplicationRecord.class_variable_get(:@@logged_in_user).id) }
+    scope :with_not_current, -> { where.not(owner: ApplicationRecord.class_variable_get(:@@logged_in_user).id) }
+    scope :with_category, -> (id) { where(category_id: id) }
+    scope :with_category_name, -> (name) { joins(:category).where(category: { name: name }) }
     scope :with_price, -> (min_price, max_price) { where("price <= ? AND price >= ?", min_price, max_price)}
   end
   
   # Class methods
   class_methods do
     def paginate_data(params)
-      items = Item.all
+      items = self.joins(:category)
 
       # Get current_user items
       if Modules::Helpers::to_boolean(params[:owner])
-        items = items.where(owner: ApplicationRecord.class_variable_get(:@@logged_in_user).id)
+        items = items.with_current
+      end
+
+      # Get not current_user items
+      if Modules::Helpers::to_boolean(params[:not_owner])
+        items = items.with_not_current
       end
       
       # Filter items by category
@@ -31,6 +39,11 @@ module Modules::Item
       # Filter items by price
       if Modules::Helpers::to_boolean(params[:min_price] && params[:max_price])
         items = items.with_price(params[:max_price], params[:min_price])
+      end
+      
+      # Filter items by category_name
+      if Modules::Helpers::to_boolean(params[:category_name]) && params[:category_name][0] != ''
+        items = items.with_category_name(params[:category_name][0])
       end
 
       # It's searching the items by title

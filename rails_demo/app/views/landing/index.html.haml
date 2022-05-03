@@ -19,6 +19,7 @@
               %li
                 %input{name: 'category_id[]', type: 'checkbox', value: cat.id}>/
                 = " #{cat.name}"
+        = text_field :category_name, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select category name'
         %h6 Price range
         = number_field_tag :min_price, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select min price'
         = number_field_tag :max_price, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select max price'

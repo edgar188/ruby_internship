@@ -9,5 +9,11 @@
             - else 
               = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
           .panel-body.text-center
-            %h4= link_to "#{item.title}", "#{items_path}/#{item.id}"
-            %p= "$ #{item.price}"
+            %h5.ellipsis= link_to "#{item.title}", "#{items_path}/#{item.id}"
+            %p.ellipsis= "$ #{item.price}"
+            - if user_signed_in?
+              = form_for @user_item do |f|
+                = f.hidden_field :user_id, value: current_user.id
+                = f.hidden_field :item_id, value: item.id
+                = button_tag(type: 'submit', class: 'btn btn-outline-dark') do
+                  %i.bi-bag-plus-fill

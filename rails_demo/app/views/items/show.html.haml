@@ -1,7 +1,6 @@
 -if user_signed_in?
-  - if @item.owner.id == current_user.id
-    .d-flex
-      = link_to 'Edit', edit_item_path, class: 'btn btn-secondary mb-2 '   
+  .d-flex
+    - if @item.owner.id == current_user.id
+      = link_to 'Edit', edit_item_path, class: 'btn btn-secondary mb-2 ml-1'   
       = button_to 'Delete', item_path(@item), data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mb-2 ml-1', method: :delete
-
-= render 'items/shared/cart'
+= render 'items/shared/card'
