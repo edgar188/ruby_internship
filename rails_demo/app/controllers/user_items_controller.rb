@@ -3,12 +3,11 @@ class UserItemsController < ApplicationController
   before_action :set_user_item, only: [:edit, :update, :destroy]
 
   def index
-    @user_items = current_user.user_items.paginate_data_ordered(params)
+    @user_items = current_user.user_items.paginate_data(params.merge(ordered: 'on'))
   end
 
   def show
-    @user_items = current_user.user_items.paginate_data_not_ordered(params)
-    @my_balance = current_user.balance 
+    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: 'on'))
   end
 
   def new
@@ -22,19 +21,18 @@ class UserItemsController < ApplicationController
     @user_item = UserItem.new(user_item_params)
       
     if @user_item.save
-      redirect_to root_path
-    else
-      render :new, status: :bad_request
+      return redirect_to root_path
     end
+
+    render :new, status: :bad_request
   end
 
   def update
     if @user_item.update(user_item_params)
-      redirect_to user_item_path
-    else
-      flash[:msg] = { message: @user_item.errors.full_messages }
-      render :edit, status: :bad_request
+      return redirect_to user_item_path
     end
+
+    redirect_to user_item_path, alert: t(:negative_balance)
   end
 
   def destroy

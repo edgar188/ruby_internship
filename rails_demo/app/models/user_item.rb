@@ -1,13 +1,12 @@
 class UserItem < ApplicationRecord
+  include Validations::UserItem
   include Modules::UserItem
 
   belongs_to :user
   belongs_to :item
 
-  after_update do
-    current = ApplicationRecord.class_variable_get(:@@logged_in_user)
-    current.balance -= self.item.price
-    current.save 
-  end
+  before_update :pay
+
+  validate :validate_balance, on: :update
 
 end

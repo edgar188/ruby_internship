@@ -8,6 +8,6 @@ module Modules::Constants
   # A constant that is used to set the count of pages.
   PAGE = 1
   # A constant that is used to set the count of items in per page.
-  PER_PAGE = 9
+  PER_PAGE = 12
   
 end
