@@ -1,4 +1,5 @@
 class ApplicationRecord < ActiveRecord::Base
+  
   self.abstract_class = true
   attr_accessor :logged_in_user
 

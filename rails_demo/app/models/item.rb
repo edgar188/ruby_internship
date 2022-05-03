@@ -1,14 +1,14 @@
 class Item < ApplicationRecord
-  # Include modules.
   include Validations::Item
   include Modules::Item
 
-  has_many_attached :images
-    
   belongs_to :owner, polymorphic: true
   belongs_to :category
   has_many :user_items
   has_many :ratings
+  has_many_attached :images
+
+  auto_strip_attributes :title, squish: true
 
   before_validation :set_owner, on: :create
   

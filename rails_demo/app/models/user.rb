@@ -1,12 +1,11 @@
 class User < ActiveRecord::Base
-  # Include modules.
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
   include Validations::User
   include Modules::User
 
-  has_one_attached :avatar
   has_many :user_items
   has_many :ratings
+  has_one_attached :avatar
 
   auto_strip_attributes :first_name, :last_name, :email, :phone, squish: true
 

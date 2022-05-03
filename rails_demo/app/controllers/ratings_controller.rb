@@ -7,8 +7,10 @@ class RatingsController < ApplicationController
     @rating = Rating.new(rating_params)
 
     if @rating.save
-      redirect_to root_path
+      return redirect_to root_path, notice: t(:success)
     end
+    
+    redirect_to root_path, alert: t(:wrong)
   end
 
   private
@@ -17,7 +19,7 @@ class RatingsController < ApplicationController
     params.require(:rating).permit(
       :user_id,
       :item_id,
-      :value,
+      :value
     )
   end  
 end

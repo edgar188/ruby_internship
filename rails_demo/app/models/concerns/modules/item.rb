@@ -97,16 +97,15 @@ module Modules::Item
 
   # Calculating the average of the ratings of the item.
   def rating
-    if self.ratings.blank?
-      @average_rating = 0
-    else
-      @average_rating = self.ratings.average(:value).round(2)
-    end
+    self.ratings.present? ? self.ratings.average(:value).round(2) : 0
   end
 
   # It's sending an email when created the item.
   def send_mail
-    ItemMailer.with(user: ApplicationRecord.class_variable_get(:@@logged_in_user), item: self).item_created.deliver_now
+    ItemMailer.with(
+      user: ApplicationRecord.class_variable_get(:@@logged_in_user),
+      item: self
+    ).item_created.deliver_now
   end
 
 end

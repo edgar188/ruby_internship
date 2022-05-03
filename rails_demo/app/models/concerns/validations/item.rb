@@ -20,7 +20,7 @@ module Validations::Item
 
   # Validating the state of the item.
   def validate_state
-    unless self.state.to_sym == :normal || self.state.to_sym == :speedily 
+    unless self.normal? || self.speedily?
       self.errors.add(:state, I18n.t(:not_valid))
     end
   end

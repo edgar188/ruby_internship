@@ -30,7 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: 'Hello world.'
+  success: 'Successfully updated.'
+  wrong: 'Something went wrong.'
   negative_value: "can't be negaive value."
   negative_balance: "Balance can't be negaive."
   not_valid: 'Not a valid.'
