@@ -32,11 +32,7 @@ module Modules::UserItem
     current = ApplicationRecord.class_variable_get(:@@logged_in_user)
     balance = current.balance 
     balance -= self.item.price
-
-    current.update_columns(
-      balance: balance
-    )
-
+    current.update_columns(balance: balance)
   end
 
 end

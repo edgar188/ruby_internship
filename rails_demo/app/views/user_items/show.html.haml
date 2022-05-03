@@ -26,5 +26,5 @@
     = will_paginate @user_items[:result], renderer: BootstrapPagination::Rails
 
   %div
-    %h5= "My Balance: #{@my_balance} $"
+    %h5= "My Balance: #{current_user.balance} $"
     %h5= "Total Price: #{total_price} $"

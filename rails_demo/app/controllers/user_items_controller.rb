@@ -8,7 +8,6 @@ class UserItemsController < ApplicationController
 
   def show
     @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: 'on'))
-    @my_balance = current_user.balance 
   end
 
   def new
