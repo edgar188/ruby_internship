@@ -49,9 +49,9 @@
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
-                    Owner
+                    Owner/Phone
                 %td.text-primary
-                  = @item.show_owner_full_name
+                  = "#{@item.show_owner_full_name} / #{@item.owner.phone}"
               %tr
                 %td
                   %strong

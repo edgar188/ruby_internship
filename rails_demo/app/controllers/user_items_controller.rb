@@ -36,7 +36,7 @@ class UserItemsController < ApplicationController
       return redirect_to user_item_path
     end
 
-    redirect_to user_item_path, alert: t(:negative_balance)
+    redirect_to user_item_path, alert: t(:wrong)
   end
 
   def destroy

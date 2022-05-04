@@ -12,5 +12,5 @@
             .panel-body.text-center
               %h5.ellipsis= link_to "#{user_item.item.title}", "#{items_path}/#{user_item.item.id}"
               %b.ellipsis= "$ #{user_item.item.price}"
-              -# %b= user_item.show_date
+              %b= user_item.show_date
     = will_paginate @user_items[:result], renderer: BootstrapPagination::Rails
