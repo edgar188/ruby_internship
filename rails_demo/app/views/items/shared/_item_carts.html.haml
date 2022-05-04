@@ -11,7 +11,7 @@
           .panel-body.text-center
             %h5.ellipsis= link_to "#{item.title}", "#{items_path}/#{item.id}"
             %p.ellipsis= "$ #{item.price}"
-            %i.bi-eye-fill= item.views
+            %i.bi-eye-fill= item.show_count
             %br/
             %i.bi-star-fill= item.rating
             - if user_signed_in?
