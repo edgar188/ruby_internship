@@ -32,8 +32,8 @@
 en:
   success: 'Successfully updated.'
   wrong: 'Something went wrong.'
-  negative_value: "can't be negaive value."
-  negative_balance: "Balance can't be negaive."
+  negative_value: "can't be negative value."
+  negative_balance: "Balance can't be negative."
   not_valid: 'Not a valid.'
   not_valid_file: 'Not a valid file format.'
   wrong_birth_date: 'Not a valid date.'

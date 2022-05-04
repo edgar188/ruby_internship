@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   auto_strip_attributes :title, squish: true
 
   before_validation :set_owner, on: :create
+  before_validation :set_default_view, on: :create
   
   validates_presence_of :category_id, :owner, :title, :price, :countity, :state, :options
   validates_length_of :title, minimum: 2, maximum: 255

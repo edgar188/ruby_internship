@@ -75,6 +75,11 @@ module Modules::Item
     self.owner.show_full_name
   end
 
+  # It's showing the count of the views of the item.
+  def show_count
+    self.views['count']
+  end
+
   # It's showing the state of the item.
   def show_state
     STATE[self.state.to_sym]
@@ -100,10 +105,30 @@ module Modules::Item
     self.ratings.present? ? self.ratings.average(:value).round(2) : 0
   end
 
-  # It's incrementing the views of the item.
+  # It's incrementing the count of the views of the item.
   def view_increment
-    views = self.views + 1
-    self.update_columns(views: views)
+    current = ApplicationRecord.class_variable_get(:@@logged_in_user) 
+    count = self.views['count'].to_i 
+    user_viewed = self.views['user_viewed']
+
+    if current.present?
+      unless self.views['user_viewed'].include?("#{current.id}")
+        count += 1
+        user_viewed["#{current.id}"] = Date.current
+      end
+    end
+
+    self.update_column(:views, { count: count, user_viewed: user_viewed })
+  end
+
+  # It's setting the default value of the views.
+  def set_default_view
+    self.assign_attributes(
+      views: {
+        count: 1, 
+        user_viewed: { "#{ApplicationRecord.class_variable_get(:@@logged_in_user).id}": Date.current }
+      }
+    )
   end
   
   # It's sending an email when created the item.
