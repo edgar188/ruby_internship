@@ -41,7 +41,7 @@ module Modules::Category
     if self.owner['type'] == 'User'
       record = User.find_by_id([self.owner['id']])
     else 
-      record = Admin.find_by_id([self.owner['id']])
+      record = AdminUser.find_by_id([self.owner['id']])
     end
     
     return record.show_full_name unless record.nil?
@@ -64,7 +64,7 @@ module Modules::Category
 
   # It's checking if the logged in user is the owner of the category.
   def correct_user?
-    unless self.owner['type'] == 'Admin'
+    unless self.owner['type'] == 'AdminUser'
       ApplicationRecord.class_variable_get(:@@logged_in_user).id == self.owner['id']
     end
   end

@@ -1,11 +1,11 @@
-admin = Admin.find_by_email(ENV['ADMIN_EMAIL'])
+admin_user = AdminUser.find_by_email(ENV['ADMIN_USER_EMAIL'])
 
-if admin.nil?
-  Admin.create!(
-    email: ENV['ADMIN_EMAIL'],
-    first_name: ENV['ADMIN_FN'],
-    last_name: ENV['ADMIN_LN'],
-    password: ENV['ADMIN_PASS'],
-    password_confirmation: ENV['ADMIN_PASS']
+if admin_user.nil?
+  AdminUser.create!(
+    email: ENV['ADMIN_USER_EMAIL'],
+    first_name: ENV['ADMIN_USER_FN'],
+    last_name: ENV['ADMIN_USER_LN'],
+    password: ENV['ADMIN_USER_PASS'],
+    password_confirmation: ENV['ADMIN_USER_PASS']
   )
 end

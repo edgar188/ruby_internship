@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root 'landing#index'
 
   devise_for :users
-  # devise_for :admins, ActiveAdmin::Devise.config
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   scope :profile do
     resources :profile, only: [:edit, :update]
