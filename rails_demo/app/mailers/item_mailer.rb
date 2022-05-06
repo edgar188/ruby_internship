@@ -6,7 +6,7 @@ class ItemMailer < ApplicationMailer
     
     mail(
       to: ENV['MAIL_TO'], 
-      cc: Admin.all.pluck(:email), 
+      cc: AdminUser.all.pluck(:email), 
       subject: 'New item created'
     )
   end

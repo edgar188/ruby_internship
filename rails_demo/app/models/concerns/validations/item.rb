@@ -27,9 +27,11 @@ module Validations::Item
 
   # Validating the options of the item.
   def validate_options
-    self.options.each do |option_key, option_value|
-      if option_value.length < 3
-        self.errors.add(:options, I18n.t(:wrong_option))
+    if self.options.present?
+      self.options.each do |option_key, option_value|
+        if option_value.length < 3
+          self.errors.add(:options, I18n.t(:wrong_option))
+        end
       end
     end
   end

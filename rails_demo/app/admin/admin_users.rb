@@ -1,11 +1,11 @@
-ActiveAdmin.register Admin do
+ActiveAdmin.register AdminUser do
   permit_params :email, :first_name, :last_name, :password, :password_confirmation
 
   index do
     selectable_column
     id_column
     column :email
-    column "Full name", :show_full_name
+    column 'Full name', :show_full_name
     column :created_at
     actions
   end
@@ -16,7 +16,6 @@ ActiveAdmin.register Admin do
       row :email
       row :first_name
       row :last_name
-      row :show_full_name
       row :created_at
     end
   end
@@ -24,7 +23,6 @@ ActiveAdmin.register Admin do
   filter :email
   filter :first_name
   filter :last_name
-  filter :show_full_name
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at

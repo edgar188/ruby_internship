@@ -1,6 +1,5 @@
 ActiveAdmin.register Item do
-  permit_params :category_id, :owner_type, :owner_id, :title, :description, 
-                :price, :countity, :state, :options
+  permit_params :category_id, :title, :description, :price, :countity, :state
   
   index do
     selectable_column
@@ -49,14 +48,11 @@ ActiveAdmin.register Item do
   form do |f|
     f.inputs do
       f.input :category_id 
-      f.input :owner_type
-      f.input :owner_id 
       f.input :title 
       f.input :description 
       f.input :price
       f.input :countity
       f.input :state 
-      f.input :options
     end
     
     f.actions
