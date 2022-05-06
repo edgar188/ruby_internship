@@ -9,11 +9,12 @@
             - else 
               = image_tag('shop.jpg', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 400px')
           .panel-body.text-center
+            - if item.speedily?
+              %span.text-danger Speedily
             %h5.ellipsis= link_to "#{item.title}", "#{items_path}/#{item.id}"
             %p.ellipsis= "$ #{item.price}"
-            %i.bi-eye-fill= item.show_count
-            %br/
-            %i.bi-star-fill= item.rating
+            %i.bi-star-fill.text-warning= item.rating
+            %i.bi-eye-fill.ml-1= item.show_count
             - if user_signed_in?
               = form_for @user_item do |f|
                 = f.hidden_field :user_id, value: current_user.id

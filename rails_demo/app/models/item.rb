@@ -1,7 +1,8 @@
 class Item < ApplicationRecord
+  acts_as_paranoid
   include Validations::Item
   include Modules::Item
-
+  
   belongs_to :owner, polymorphic: true
   belongs_to :category
   has_many :user_items

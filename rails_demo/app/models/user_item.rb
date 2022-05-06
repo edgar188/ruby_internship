@@ -4,7 +4,7 @@ class UserItem < ApplicationRecord
   include Modules::UserItem
 
   belongs_to :user
-  belongs_to :item
+  belongs_to :item, -> { with_deleted }
 
   before_update :pay
 
