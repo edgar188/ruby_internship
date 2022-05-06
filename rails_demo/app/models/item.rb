@@ -8,6 +8,8 @@ class Item < ApplicationRecord
   has_many :ratings
   has_many_attached :images
 
+  acts_as_paranoid
+
   auto_strip_attributes :title, squish: true
 
   before_validation :set_owner, on: :create

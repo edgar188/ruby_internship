@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_134735) do
+ActiveRecord::Schema.define(version: 2022_05_06_043501) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -56,8 +56,8 @@ ActiveRecord::Schema.define(version: 2022_05_05_134735) do
 
   create_table "admin_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "first_name"
     t.string "last_name"
+    t.string "first_name"
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -91,7 +91,9 @@ ActiveRecord::Schema.define(version: 2022_05_05_134735) do
     t.json "options"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["category_id"], name: "index_items_on_category_id"
+    t.index ["deleted_at"], name: "index_items_on_deleted_at"
     t.index ["owner_type", "owner_id"], name: "index_items_on_owner"
   end
 
