@@ -7,7 +7,6 @@
 //= link categories/categories_tree.js
 //= link categories/options.js
 //= link categories/search.js
-//= link items/search.js
 //= link items/images_slider.js
 //= link items/select_categories.js
 //= link items/select_options.js

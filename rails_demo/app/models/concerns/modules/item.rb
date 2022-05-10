@@ -110,6 +110,11 @@ module Modules::Item
     self.ratings.present? ? self.ratings.average(:value).round(2) : 0
   end
 
+  # It's getting the user that rated the item.
+  def get_rated_user
+    self.ratings.find_by_user_id(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
+  end
+
   # It's incrementing the count of the views of the item.
   def view_increment
     current = ApplicationRecord.class_variable_get(:@@logged_in_user) 
