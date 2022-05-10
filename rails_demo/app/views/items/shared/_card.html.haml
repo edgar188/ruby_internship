@@ -49,16 +49,17 @@
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
-                    Owner/Phone
+                    Owner / Phone
                 %td.text-primary
-                  = "#{@item.show_owner_full_name} / #{@item.owner.phone}"
+                  %b= link_to @item.show_owner_full_name, user_path(@item.owner)
+                  = "/ #{@item.owner.show_phone}"
               %tr
                 %td
                   %strong
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Description
                 %td.text-primary
-                  = @item.description
+                  = @item.show_description
               %tr
                 %td
                   %strong
@@ -80,7 +81,7 @@
                     %span.glyphicon.glyphicon-envelope.text-primary
                     Views
                 %td.text-primary
-                  = @item.show_count
+                  = @item.show_views_count
               %tr
                 %td
                   %strong

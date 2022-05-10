@@ -1,13 +1,10 @@
 class ItemsController < ApplicationController
 
   before_action :authenticate_user!, except: [:show]
-  before_action :set_items, only: [:index, :search]
+  before_action :set_items, only: [:search]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :set_categories, only: [:new, :create]
   before_action :check_correct_user, only: [:edit, :update, :destroy]
-
-  def index
-  end
 
   def show
     @item.view_increment

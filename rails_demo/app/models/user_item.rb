@@ -6,9 +6,10 @@ class UserItem < ApplicationRecord
   belongs_to :user
   belongs_to :item, -> { with_deleted }
 
-  before_update :pay
+  after_update :pay
 
   validate :validate_balance, on: :update
+  validate :validate_item_countity, on: :update
   validate :validate_ordered_at, on: :update
-
+  
 end

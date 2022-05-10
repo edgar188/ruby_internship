@@ -75,8 +75,13 @@ module Modules::Item
     self.owner.show_full_name
   end
 
+  # It's showing the description of the item.
+  def show_description
+    self.description || Modules::Constants::NO_SELECT
+  end
+
   # It's showing the count of the views of the item.
-  def show_count
+  def show_views_count
     self.views['count']
   end
 

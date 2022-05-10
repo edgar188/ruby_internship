@@ -3,7 +3,7 @@ class UserItemsController < ApplicationController
   before_action :set_user_item, only: [:edit, :update, :destroy]
 
   def index
-    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: 'on'))
+    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: true))
   end
 
   def show
@@ -11,7 +11,7 @@ class UserItemsController < ApplicationController
   end
 
   def order_history
-    @user_items = current_user.user_items.paginate_data(params.merge(ordered: 'on'))
+    @user_items = current_user.user_items.paginate_data(params.merge(ordered: true))
   end
 
   def new

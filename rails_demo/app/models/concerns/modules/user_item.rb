@@ -27,12 +27,16 @@ module Modules::UserItem
     self.ordered_at.to_s(:long_ordinal)
   end
 
-  # Subtracting the price of the item from the user's balance.
+  # Subtracting the price of the item from the user's balance and count of items.
   def pay
     current = ApplicationRecord.class_variable_get(:@@logged_in_user)
     balance = current.balance 
     balance -= self.item.price
-    current.update_columns(balance: balance)
+    current.update_columns(balance: balance) 
+    item = self.item
+    countity = item.countity
+    countity -= 1
+    item.update_columns(countity: countity)
   end
 
 end

@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  acts_as_paranoid
   include Validations::User
   include Modules::User
 
-  has_many :user_items
+  has_many :items, as: :owner, dependent: :destroy
+  has_many :user_items, dependent: :destroy
   has_many :ratings
   has_one_attached :avatar
 
