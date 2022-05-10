@@ -43,14 +43,6 @@ class CategoriesController < ApplicationController
     end
   end
 
-  def destroy
-    unless @category.destroy
-      return redirect_to categories_path, alert: t(:not_destroyed)
-    end
-
-    redirect_to categories_path, notice: t(:destroyed, obj: 'Category')
-  end
-
   def search
     render json: @categories, status: :ok
   end
