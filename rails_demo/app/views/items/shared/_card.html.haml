@@ -45,14 +45,15 @@
                     Category 
                 %td.text-primary
                   = @item.show_category
-              %tr
-                %td
-                  %strong
-                    %span.glyphicon.glyphicon-envelope.text-primary
-                    Owner / Phone
-                %td.text-primary
-                  %b= link_to @item.show_owner_full_name, user_path(@item.owner)
-                  = "/ #{@item.owner.show_phone}"
+              - if @item.owner_type == 'User'
+                %tr
+                  %td
+                    %strong
+                      %span.glyphicon.glyphicon-envelope.text-primary
+                      Owner / Phone
+                  %td.text-primary
+                    %b= link_to @item.show_owner_full_name, user_path(@item.owner)
+                    = "/ #{@item.owner.show_phone}"
               %tr
                 %td
                   %strong
@@ -96,12 +97,13 @@
                     State
                 %td.text-primary
                   = @item.show_state  
-              %tr
-                %td
-                  %strong
-                    %span.glyphicon.glyphicon-envelope.text-primary
-                    Options
-                %td.text-primary
-                  = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] }) 
+              - if @item.options.present?
+                %tr
+                  %td
+                    %strong
+                      %span.glyphicon.glyphicon-envelope.text-primary
+                      Options
+                  %td.text-primary
+                    = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] }) 
 
 = javascript_include_tag 'items/images_slider'
