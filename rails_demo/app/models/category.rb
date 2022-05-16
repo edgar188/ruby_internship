@@ -10,6 +10,11 @@ class Category < ApplicationRecord
   
   before_validation :set_owner, on: :create
 
+  before_destroy do
+    validate_destroy
+    throw(:abort) if self.errors.present?
+  end
+
   validates_uniqueness_of :name
   validates_length_of :name, minimum: 2, maximum: 255
   validate :validate_level, unless: -> { self.level.nil? }

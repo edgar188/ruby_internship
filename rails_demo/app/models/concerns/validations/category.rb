@@ -14,7 +14,7 @@ module Validations::Category
   def validate_options
     if self.options.present?
       self.options.each do |option|
-        if option.length < 3
+        if option.length < 2
           self.errors.add(:option, I18n.t(:wrong_option))
         end
       end
@@ -22,8 +22,14 @@ module Validations::Category
   end
 
   def validate_user_role
-    if ApplicationRecord.class_variable_get(:@@logged_in_user).role == 'buyer'
+    if ApplicationRecord.class_variable_get(:@@logged_in_user).buyer?
       self.errors.add(:role, I18n.t(:not_valid)) 
+    end
+  end
+
+  def validate_destroy
+    unless self.childs.nil? || self.items.nil?
+      self.errors.add(:base, I18n.t(:not_destroyed))
     end
   end
 
