@@ -44,10 +44,10 @@ class ItemsController < ApplicationController
 
   def destroy
     unless @item.destroy
-      return redirect_to items_path, alert: t(:not_destroyed)
+      return redirect_to profile_page_path, alert: t(:not_destroyed)
     end
     
-    redirect_to items_path, notice: t(:destroyed, obj: 'Item')
+    redirect_to profile_page_path, notice: t(:destroyed, obj: 'Item')
   end
 
   def search

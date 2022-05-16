@@ -2,12 +2,17 @@ module Modules::UserItem
   extend ActiveSupport::Concern
   include Modules::Constants
 
+  included do
+    scope :with_ordered, -> { where.not(ordered_at: nil) }
+    scope :with_not_ordered, -> { where(ordered_at: nil) }
+  end
+
   class_methods do
     def paginate_data(params)
       user_items = self.all
 
-      user_items = user_items.where(ordered_at: nil) if Modules::Helpers::to_boolean(params[:not_ordered]) 
-      user_items = user_items.where.not(ordered_at: nil) if Modules::Helpers::to_boolean(params[:ordered]) 
+      user_items = user_items.with_ordered if Modules::Helpers::to_boolean(params[:ordered])
+      user_items = user_items.with_not_ordered if Modules::Helpers::to_boolean(params[:not_ordered])
       
       unless Modules::Helpers::to_boolean(params[:all])
         user_items = user_items.paginate(
@@ -19,6 +24,20 @@ module Modules::UserItem
       # Get items and items count
       user_items = { result: user_items, count: count }
       user_items
+    end
+
+    # Calculating the total price of all the items in the user's cart.
+    def total_price
+      current = ApplicationRecord.class_variable_get(:@@logged_in_user)
+      total_price = 0
+      current.user_items.with_not_ordered.select { |user_item| total_price += user_item.item.price }
+      total_price
+    end
+
+    # Calculating the balance after buying all the items in the user's cart.
+    def balance_after_buy_all
+      current_balance =  ApplicationRecord.class_variable_get(:@@logged_in_user).balance
+      current_balance - self.total_price
     end
   end
 

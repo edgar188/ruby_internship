@@ -16,18 +16,18 @@
 
 body {
   background: #f1f2f7;
+  height: 100vh; 
+  display: flex; 
+  flex-direction: column; 
 }
 
 header {
   min-height: 65px;
 }
 
-main {
-  min-height: 450px;
-}
-
 footer {
   min-height: 65px;
+  margin-top: auto; 
 }
 
 a {

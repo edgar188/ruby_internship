@@ -36,7 +36,7 @@ class UserItemsController < ApplicationController
       return redirect_to user_item_path
     end
 
-    redirect_to user_item_path, alert: t(:wrong)
+    redirect_to user_item_path, alert: @user_item.errors.full_messages
   end
 
   def destroy
@@ -48,6 +48,24 @@ class UserItemsController < ApplicationController
     redirect_to user_item_path
   end
 
+  def buy_all
+    result = OrderCreator.new(current_user).call
+    
+    if result
+      return redirect_to user_items_path, notice: t(:success)
+    end
+
+    redirect_to user_items_path, alert: t(:wrong)
+  end
+  
+  def delete_all
+    if current_user.user_items.with_not_ordered.destroy_all 
+      return redirect_to user_items_path, notice: t(:destroyed, obj: 'User items')
+    end
+
+    redirect_to user_items_path, alert: t(:not_destroyed)
+  end
+  
   private
   
   def user_item_params

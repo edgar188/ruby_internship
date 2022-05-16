@@ -16,8 +16,8 @@ class Item < ApplicationRecord
   
   validates_presence_of :category_id, :owner, :title, :price, :countity, :state, :options
   validates_length_of :title, minimum: 2, maximum: 255
-  validate :validate_price, unless: -> { self.price.nil? }
-  validate :validate_countity, unless: -> { self.countity.nil? }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validates :countity, numericality: { greater_than_or_equal_to: 0 }, presence: true
   validate :validate_state, unless: -> { self.state.nil? }
   validate :validate_options
   validate :validate_user_role

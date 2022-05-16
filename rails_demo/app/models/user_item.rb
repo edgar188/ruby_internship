@@ -8,7 +8,6 @@ class UserItem < ApplicationRecord
 
   after_update :pay
 
-  validate :validate_balance, on: :update
   validate :validate_item_countity, on: :update
   validate :validate_ordered_at, on: :update
   
