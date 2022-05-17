@@ -68,7 +68,10 @@ class ItemsController < ApplicationController
       :rating,
       :state,
       :options,
-      images: []
+      images: [],
+      item_resources_attributes: [
+        :id, :name, :resource_type, :url, :file, :_destroy
+      ]
     )
   end  
 

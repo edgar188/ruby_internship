@@ -7,7 +7,10 @@ class Item < ApplicationRecord
   belongs_to :category
   has_many :user_items
   has_many :ratings, dependent: :destroy
+  has_many :item_resources
   has_many_attached :images
+
+  accepts_nested_attributes_for :item_resources, allow_destroy: true
 
   auto_strip_attributes :title, squish: true
 

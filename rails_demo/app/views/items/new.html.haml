@@ -43,7 +43,34 @@
       .form-check 
         = f.radio_button :state, 'speedily', class: 'gridRadios1 form-check-input'
         = f.label :state, 'Speedily', class: 'label form-check-label'
+
+  %hr/
+  .form-group.row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Resource Name
+    .col-sm-10
+      %input{name: 'item[item_resources_attributes][0][name]', class: 'form-control', placeholder: 'Resource name'}
+  .row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Resource Type
+    .col-sm-10
+      .form-check 
+        %input{name: 'item[item_resources_attributes][0][resource_type]', id: 'url_radio', class: 'gridRadios1 form-check-input', type: 'radio', value: 'url', checked: true}
+        Url
+      .form-check 
+        %input{name: 'item[item_resources_attributes][0][resource_type]', id: 'document_radio', class: 'gridRadios1 form-check-input', type: 'radio', value: 'document'}
+        Document
+  #resource_type_url.form-group.row.mb-2
+    %legend.col-form-label.col-sm-2.pt-0 Resource Url
+    .col-sm-10
+      %input{name: 'item[item_resources_attributes][0][url]', class: 'form-control', placeholder: 'Resource url'}
+  #resource_type_document.form-group.row.mb-2.d-none
+    %label.col-sm-2.col-form-label Recource Document
+    .col-sm-10
+      %input{name: 'item[item_resources_attributes][0][file]', type: 'file', class: 'form-control', placeholder: 'Resource doc'}
+  
+  
+  
   .actions
     = f.submit 'Create', class: 'btn btn-primary mb-2', id: 'create_item_btn'
 
 = javascript_include_tag 'items/select_options'
+= javascript_include_tag 'items/add_resource'

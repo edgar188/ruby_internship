@@ -105,5 +105,21 @@
                       Options
                   %td.text-primary
                     = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] }) 
+                - if @item.item_resources.present?
+                  %tr
+                    %td
+                      %strong
+                        %span.glyphicon.glyphicon-envelope.text-primary
+                        Resource /
+                        = @item.item_resources.first.resource_type
+                    %td.text-primary
+                      - if @item.item_resources.first.url?
+                        %small.text-dark Click to open url
+                        %br/
+                        %b= link_to @item.item_resources.first.name, @item.item_resources.first.url, target: "_blank"
+                      - else @item.item_resources.first.document?
+                        %small.text-dark Click to download
+                        %br/
+                        %b= link_to @item.item_resources.first.file.filename, rails_blob_path(@item.item_resources.first.file, disposition: 'attachment')           
 
 = javascript_include_tag 'items/images_slider'

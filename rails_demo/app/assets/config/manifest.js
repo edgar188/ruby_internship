@@ -10,6 +10,7 @@
 //= link items/images_slider.js
 //= link items/select_categories.js
 //= link items/select_options.js
+//= link items/add_resource.js
 
 //= require axios
 //= require jquery
