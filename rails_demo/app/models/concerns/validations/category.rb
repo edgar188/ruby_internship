@@ -21,15 +21,18 @@ module Validations::Category
     end
   end
 
+  # Checking if the user is a buyer or not.
   def validate_user_role
     if ApplicationRecord.class_variable_get(:@@logged_in_user).buyer?
       self.errors.add(:role, I18n.t(:not_valid)) 
     end
   end
 
+  # Checking if the category has childs or items. If it has, it will not be destroyed.
   def validate_destroy
-    unless self.childs.nil? || self.items.nil?
+    if self.childs.present? || self.items.present?
       self.errors.add(:base, I18n.t(:not_destroyed))
+      throw(:abort)
     end
   end
 

@@ -9,11 +9,7 @@ class Category < ApplicationRecord
   auto_strip_attributes :name, squish: true
   
   before_validation :set_owner, on: :create
-
-  before_destroy do
-    validate_destroy
-    throw(:abort) if self.errors.present?
-  end
+  before_destroy :validate_destroy, prepend: true
 
   validates_uniqueness_of :name
   validates_length_of :name, minimum: 2, maximum: 255
