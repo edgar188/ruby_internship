@@ -45,7 +45,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     unless @category.destroy
-      return redirect_to categories_path, alert: t(:not_destroyed)
+      return redirect_to category_path(@category), alert: t(:not_destroyed)
     end
 
     redirect_to categories_path, notice: t(:destroyed, obj: 'Category')
