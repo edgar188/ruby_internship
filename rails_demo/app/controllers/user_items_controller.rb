@@ -49,13 +49,14 @@ class UserItemsController < ApplicationController
   end
 
   def buy_all
-    result = OrderCreator.new(current_user).call
-    
-    if result
+    service = OrderCreator.new(current_user)
+    result = service.call
+
+    if result.success?
       return redirect_to user_items_path, notice: t(:success)
     end
 
-    redirect_to user_items_path, alert: t(:wrong)
+    redirect_to user_items_path, alert: result.errors
   end
   
   def delete_all
