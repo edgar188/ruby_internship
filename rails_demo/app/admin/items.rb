@@ -11,6 +11,8 @@ ActiveAdmin.register Item do
     column :description 
     column :price
     column :countity
+    column 'Views count', :show_views_count
+    column :rating
     column :state 
     column :options
     actions
@@ -26,6 +28,8 @@ ActiveAdmin.register Item do
       row :description 
       row :price
       row :countity
+      row :show_views_count
+      row :rating
       row :state 
       row :options
       row :created_at
@@ -39,6 +43,8 @@ ActiveAdmin.register Item do
   filter :description 
   filter :price
   filter :countity
+  filter :show_views_count
+  filter :rating
   filter :state 
   filter :options
   filter :current_sign_in_at

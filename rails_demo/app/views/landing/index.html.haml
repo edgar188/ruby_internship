@@ -9,9 +9,16 @@
       = form_with(url: root_path, method: 'GET', class: 'd-flex') do |form|
         = form.text_field(:query, placeholder: 'Search...', class: 'form-control rounded', id: 'items_search')
       = link_to 'Reset', root_path, class: 'btn btn-outline-warning'
-    %br
     .d-flex.mb-2.mt-2.mr-2
       = form_tag '', method: :get do
+        - if user_signed_in? 
+          .d-flex.flex-column.mb-2
+            %label
+              %input{name: 'owner', type: 'radio'}
+              %span.h6 My items
+            %label
+              %input{name: 'not_owner', type: 'radio'}
+              %span.h6 Not my items
         #list1.dropdown-check-list.mb-2{tabindex: '100'}
           %span.anchor Select categories
           %ul.items
@@ -21,8 +28,8 @@
                 = " #{cat.name}"
         = text_field :category_name, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select category name'
         %h6 Price range
-        = number_field_tag :min_price, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select min price'
-        = number_field_tag :max_price, @current_value, class: 'number mb-2 form-control rounded', placeholder: 'Select max price'
+        = number_field_tag :min_price, @current_value, min: 0, class: 'number mb-2 form-control rounded', placeholder: 'Select min price'
+        = number_field_tag :max_price, @current_value, min: 0, class: 'number mb-2 form-control rounded', placeholder: 'Select max price'
         = submit_tag 'Filter',  class: 'btn btn-secondary'
         = link_to 'Reset', root_path, class: 'btn btn-outline-warning'
 

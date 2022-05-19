@@ -27,11 +27,6 @@ module Modules::User
     def paginate_data(params)
       users = self.all
 
-      # It's a method that returns the age of the user.
-      def get_age(age)
-        DateTime.current.to_date.year - age.to_i
-      end
-
       # Filter out current user
       users = users.except_current_user(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
 
@@ -77,6 +72,11 @@ module Modules::User
       # Get users and users count
       users = { result: users, count: count }
       users
+    end
+
+    # It's a method that returns the age of the user.
+    def get_age(age)
+      DateTime.current.to_date.year - age.to_i
     end
   end
 

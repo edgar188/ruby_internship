@@ -75,8 +75,13 @@ module Modules::Item
     self.owner.show_full_name
   end
 
+  # It's showing the description of the item.
+  def show_description
+    self.description || Modules::Constants::NO_SELECT
+  end
+
   # It's showing the count of the views of the item.
-  def show_count
+  def show_views_count
     self.views['count']
   end
 
@@ -103,6 +108,11 @@ module Modules::Item
   # Calculating the average of the ratings of the item.
   def rating
     self.ratings.present? ? self.ratings.average(:value).round(2) : 0
+  end
+
+  # It's getting the user that rated the item.
+  def get_rated_user
+    self.ratings.find_by_user_id(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
   end
 
   # It's incrementing the count of the views of the item.

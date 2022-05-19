@@ -3,7 +3,7 @@ class UserItemsController < ApplicationController
   before_action :set_user_item, only: [:edit, :update, :destroy]
 
   def index
-    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: 'on'))
+    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: true))
   end
 
   def show
@@ -11,7 +11,7 @@ class UserItemsController < ApplicationController
   end
 
   def order_history
-    @user_items = current_user.user_items.paginate_data(params.merge(ordered: 'on'))
+    @user_items = current_user.user_items.paginate_data(params.merge(ordered: true))
   end
 
   def new
@@ -36,7 +36,7 @@ class UserItemsController < ApplicationController
       return redirect_to user_item_path
     end
 
-    redirect_to user_item_path, alert: t(:wrong)
+    redirect_to user_item_path, alert: @user_item.errors.full_messages
   end
 
   def destroy
@@ -48,6 +48,25 @@ class UserItemsController < ApplicationController
     redirect_to user_item_path
   end
 
+  def buy_all
+    service = OrderCreator.new(current_user)
+    result = service.call
+
+    if result.success?
+      return redirect_to user_items_path, notice: t(:success)
+    end
+
+    redirect_to user_items_path, alert: result.errors
+  end
+  
+  def delete_all
+    if current_user.user_items.with_not_ordered.destroy_all 
+      return redirect_to user_items_path, notice: t(:destroyed, obj: 'User items')
+    end
+
+    redirect_to user_items_path, alert: t(:not_destroyed)
+  end
+  
   private
   
   def user_item_params

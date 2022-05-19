@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :items do
+  resources :items, except: [:index] do
     collection do
       get :search
     end
@@ -39,6 +39,8 @@ Rails.application.routes.draw do
   resources :user_items do
     collection do
       get :order_history
+      get :buy_all
+      get :delete_all
     end  
   end
 

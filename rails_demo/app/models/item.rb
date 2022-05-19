@@ -6,8 +6,8 @@ class Item < ApplicationRecord
   belongs_to :owner, polymorphic: true
   belongs_to :category
   has_many :user_items
-  has_many :ratings
-  has_many_attached :images
+  has_many :ratings, dependent: :destroy
+  has_many_attached :images, dependent: :destroy
 
   auto_strip_attributes :title, squish: true
 
@@ -15,9 +15,10 @@ class Item < ApplicationRecord
   before_validation :set_default_view, on: :create
   
   validates_presence_of :category_id, :owner, :title, :price, :countity, :state, :options
+  validates_inclusion_of :owner_type, in: %w(AdminUser User)
   validates_length_of :title, minimum: 2, maximum: 255
-  validate :validate_price, unless: -> { self.price.nil? }
-  validate :validate_countity, unless: -> { self.countity.nil? }
+  validates :price, numericality: { greater_than_or_equal_to: 0 }, presence: true
+  validates :countity, numericality: { greater_than_or_equal_to: 0 }, presence: true
   validate :validate_state, unless: -> { self.state.nil? }
   validate :validate_options
   validate :validate_user_role

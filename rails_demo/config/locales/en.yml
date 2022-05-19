@@ -33,7 +33,6 @@ en:
   success: 'Successfully updated.'
   wrong: 'Something went wrong.'
   negative_value: "can't be negative value."
-  negative_balance: "Balance can't be negative."
   not_valid: 'Not a valid.'
   not_valid_file: 'Not a valid file format.'
   wrong_birth_date: 'Not a valid date.'
@@ -44,5 +43,5 @@ en:
   created: "%{obj} was successfully created."
   updated: "%{obj} was successfully updated."
   destroyed: "%{obj} was successfully destroyed."
-  not_destroyed: "Not destroyed."
+  not_destroyed: 'Not destroyed.'
   not_allowed: "You are not allowed to update this %{obj}."

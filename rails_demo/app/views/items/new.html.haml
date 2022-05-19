@@ -29,11 +29,11 @@
   .form-group.row.mb-2
     %legend.col-form-label.col-sm-2.pt-0 Price $
     .col-sm-10
-      = f.number_field :price, class: 'form-control', placeholder: 'Price'
+      = f.number_field :price, min: 0, class: 'form-control', placeholder: 'Price'
   .form-group.row.mb-2
     %legend.col-form-label.col-sm-2.pt-0 Count
     .col-sm-10
-      = f.number_field :countity, class: 'form-control', value: 1, placeholder: 'Countity'
+      = f.number_field :countity, min: 0, class: 'form-control', value: 1, placeholder: 'Countity'
   .row.mb-2
     %legend.col-form-label.col-sm-2.pt-0 State
     .col-sm-10
