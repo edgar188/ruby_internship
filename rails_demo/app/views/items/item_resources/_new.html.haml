@@ -1,0 +1,21 @@
+.form-group.row.mb-2
+  %legend.col-form-label.col-sm-2.pt-0 Resource Name
+  .col-sm-10
+    %input{name: 'item[item_resources_attributes][0][name]', class: 'form-control', placeholder: 'Resource name'}
+.row.mb-2
+  %legend.col-form-label.col-sm-2.pt-0 Resource Type
+  .col-sm-10
+    .form-check 
+      %input{name: 'item[item_resources_attributes][0][resource_type]', id: 'link_radio', class: 'gridRadios1 form-check-input', type: 'radio', value: 'link', checked: true}
+      Link
+    .form-check 
+      %input{name: 'item[item_resources_attributes][0][resource_type]', id: 'document_radio', class: 'gridRadios1 form-check-input', type: 'radio', value: 'document'}
+      Document
+#resource_type_link.form-group.row.mb-2
+  %legend.col-form-label.col-sm-2.pt-0 Resource Link
+  .col-sm-10
+    %input{name: 'item[item_resources_attributes][0][url]', class: 'form-control', placeholder: 'Resource url'}
+#resource_type_document.form-group.row.mb-2.d-none
+  %label.col-sm-2.col-form-label Recource Document
+  .col-sm-10
+    %input{name: 'item[item_resources_attributes][0][file]', type: 'file', class: 'form-control', placeholder: 'Resource doc'}

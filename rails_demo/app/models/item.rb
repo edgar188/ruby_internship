@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :category
   has_many :user_items
   has_many :ratings, dependent: :destroy
+  has_many :item_resources, dependent: :destroy
   has_many_attached :images, dependent: :destroy
 
   accepts_nested_attributes_for :item_resources, allow_destroy: true

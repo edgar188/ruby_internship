@@ -8,14 +8,18 @@ class ItemResource < ApplicationRecord
   auto_strip_attributes :name, squish: true
   auto_strip_attributes :url, squish: true
 
-  validates_presence_of :name, if: -> { self.name.present? }
+  before_validation :remove_not_selected_resource
+
+  validates_presence_of :name
+  validates_presence_of :file, if: -> { self.document? }
+  validates_presence_of :url, if: -> { self.link? }
   validates_length_of :name, minimum: 2, maximum: 255, if: -> { self.name.present? }
-  validates :url, format: URI::regexp(%w[http https]), if: -> { self.url? && self.url.present? }
+  validates :url, format: URI::regexp(Validations::Variables::VALID_URL), if: -> { self.link? && self.url.present? }
   validate :validate_resource_type, unless: -> { self.resource_type.nil? }
   validate :validate_file_type, if: -> { self.file.present? }
 
   enum resource_type: {
-    url: 0,
+    link: 0,
     document: 1
   }
 

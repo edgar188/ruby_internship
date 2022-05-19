@@ -10,5 +10,6 @@ module Validations::Variables
     application/x-msexcel
     application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
   )
+  VALID_URL = %w[http https]
 
 end

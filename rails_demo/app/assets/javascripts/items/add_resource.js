@@ -1,41 +1,28 @@
-let url_input = document.getElementById('resource_type_url');
+let link_input = document.getElementById('resource_type_link');
 let document_input = document.getElementById('resource_type_document');
 let document_radio = document.getElementById('document_radio');
-let url_radio = document.getElementById('url_radio');
+let link_radio = document.getElementById('link_radio');
 let current_resource_type = document.getElementById('resource_type');
-
-console.log(current_resource_type.dataset.current_radio_value);
-// alert(current_resource_type.dataset.current_radio_value);
 
 // Toggle selected type classes
 function toggle_class(radio) {
-  if (radio.value == 'url') {
-    url_input.className = 'form-group row mb-2';
+  if (radio == 'link') {
+    link_input.className = 'form-group row mb-2';
     document_input.className = 'd-none';
-  } else if (radio.value == 'document'){
-    url_input.className = 'd-none';
+  } else if (radio == 'document') {
+    link_input.className = 'd-none';
     document_input.className = 'form-group row mb-2';
   }
 }
 
-// toggle_class(current_resource_type.dataset.current_radio_value)
-toggle_class('url')
-
-
-url_radio.addEventListener('click', function () {
-  toggle_class(url_radio)
+link_radio.addEventListener('click', function () {
+  toggle_class(link_radio.value);
 });
 
 document_radio.addEventListener('click', function () {
-  toggle_class(document_radio)
+  toggle_class(document_radio.value);
 });
 
-// // Select resource type
-// for (let i = 0; i < resource_type_radio_btns.length; i++) {
-//   console.log(resource_type_radio_btns[i]);
-//   toggle_class(resource_type_radio_btns[i])
-
-//   // resource_type_radio_btns[i].addEventListener('click', function () {
-//   //   toggle_class(resource_type_radio_btns[i])
-//   // });
-// }
+if (current_resource_type.dataset.current_radio_value) {
+  toggle_class(current_resource_type.dataset.current_radio_value);
+}

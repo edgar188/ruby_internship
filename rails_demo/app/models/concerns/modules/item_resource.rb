@@ -2,7 +2,7 @@ module Modules::ItemResource
   extend ActiveSupport::Concern
   
   RESOURCE_TYPE = {
-    url: 'Url',
+    link: 'Link',
     document: 'Document'
   }
 

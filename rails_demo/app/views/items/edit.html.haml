@@ -36,34 +36,34 @@
         .d-flex.justify-content-between
           %b.mr-2.mt-2.mw-20= "#{option.first}"
           = f.text_field :options, value: option.last, class: 'form-control mb-2', name: "options[#{option.first}]"
-    
-    %hr/
+  %hr/
+  - if @item.item_resources.present?
     = f.fields_for :item_resources do |item_resource| 
       .form-group.row.mb-2
-        %label.col-sm-2.col-form-label Resource Name
+        %legend.col-form-label.col-sm-2.pt-0 Resource Name
         .col-sm-10
           = item_resource.text_field :name, class: 'form-control'
       .row.mb-2
         %legend.col-form-label.col-sm-2.pt-0 Resource Type 
         #resource_type.col-sm-10{'data-current_radio_value': @item.item_resources.first.resource_type}
           .form-check 
-            = item_resource.radio_button :resource_type, 'url', id: 'url_radio', class: 'gridRadios1 form-check-input'
-            = item_resource.label :resource_type, 'Url', class: 'label form-check-label'
+            = item_resource.radio_button :resource_type, 'link', id: 'link_radio', class: 'gridRadios1 form-check-input'
+            = item_resource.label :resource_type, 'Link', class: 'label form-check-label'
           .form-check
             = item_resource.radio_button :resource_type, 'document', id: 'document_radio', class: 'gridRadios1 form-check-input'
             = item_resource.label :resource_type, 'Document', class: 'label form-check-label'
-        
-        #resource_type_url.form-group.row.mb-2
-          %label.col-sm-2.col-form-label Resource Url
-          .col-sm-10
-            = item_resource.text_field :url, class: 'form-control'
-        #resource_type_document.form-group.row.mb-2
-          %label.col-sm-2.col-form-label Resource Document
-          .col-sm-10
-            %small= "Current: #{@item.item_resources.first.file.filename}"
-            = item_resource.file_field :file, class: 'form-control'
-
+      #resource_type_link.form-group.row.mb-2
+        %legend.col-form-label.col-sm-2.pt-0 Resource Link
+        .col-sm-10
+          = item_resource.text_field :url, class: 'form-control'
+      #resource_type_document.form-group.row.mb-2
+        %legend.col-form-label.col-sm-2.pt-0 Resource Document
+        .col-sm-10
+          %small= "Current: #{@item.item_resources.first.file.filename}"
+          = item_resource.file_field :file, class: 'form-control'
+  - else 
+    = render partial: 'items/item_resources/new'
   .actions
     = f.submit 'Update', class: 'btn btn-primary mb-2'
 
-= javascript_include_tag 'items/add_resource'
+= javascript_include_tag 'items/add_resource' 
