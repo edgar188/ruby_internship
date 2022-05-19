@@ -25,7 +25,7 @@
   %div
     %h5= "My Balance: #{current_user.balance} $"
     - if current_user.user_items.with_not_ordered.present?
-      %h5= "After buy all: #{current_user.user_items.with_not_ordered.balance_after_buy_all} $"
-      %h5= "Total price: #{current_user.user_items.with_not_ordered.total_price} $"
+      %h5= "After buy all: #{current_user.user_items.balance_after_buy_all} $"
+      %h5= "Total price: #{current_user.user_items.total_price} $"
       = link_to "Buy All", buy_all_user_items_path, class: 'btn btn-success', method: :get
       = link_to "Delete All", delete_all_user_items_path, class: 'btn btn-danger', method: :get

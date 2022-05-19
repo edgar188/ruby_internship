@@ -24,3 +24,6 @@
                   = f.hidden_field :item_id, value: item.id
                   = button_tag(type: 'submit', class: 'btn btn-outline-dark ml-1') do
                     %i.bi-bag-plus-fill
+              - else
+                = button_to new_user_session_path, method: :get, class: 'btn btn-outline-dark ml-1' do
+                  %i.bi-bag-plus-fill

@@ -5,6 +5,7 @@ module Modules::UserItem
   included do
     scope :with_ordered, -> { where.not(ordered_at: nil) }
     scope :with_not_ordered, -> { where(ordered_at: nil) }
+    scope :total_price, -> { joins(:item).where('user_items.ordered_at is null').sum('items.price') }
   end
 
   class_methods do
@@ -24,14 +25,6 @@ module Modules::UserItem
       # Get items and items count
       user_items = { result: user_items, count: count }
       user_items
-    end
-
-    # Calculating the total price of all the items in the user's cart.
-    def total_price
-      current = ApplicationRecord.class_variable_get(:@@logged_in_user)
-      total_price = 0
-      current.user_items.with_not_ordered.select { |user_item| total_price += user_item.item.price }
-      total_price
     end
 
     # Calculating the balance after buying all the items in the user's cart.

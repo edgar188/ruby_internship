@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   include Modules::User
 
   has_many :items, as: :owner, dependent: :destroy
-  has_many :user_items
+  has_many :user_items, dependent: :destroy
   has_many :ratings, dependent: :nullify
-  has_one_attached :avatar
+  has_one_attached :avatar, dependent: :destroy
 
   auto_strip_attributes :first_name, :last_name, :email, :phone, squish: true
 
