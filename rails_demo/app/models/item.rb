@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   acts_as_paranoid
   include Validations::Item
+  include Validations::Global
   include Modules::Item
   
   belongs_to :owner, polymorphic: true
@@ -26,6 +27,7 @@ class Item < ApplicationRecord
   validate :validate_options
   validate :validate_user_role
   validate :images_type
+  validate :validate_unique_item_resources
 
   after_create :send_mail
 
