@@ -29,8 +29,9 @@
                     = form_with model: @rating do |f|
                       = f.hidden_field :user_id, value: current_user.id
                       = f.hidden_field :item_id, value: @item.id
-                      = f.select :value, options_for_select((0..5))
-                      = f.submit 'Rate', class: 'btn btn-primary'
+                      .d-flex
+                        = f.select :value, options_for_select((0..5))
+                        = f.submit 'Rate', class: 'btn btn-outline-primary ml-1'
               %tr
                 %td
                   %strong

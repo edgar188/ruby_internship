@@ -10,6 +10,7 @@ class ItemResource < ApplicationRecord
 
   before_validation :remove_not_selected_resource
 
+  validates_uniqueness_of :name, scope: [:item_id, :resource_type]
   validates_presence_of :name
   validates_presence_of :file, if: -> { self.document? }
   validates_presence_of :url, if: -> { self.link? }
