@@ -43,7 +43,7 @@
       .form-check 
         = f.radio_button :state, 'speedily', class: 'gridRadios1 form-check-input'
         = f.label :state, 'Speedily', class: 'label form-check-label'
-  %hr/
+  %hr{style: "height: 5px;"}
   = render partial: 'items/item_resources/new'
   .actions
     = f.submit 'Create', class: 'btn btn-primary mb-2', id: 'create_item_btn'

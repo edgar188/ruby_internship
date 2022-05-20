@@ -106,20 +106,21 @@
                   %td.text-primary
                     = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] }) 
                 - if @item.item_resources.present?
-                  %tr
-                    %td
-                      %strong
-                        %span.glyphicon.glyphicon-envelope.text-primary
-                        Resource /
-                        = @item.item_resources.first.resource_type
-                    %td.text-primary
-                      - if @item.item_resources.first.link?
-                        %small.text-dark Click to open link
-                        %br/
-                        %b= link_to @item.item_resources.first.name, @item.item_resources.first.url, target: "_blank"
-                      - elsif @item.item_resources.first.document?
-                        %small.text-dark Click to download
-                        %br/
-                        %b= link_to link_to @item.item_resources.first.name, rails_blob_path(@item.item_resources.first.file, disposition: 'attachment')           
+                  - @item.item_resources.each do |item_resource|
+                    %tr
+                      %td
+                        %strong
+                          %span.glyphicon.glyphicon-envelope.text-primary
+                          Resource /
+                          = item_resource.resource_type
+                      %td.text-primary
+                        - if item_resource.link?
+                          %small.text-dark Click to open link
+                          %br/
+                          %b= link_to item_resource.name, item_resource.url, target: "_blank"
+                        - elsif item_resource.document?
+                          %small.text-dark Click to download
+                          %br/
+                          %b= link_to link_to item_resource.name, rails_blob_path(item_resource.file, disposition: 'attachment')           
 
 = javascript_include_tag 'items/images_slider'
