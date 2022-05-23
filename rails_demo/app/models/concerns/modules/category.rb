@@ -28,6 +28,31 @@ module Modules::Category
       categories = { result: categories, count: count }
       categories
     end
+
+    def import_categories(file)
+      ActiveRecord::Base.transaction do
+        @@errors = []
+
+        unless file.content_type.in?(Validations::Variables::CSV)
+          @@errors << I18n.t(:not_valid_file)
+          raise ActiveRecord::Rollback
+        end
+
+        CSV.foreach(file.path, headers: true).with_index do |row, index|
+          category_hash = row.to_hash
+          category_hash['options'] = category_hash['options'].split(',')
+          category = create!(
+            parrent_id: category_hash['parrent_id'],
+            name: category_hash['name'],
+            options: category_hash['options']
+          )
+
+        rescue Exception => e
+          @@errors << "Error in row #{index + 2}/#{category_hash['name']}, #{e}" 
+          raise ActiveRecord::Rollback
+        end
+      end
+    end
   end
 
   # It's showing the name of the parrent category.

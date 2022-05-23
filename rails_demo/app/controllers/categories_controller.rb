@@ -55,6 +55,17 @@ class CategoriesController < ApplicationController
     render json: @categories, status: :ok
   end
 
+  def import
+    Category.import_categories(params[:file])
+
+    if Category.class_variable_get(:@@errors).present?
+      flash[:msg] = { message: Category.class_variable_get(:@@errors) }
+      render :new, status: :bad_request
+    else
+      redirect_to categories_path, notice: t(:imported, obj: 'Categories')
+    end
+  end
+  
   private
 
   def category_params
