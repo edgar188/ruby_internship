@@ -2,8 +2,8 @@ class Category < ApplicationRecord
   include Validations::Category
   include Modules::Category
   
-  belongs_to :parrent, class_name: :Category, optional: true
-  has_many :childs, class_name: :Category, foreign_key: :parrent_id, dependent: :destroy
+  belongs_to :parent, class_name: :Category, optional: true
+  has_many :childs, class_name: :Category, foreign_key: :parent_id, dependent: :destroy
   has_many :items, dependent: :destroy
 
   auto_strip_attributes :name, squish: true

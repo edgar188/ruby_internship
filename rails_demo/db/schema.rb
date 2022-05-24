@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_16_114353) do
+ActiveRecord::Schema.define(version: 2022_05_24_064247) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -69,13 +69,13 @@ ActiveRecord::Schema.define(version: 2022_05_16_114353) do
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "parrent_id"
+    t.bigint "parent_id"
     t.string "name", null: false
     t.json "owner"
     t.json "options"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["parrent_id"], name: "index_categories_on_parrent_id"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
   create_table "item_resources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
