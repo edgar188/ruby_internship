@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_064247) do
+ActiveRecord::Schema.define(version: 2022_05_24_104102) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(version: 2022_05_24_064247) do
     t.bigint "item_id"
     t.string "name", null: false
     t.integer "resource_type", limit: 1, default: 0, null: false
-    t.string "url"
+    t.text "url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_item_resources_on_item_id"
