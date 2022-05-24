@@ -29,8 +29,9 @@
                     = form_with model: @rating do |f|
                       = f.hidden_field :user_id, value: current_user.id
                       = f.hidden_field :item_id, value: @item.id
-                      = f.select :value, options_for_select((0..5))
-                      = f.submit 'Rate', class: 'btn btn-primary'
+                      .d-flex
+                        = f.select :value, options_for_select((0..5))
+                        = f.submit 'Rate', class: 'btn btn-outline-primary ml-1'
               %tr
                 %td
                   %strong
@@ -105,5 +106,22 @@
                       Options
                   %td.text-primary
                     = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] }) 
+                - if @item.item_resources.present?
+                  - @item.item_resources.each do |item_resource|
+                    %tr
+                      %td
+                        %strong
+                          %span.glyphicon.glyphicon-envelope.text-primary
+                          Resource /
+                          = item_resource.resource_type
+                      %td.text-primary
+                        - if item_resource.link?
+                          %small.text-dark Click to open link
+                          %br/
+                          %b= link_to item_resource.name, item_resource.url, target: "_blank"
+                        - elsif item_resource.document?
+                          %small.text-dark Click to download
+                          %br/
+                          %b= link_to link_to item_resource.name, rails_blob_path(item_resource.file, disposition: 'attachment')           
 
 = javascript_include_tag 'items/images_slider'

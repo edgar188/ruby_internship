@@ -1,13 +1,17 @@
 class Item < ApplicationRecord
   acts_as_paranoid
   include Validations::Item
+  include Validations::Global
   include Modules::Item
   
   belongs_to :owner, polymorphic: true
   belongs_to :category
   has_many :user_items
   has_many :ratings, dependent: :destroy
+  has_many :item_resources, dependent: :destroy
   has_many_attached :images, dependent: :destroy
+
+  accepts_nested_attributes_for :item_resources, allow_destroy: true
 
   auto_strip_attributes :title, squish: true
 
@@ -23,6 +27,7 @@ class Item < ApplicationRecord
   validate :validate_options
   validate :validate_user_role
   validate :images_type
+  validate :validate_unique_item_resources
 
   after_create :send_mail
 

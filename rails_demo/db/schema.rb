@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_16_102053) do
+ActiveRecord::Schema.define(version: 2022_05_24_104102) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -69,13 +69,23 @@ ActiveRecord::Schema.define(version: 2022_05_16_102053) do
   end
 
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "parrent_id"
+    t.bigint "parent_id"
     t.string "name", null: false
     t.json "owner"
     t.json "options"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["parrent_id"], name: "index_categories_on_parrent_id"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
+
+  create_table "item_resources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "item_id"
+    t.string "name", null: false
+    t.integer "resource_type", limit: 1, default: 0, null: false
+    t.text "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["item_id"], name: "index_item_resources_on_item_id"
   end
 
   create_table "items", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -139,6 +149,7 @@ ActiveRecord::Schema.define(version: 2022_05_16_102053) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "item_resources", "items", on_delete: :cascade
   add_foreign_key "items", "categories", on_delete: :cascade
   add_foreign_key "ratings", "items", on_delete: :cascade
   add_foreign_key "ratings", "users", on_delete: :cascade

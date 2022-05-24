@@ -68,7 +68,10 @@ class ItemsController < ApplicationController
       :rating,
       :state,
       :options,
-      images: []
+      images: [],
+      item_resources_attributes: [
+        :id, :name, :resource_type, :url, :file, :_destroy
+      ]
     )
   end  
 
@@ -87,7 +90,7 @@ class ItemsController < ApplicationController
 
   def check_correct_user
     unless @item.correct_user?
-      redirect_to items_path, alert: t(:not_allowed, obj: 'Item')
+      redirect_to root_path, alert: t(:not_allowed, obj: 'Item')
     end
   end
 

@@ -6,14 +6,14 @@ module Validations::User
 
   # It checks if the role is buyer or seller.
   def validate_role
-    unless self.role.to_sym == :buyer || self.role.to_sym == :seller 
+    unless self.buyer? || self.seller? 
       self.errors.add(:role, I18n.t(:not_valid))
     end
   end
 
   # It checks if the gender is male, female or no_select.
   def validate_gender
-    unless self.gender.to_sym == :no_select || self.gender.to_sym == :male || self.gender.to_sym == :female 
+    unless self.no_select? || self.male? || self.female?
       self.errors.add(:gender, I18n.t(:not_valid))
     end
   end

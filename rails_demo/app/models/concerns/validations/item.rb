@@ -38,4 +38,14 @@ module Validations::Item
     end
   end
 
+  # Validating the uniqueness of the item resources.
+  def validate_unique_item_resources
+    validate_uniqueness_of_in_memory(
+      item_resources,
+      [:name, :resource_type],
+      I18n.t(:duplicate, obj: 'Item resources name'
+      )
+    )
+  end
+  
 end
