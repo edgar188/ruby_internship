@@ -3,9 +3,7 @@
     -if current_user.seller?
       .d-flex.flex-column
         = link_to 'New Category', new_category_path, class: 'btn btn-secondary mb-2'      
-        = form_tag import_categories_path, multipart: true, class: 'form-inline' do
-          = file_field_tag :file, class: '', accept: 'text/csv'
-          = submit_tag "Import CSV", class: 'btn btn-success'
+
     %span#categories_count.h3.mt-2= "Total  #{@categories[:count]} categories"
     .d-flex.justify-content-end.mb-2
       = form_with(url: categories_path, method: 'GET', class: 'd-flex') do |form|
@@ -14,6 +12,10 @@
   %hr
   = render 'categories/shared/categories_list'
   = will_paginate @categories[:result], renderer: BootstrapPagination::Rails
+  .d-flex.justify-content-center
+    = form_tag import_categories_path, multipart: true, class: 'form-inline' do
+      = file_field_tag :file, class: '', accept: 'text/csv'
+      = submit_tag "Import CSV", class: 'btn btn-success'
 
 = javascript_include_tag 'helpers/axios_handler'
 = javascript_include_tag 'categories/search'

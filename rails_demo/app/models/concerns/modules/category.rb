@@ -29,24 +29,24 @@ module Modules::Category
       categories
     end
 
+    # It's importing the categories from a csv file.
     def import_categories(file)
       ActiveRecord::Base.transaction do
         @@errors = []
 
-        unless file.content_type.in?(Validations::Variables::CSV)
+        unless file.present? && file.content_type.in?(Validations::Variables::CSV)
           @@errors << I18n.t(:not_valid_file)
           raise ActiveRecord::Rollback
         end
 
         CSV.foreach(file.path, headers: true).with_index do |row, index|
           category_hash = row.to_hash
-          category_hash['options'] = category_hash['options'].split(',')
+          category_hash['options'] = category_hash['options'].split(',') 
           category = create!(
-            parent_id: category_hash['parent_id'],
+            parent_id: self.find_by_name(category_hash['parent']).id,
             name: category_hash['name'],
             options: category_hash['options']
           )
-
         rescue Exception => e
           @@errors << "Error in row #{index + 2}/#{category_hash['name']}, #{e}" 
           raise ActiveRecord::Rollback

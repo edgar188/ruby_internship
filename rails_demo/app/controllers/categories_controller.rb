@@ -59,11 +59,11 @@ class CategoriesController < ApplicationController
     Category.import_categories(params[:file])
 
     if Category.class_variable_get(:@@errors).present?
-      flash[:msg] = { message: Category.class_variable_get(:@@errors) }
-      render :new, status: :bad_request
-    else
-      redirect_to categories_path, notice: t(:imported, obj: 'Categories')
+      flash[:msg] = { message:  Category.class_variable_get(:@@errors) }
+      return redirect_to categories_path
     end
+
+    redirect_to categories_path, notice: t(:imported, obj: 'Categories')
   end
   
   private
