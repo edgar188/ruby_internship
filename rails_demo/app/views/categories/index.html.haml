@@ -1,4 +1,5 @@
 .container
+  = render partial: 'shared/error_messages', resource: @category
   .d-flex.justify-content-between
     -if current_user.seller?
       .d-flex.flex-column
@@ -12,7 +13,7 @@
   %hr
   = render 'categories/shared/categories_list'
   = will_paginate @categories[:result], renderer: BootstrapPagination::Rails
-  .d-flex.justify-content-center
+  .d-flex.justify-content-center.mb-1
     = form_tag import_categories_path, multipart: true, class: 'form-inline' do
       = file_field_tag :file, class: '', accept: 'text/csv'
       = submit_tag "Import CSV", class: 'btn btn-success'

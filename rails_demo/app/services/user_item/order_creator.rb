@@ -1,5 +1,5 @@
-class OrderCreator
-  
+class UserItem::OrderCreator
+
   def initialize(current_user)
     @current_user = current_user
   end

@@ -56,14 +56,14 @@ class CategoriesController < ApplicationController
   end
 
   def import
-    Category.import_categories(params[:file])
-
-    if Category.class_variable_get(:@@errors).present?
-      flash[:msg] = { message:  Category.class_variable_get(:@@errors) }
-      return redirect_to categories_path
+    ActiveRecord::Base.transaction do
+      service = Category::Import.new(params[:file])
+      result = service.call()
+      return redirect_to categories_path, notice: t(:imported, obj: 'Categories') if result.success?
+      flash[:msg] = { message: result.errors }
+      redirect_to categories_path 
+      raise ActiveRecord::Rollback if result.errors.present?
     end
-
-    redirect_to categories_path, notice: t(:imported, obj: 'Categories')
   end
   
   private
