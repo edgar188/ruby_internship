@@ -6,7 +6,12 @@ class Category::Import
   end
 
   def call
-    import()
+    if @file.present? && @file.content_type.in?(Validations::Variables::CSV)
+      import()
+    else
+      @errors << I18n.t(:not_valid_file) 
+    end
+
     return OpenStruct.new(success?: true) if @errors.empty?
     return OpenStruct.new(success?: false, errors: @errors) if @errors.present?
   end
