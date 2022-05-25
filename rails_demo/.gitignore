@@ -30,7 +30,6 @@
 /config/master.key
 
 /public/packs
-/public/csv
 /public/packs-test
 /node_modules
 /yarn-error.log

@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def export
     User.export
-    send_file "#{Rails.root}/public/csv/users_#{current_user.id}.csv"
+    send_file "#{Rails.root}/storage/system/csv/users_#{current_user.id}.csv"
   end
 
   private

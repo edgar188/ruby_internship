@@ -81,7 +81,7 @@ module Modules::User
 
     # It's a method that creates a folder for the users csv's.
     def create_folder(user_id)
-      dirname = File.dirname("#{Rails.root}/public/csv/ ")
+      dirname = File.dirname("#{Rails.root}/storage/system/csv/ ")
       FileUtils.mkdir_p(dirname) unless Dir.exist?(dirname)
       filename = "#{dirname}/users_#{user_id}.csv"
     end
