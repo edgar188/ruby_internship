@@ -33,6 +33,10 @@ Rails.application.routes.draw do
   end
 
   resources :items, except: [:index] do
+    member do
+      get :export
+    end
+    
     collection do
       get :search
     end
