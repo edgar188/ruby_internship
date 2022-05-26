@@ -55,8 +55,9 @@ class ItemsController < ApplicationController
   end
 
   def export
+    Item.create_folder
     filename = "item_#{@item.id}_user_#{current_user.id}"
-
+  
     respond_to do |format|
       format.pdf do
         render pdf: filename,
