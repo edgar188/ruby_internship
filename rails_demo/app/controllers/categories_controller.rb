@@ -62,8 +62,12 @@ class CategoriesController < ApplicationController
       return redirect_to categories_path, notice: t(:imported, obj: 'Categories') if result.success?
       flash[:msg] = { message: result.errors }
       redirect_to categories_path 
-      raise ActiveRecord::Rollback if result.errors.present?
+      raise ActiveRecord::Rollback
     end
+  end
+
+  def export_sample_csv
+    send_file "#{Rails.root}/public/csv/categories_sample.csv"
   end
   
   private

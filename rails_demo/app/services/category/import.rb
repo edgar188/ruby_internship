@@ -12,19 +12,24 @@ class Category::Import
       @errors << I18n.t(:not_valid_file) 
     end
 
-    return OpenStruct.new(success?: true) if @errors.empty?
     return OpenStruct.new(success?: false, errors: @errors) if @errors.present?
+    OpenStruct.new(success?: true)
   end
 
   # It's importing the categories from a csv file.
   def import
     CSV.foreach(@file.path, headers: true).with_index do |row, index|
       category_hash = row.to_hash
+      
+      if category_hash['parent'] != 'N/A' && Category.find_by_name(category_hash['parent'])&.id.nil?
+        @errors << "Row #{index + 2}, Parent #{I18n.t(:not_valid)} "
+      end
+
       category_hash['options'] ||= [] 
       category_hash['options'] = category_hash['options'].split(',')
 
-      category = Category.create(
-        parent_id: Category.find_by_name(category_hash['parent']).id,
+      category = Category.new(
+        parent_id: Category.find_by_name(category_hash['parent'])&.id,
         name: category_hash['name'],
         options: category_hash['options'] 
       )

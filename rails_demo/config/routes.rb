@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
     collection do
       get :search
+      get 'export' => 'categories#export_sample_csv', as: :export
       post :import
     end
   end
