@@ -1,10 +1,10 @@
 ActiveAdmin.register Category do
-  permit_params :name, :parrent_id, :owner, :options
+  permit_params :name, :parent_id, :owner, :options
   
   index do
     selectable_column
     id_column
-    column :parrent
+    column :parent
     column :name
     column :owner
     column :options
@@ -14,7 +14,7 @@ ActiveAdmin.register Category do
   show do |item|
     attributes_table do
       row :id
-      row :parrent
+      row :parent
       row :name
       row :owner
       row :options
@@ -22,7 +22,7 @@ ActiveAdmin.register Category do
     end
   end
 
-  filter :parrent
+  filter :parent
   filter :name
   filter :owner
   filter :options
@@ -32,7 +32,7 @@ ActiveAdmin.register Category do
 
   form do |f|
     f.inputs do
-      f.input :parrent
+      f.input :parent
       f.input :name
       f.input :owner
     end

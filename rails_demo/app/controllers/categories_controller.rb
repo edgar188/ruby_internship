@@ -55,12 +55,27 @@ class CategoriesController < ApplicationController
     render json: @categories, status: :ok
   end
 
+  def import
+    ActiveRecord::Base.transaction do
+      service = Category::Import.new(params[:file])
+      result = service.call()
+      return redirect_to categories_path, notice: t(:imported, obj: 'Categories') if result.success?
+      flash[:msg] = { message: result.errors }
+      redirect_to categories_path 
+      raise ActiveRecord::Rollback
+    end
+  end
+
+  def export_sample_csv
+    send_file "#{Rails.root}/public/csv/categories_sample.csv"
+  end
+  
   private
 
   def category_params
     params.require(:category).permit(
       :name, 
-      :parrent_id, 
+      :parent_id, 
       :owner,
       :options
     )

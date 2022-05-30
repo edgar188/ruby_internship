@@ -46,3 +46,4 @@ en:
   not_destroyed: 'Not destroyed.'
   not_allowed: "You are not allowed to update this %{obj}."
   duplicate: "%{obj} has already been taken."
+  imported: "%{obj} are imported."

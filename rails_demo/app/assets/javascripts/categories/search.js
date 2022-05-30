@@ -30,11 +30,8 @@ window.onload = function () {
       let name = row.insertCell(0);
       let owner = row.insertCell(1);
       let options = row.insertCell(2);
-
       name.innerHTML = `<td><a href="categories/${category.id}"> ${category.name} </a> </td> `;
-      owner.innerHTML = `<td>${JSON.stringify(
-        category.owner.full_name).replaceAll('"', '')}</td>`;
-
+      owner.innerHTML = `<td>${category.owner.full_name}</td>`;
       options.id = 'options_list';
       options.innerHTML = `<td id="options_list"> 
         <select id="options" name="options">

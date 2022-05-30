@@ -30,10 +30,10 @@ module Modules::Category
     end
   end
 
-  # It's showing the name of the parrent category.
-  def show_parrent
-    return Modules::Constants::EMPTY unless self.parrent 
-    self.parrent.name if self.parrent 
+  # It's showing the name of the parent category.
+  def show_parent
+    return Modules::Constants::EMPTY unless self.parent 
+    self.parent.name if self.parent 
   end
 
   # It's showing the full name of the owner of the category.
@@ -50,13 +50,13 @@ module Modules::Category
 
   # It's getting the level of the category.
   def level
-    return 0 if self.parrent_id.nil?
+    return 0 if self.parent_id.nil?
     ctg = self
     lvl = 0
 
-    while ctg.parrent_id.present?
+    while ctg.parent_id.present?
       lvl +=1
-      ctg = ctg.parrent
+      ctg = ctg.parent
     end
 
     lvl
