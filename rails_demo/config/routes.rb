@@ -34,6 +34,10 @@ Rails.application.routes.draw do
   end
 
   resources :items, except: [:index] do
+    member do
+      get :export_pdf, as: :export
+    end
+    
     collection do
       get :search
     end
