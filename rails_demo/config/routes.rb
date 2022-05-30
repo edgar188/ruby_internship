@@ -34,7 +34,7 @@ Rails.application.routes.draw do
 
   resources :items, except: [:index] do
     member do
-      get :export
+      get :export_pdf, as: :export
     end
     
     collection do

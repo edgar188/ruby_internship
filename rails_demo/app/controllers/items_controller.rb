@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
   before_action :authenticate_user!, except: [:show]
   before_action :set_items, only: [:search]
-  before_action :set_item, only: [:show, :edit, :update, :destroy, :export]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :export_pdf]
   before_action :set_categories, only: [:new, :create]
   before_action :check_correct_user, only: [:edit, :update, :destroy]
 
@@ -54,7 +54,7 @@ class ItemsController < ApplicationController
     render json: @items, status: :ok
   end
 
-  def export
+  def export_pdf
     Item.create_folder
     filename = "item_#{@item.id}_user_#{current_user.id}"
   
