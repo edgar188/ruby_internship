@@ -20,18 +20,20 @@ class Category::Import
   def import
     CSV.foreach(@file.path, headers: true).with_index do |row, index|
       category_hash = row.to_hash
-      
-      if category_hash['parent'] != 'N/A' && Category.find_by_name(category_hash['parent'])&.id.nil?
+      category_parent_id = Category.find_by_name(category_hash['Parent'])&.id
+
+      if category_hash['Parent'].downcase != 'N/A'.downcase && category_parent_id.nil?
         @errors << "Row #{index + 2}, Parent #{I18n.t(:not_valid)} "
+        next
       end
 
-      category_hash['options'] ||= [] 
-      category_hash['options'] = category_hash['options'].split(',')
+      category_hash['Options'] ||= [] 
+      category_hash['Options'] = category_hash['Options'].split(',')
 
       category = Category.new(
-        parent_id: Category.find_by_name(category_hash['parent'])&.id,
-        name: category_hash['name'],
-        options: category_hash['options'] 
+        parent_id: category_parent_id,
+        name: category_hash['Name'],
+        options: category_hash['Options'] 
       )
 
       unless category.save
