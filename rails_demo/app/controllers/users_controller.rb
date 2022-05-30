@@ -13,8 +13,8 @@ class UsersController < ApplicationController
     render json: @users, status: :ok
   end
 
-  def export
-    User.export
+  def export_csv
+    User.export_csv
     send_file "#{Rails.root}/storage/system/csv/users_#{current_user.id}.csv"
   end
 

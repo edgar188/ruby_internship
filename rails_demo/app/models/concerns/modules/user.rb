@@ -87,16 +87,15 @@ module Modules::User
     end
 
     # It's a method that returns the list of users in CSV format.
-    def export
-      users = self.all.except_current_user(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
-      headers = ['id', 'first_name', 'last_name', 'email', 'role', 'gender', 'phone']
+    def export_csv
+      users = self.paginate_data(all: true)[:result]
+      headers = ['First name', 'Last name', 'Email', 'Role', 'Gender', 'Phone']
+      columns = ['first_name', 'last_name', 'email', 'role', 'gender', 'phone']
       filename = create_folder(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
 
-      CSV.open(filename, 'wb') do |csv|
-        csv << headers
-
+      CSV.open(filename, 'wb', write_headers: true, headers: headers) do |csv|
         users.each do |user|
-          csv << user.attributes.values_at(*headers)
+          csv << user.attributes.values_at(*columns)
         end
       end
     end
