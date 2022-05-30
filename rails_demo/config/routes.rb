@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     collection do
       get :search
+      get :export_csv, as: :export
     end
   end
 

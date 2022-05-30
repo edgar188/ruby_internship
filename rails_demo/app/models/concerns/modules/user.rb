@@ -78,6 +78,27 @@ module Modules::User
     def get_age(age)
       DateTime.current.to_date.year - age.to_i
     end
+
+    # It's a method that creates a folder for the users csv's.
+    def create_folder(user_id)
+      dirname = File.dirname("#{Rails.root}/storage/system/csv/ ")
+      FileUtils.mkdir_p(dirname) unless Dir.exist?(dirname)
+      filename = "#{dirname}/users_#{user_id}.csv"
+    end
+
+    # It's a method that returns the list of users in CSV format.
+    def export_csv
+      users = self.paginate_data(all: true)[:result]
+      headers = ['First name', 'Last name', 'Email', 'Role', 'Gender', 'Phone']
+      columns = ['first_name', 'last_name', 'email', 'role', 'gender', 'phone']
+      filename = create_folder(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
+
+      CSV.open(filename, 'wb', write_headers: true, headers: headers) do |csv|
+        users.each do |user|
+          csv << user.attributes.values_at(*columns)
+        end
+      end
+    end
   end
 
   # A method that returns the value of the role attribute.
