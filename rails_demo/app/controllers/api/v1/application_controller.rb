@@ -1,6 +1,8 @@
 class Api::V1::ApplicationController < ActionController::API
   before_action :authorized
 
+  private
+
   def encode_token(payload)
     JWT.encode(payload, 'mySuperSecretKey')
   end
@@ -28,8 +30,15 @@ class Api::V1::ApplicationController < ActionController::API
     end
   end
 
+  def logged_in_admin
+    if decoded_token
+      admin_id = decoded_token[0]['admin_id']
+      @admin = AdminUser.find_by_id(admin_id)
+    end
+  end
+
   def logged_in?
-    !!logged_in_user
+    !!logged_in_admin || !!logged_in_user
   end
 
   def authorized

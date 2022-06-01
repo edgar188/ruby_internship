@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       post '/auth', to: 'authentication#auth'
+      post '/admin_auth', to: 'authentication#admin_auth'
       post '/registration', to: 'authentication#registration'
       get '/*a', to: 'application#not_found' 
     end
