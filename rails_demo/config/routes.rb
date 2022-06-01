@@ -2,6 +2,15 @@ Rails.application.routes.draw do
   
   root 'landing#index'
 
+  namespace :api do
+    namespace :v1 do
+      resources :users
+      post '/auth', to: 'authentication#auth'
+      post '/registration', to: 'authentication#registration'
+      get '/*a', to: 'application#not_found' 
+    end
+  end
+
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

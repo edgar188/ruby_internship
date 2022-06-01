@@ -33,6 +33,8 @@ en:
   success: 'Successfully updated.'
   wrong: 'Something went wrong.'
   negative_value: "can't be negative value."
+  not_found: '%{obj} Not found.'
+  not_logged_in: 'You are not logged in.'
   not_valid: 'Not a valid.'
   not_valid_file: 'Not a valid file format.'
   wrong_birth_date: 'Not a valid date.'
@@ -47,3 +49,4 @@ en:
   not_allowed: "You are not allowed to update this %{obj}."
   duplicate: "%{obj} has already been taken."
   imported: "%{obj} are imported."
+  invalid_email_or_password: 'Invalid email or password'
