@@ -6,7 +6,6 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   end
 
   def show
-    render json: @user
   end
 
   def new
@@ -15,7 +14,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
 
   def update
     if @user == logged_in_user && @user.update(user_params)
-      render json: @user
+      @user
     else
       render json: @user.errors, status: :bad_request
     end
@@ -28,6 +27,11 @@ class Api::V1::UsersController < Api::V1::ApplicationController
       render json: @user.errors, status: :forbidden
     end
   end 
+
+  def current
+    @is_admin = !!logged_in_admin
+    @logged_in = logged_in_user.present? ? logged_in_user : logged_in_admin
+  end
 
   private
 

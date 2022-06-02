@@ -1,6 +1,13 @@
 json.array! @users do |user|
-  json.id user.id
-  json.first_name user.first_name
-  json.last_name user.last_name
-  json.email user.email
+  json.full_name user.show_full_name
+  json.extract! user, 
+  :id,
+  :first_name, 
+  :last_name, 
+  :email, 
+  :role, 
+  :gender, 
+  :birth_date, 
+  :country, 
+  :phone
 end

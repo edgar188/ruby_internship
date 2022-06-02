@@ -5,9 +5,10 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users
+      post '/registration', to: 'authentication#registration'
       post '/auth', to: 'authentication#auth'
       post '/admin_auth', to: 'authentication#admin_auth'
-      post '/registration', to: 'authentication#registration'
+      get '/current', to: 'users#current'
       get '/*a', to: 'application#not_found' 
     end
   end
