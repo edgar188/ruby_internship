@@ -1,5 +1,13 @@
 class Api::V1::ApplicationController < ActionController::API
+  
   before_action :authorized
+  before_action :set_logged_in
+  rescue_from ActiveRecord::RecordNotFound, with: :notfound
+
+  def current
+    @is_admin = !!logged_in_admin
+    @logged_in = logged_in_user.present? ? logged_in_user : logged_in_admin
+  end
 
   private
 
@@ -45,8 +53,12 @@ class Api::V1::ApplicationController < ActionController::API
     render json: { message: I18n.t(:not_logged_in) }, status: :unauthorized unless logged_in?
   end
 
-  def not_found
-    render json: { error: I18n.t(:not_found, obj: '') }
+  def set_logged_in
+    ApplicationRecord.set_logged_in_user(current)
+  end
+
+  def notfound
+    render json: { error: I18n.t(:not_found) }, status: :not_found
   end
 
 end

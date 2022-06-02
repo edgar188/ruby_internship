@@ -33,7 +33,7 @@ en:
   success: 'Successfully updated.'
   wrong: 'Something went wrong.'
   negative_value: "can't be negative value."
-  not_found: '%{obj} Not found.'
+  not_found: 'Not found.'
   not_logged_in: 'You are not logged in.'
   not_valid: 'Not a valid.'
   not_valid_file: 'Not a valid file format.'
