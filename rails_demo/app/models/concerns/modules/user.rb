@@ -62,10 +62,10 @@ module Modules::User
       else
         users = users.order("#{params[:sort_by] || :first_name} #{params[:sort_type] || :ASC}")
       end
-      
+
       # It's paginating the users list.
       users = users.paginate(
-        page: params[:page] || Modules::Constants::PAGE, 
+        page: params[:page] || Modules::Constants::PAGE,
         per_page: params[:per_page] || Modules::Constants::PER_PAGE
       ) unless Modules::Helpers::to_boolean(params[:all])
 
@@ -105,7 +105,7 @@ module Modules::User
   def show_role
     ROLE[self.role.to_sym]
   end
-  
+
   # A method that returns the full name of the user.
   def show_full_name
     "#{self.first_name} #{self.last_name}"
@@ -142,5 +142,5 @@ module Modules::User
   def has_avatar?
     self.avatar.attached?
   end
-  
+
 end

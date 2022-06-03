@@ -1,16 +1,8 @@
 class Api::V1::ApplicationController < ActionController::API
-  
+
   before_action :authorized
   before_action :set_logged_in
   rescue_from ActiveRecord::RecordNotFound, with: :notfound
-
-  def current
-    @is_admin = !!logged_in_admin
-    @logged_in = logged_in_user.present? ? logged_in_user : logged_in_admin
-    return render 'current_admin' if @is_admin
-    render 'current_user'
-    @logged_in
-  end
 
   private
 

@@ -1,10 +1,10 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
-  
+
   before_action :set_user, only: [:show]
   before_action :set_logged_in_user, only: [:update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.paginate_data(all: true)
   end
 
   def show
@@ -15,39 +15,51 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   end
 
   def update
-    return @user if @user.update(user_params)
-    render json: @user.errors, status: :bad_request
+    unless @user.update(user_params)
+      return render json: @user.errors, status: :bad_request
+    end
+
+    render :show, status: :ok
   end
 
   def destroy
-    return @user.destroy
-    render json: @user.errors, status: :forbidden
-  end 
+    unless @user.destroy
+      return render json: { error: @user.errors }, status: :bad_request
+    end
+
+    render json: { message: I18n.t(:destroyed, obj: 'User') }, status: :ok
+  end
+
+  def current
+    @is_admin = !!logged_in_admin
+    @logged_in = logged_in_user.present? ? logged_in_user : logged_in_admin
+    render :current, status: :ok
+  end
 
   private
 
   def set_user
-    @user = User.find_by_id!(params[:id])
+    @user = User.find(params[:id])
   end
 
   def set_logged_in_user
-    @user = User.find_by_id!(params[:id])
+    @user = User.find(params[:id])
 
     unless @user == logged_in_user
-      render json: {error: I18n.t(:not_allowed, obj: 'User')}, status: :bad_request 
+      render json: {error: I18n.t(:not_allowed, obj: 'User')}, status: :bad_request
     end
   end
 
   def user_params
     params.require(:user).permit(
-      :role, 
-      :first_name, 
-      :last_name, 
-      :email, 
-      :gender, 
-      :birth_date, 
-      :country, 
-      :phone, 
+      :role,
+      :first_name,
+      :last_name,
+      :email,
+      :gender,
+      :birth_date,
+      :country,
+      :phone,
       :avatar
       )
   end

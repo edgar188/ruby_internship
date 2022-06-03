@@ -6,7 +6,7 @@ module Validations::User
 
   # It checks if the role is buyer or seller.
   def validate_role
-    unless self.buyer? || self.seller? 
+    unless self.buyer? || self.seller?
       self.errors.add(:role, I18n.t(:not_valid))
     end
   end
@@ -32,7 +32,7 @@ module Validations::User
   # It checks if the country is in the list of countries.
   def validate_country
     countries = ['No select', 'Armenia', 'Russia', 'USA', 'UK']
-    
+
     if countries.exclude?(self.country)
       self.errors.add(:country, I18n.t(:not_valid))
     end
@@ -44,5 +44,5 @@ module Validations::User
       errors.add(:avatar, I18n.t(:not_valid_file))
     end
   end
-  
+
 end
