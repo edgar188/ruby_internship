@@ -32,8 +32,8 @@ module Modules::Category
 
   # It's showing the name of the parent category.
   def show_parent
-    return Modules::Constants::EMPTY unless self.parent
-    self.parent.name if self.parent
+    return Modules::Constants::EMPTY if self.parent.nil?
+    self.parent.name
   end
 
   # It's showing the full name of the owner of the category.
