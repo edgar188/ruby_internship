@@ -16,6 +16,6 @@ class Category < ApplicationRecord
   validates_length_of :name, minimum: 2, maximum: 255
   validate :validate_level, unless: -> { self.level.nil? }
   validate :validate_options
-  validate :validate_user_role
+  validate :validate_user_role, if: -> { self.owner['type'] == 'User' }
 
 end

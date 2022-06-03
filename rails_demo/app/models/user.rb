@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name, :last_name
   validates_length_of :first_name, :last_name, minimum: 3, maximum: 255
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP } 
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :phone, numericality: true, length: { minimum: 9, maximum: 20 }, unless: -> { self.phone.nil? }
   validates :balance, numericality: { greater_than_or_equal_to: 0 }, presence: true
   validate :validate_role, unless: -> { self.role.nil? }
@@ -31,5 +31,5 @@ class User < ActiveRecord::Base
     male: 1,
     female: 2
   }
-  
+
 end

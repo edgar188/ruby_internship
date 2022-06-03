@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
-  
+
   root 'landing#index'
+
+  namespace :api do
+    namespace :v1 do
+      post '/registration', to: 'authentication#registration'
+      post '/auth', to: 'authentication#auth'
+      post '/admin_auth', to: 'authentication#admin_auth'
+      resources :users
+      get '/current', to: 'users#current'
+      resources :categories
+      get '/*a', to: 'application#not_found'
+    end
+  end
 
   devise_for :users
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -8,14 +20,14 @@ Rails.application.routes.draw do
 
   scope :profile do
     resources :profile, only: [:edit, :update]
-    get '/' => 'profile#index', as: :profile_page 
+    get '/' => 'profile#index', as: :profile_page
     get 'edit/account' => 'profile#edit', as: :edit_user_account
 
     devise_scope :user do
       get 'edit/password' => 'devise/registrations#edit', as: :edit_user_account_password
     end
   end
-  
+
   resources :users, only: [:index, :show] do
     collection do
       get :search
@@ -37,7 +49,7 @@ Rails.application.routes.draw do
     member do
       get :export_pdf, as: :export
     end
-    
+
     collection do
       get :search
     end
@@ -48,7 +60,7 @@ Rails.application.routes.draw do
       get :order_history
       get :buy_all
       get :delete_all
-    end  
+    end
   end
 
   resources :ratings, only: [:new, :create]
