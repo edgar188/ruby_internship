@@ -1,7 +1,7 @@
 class Api::V1::CategoriesController < Api::V1::ApplicationController
   
   before_action :set_category, only: [:show, :update, :destroy]
-  before_action :check_correct_user, only: [:edit, :update, :destroy]
+  before_action :check_correct_user, only: [:edit, :update, :destroy], if: :logged_in_user
 
   def index
     @categories = Category.paginate_data(all: true)[:result]
@@ -17,12 +17,19 @@ class Api::V1::CategoriesController < Api::V1::ApplicationController
 
   def create
     @category = Category.new(category_params)
-    return render json: @category.errors, status: :bad_request unless @category.save
+
+    unless @category.save
+      return render json: @category.errors, status: :bad_request 
+    end
+
     render json: @category, status: :created, location: @category 
   end
 
   def update
-    return render json: @category.errors, status: :bad_request unless @category.update(category_params)
+    unless @category.update(category_params)
+      return render json: @category.errors, status: :bad_request 
+    end
+    
     @category
   end
 

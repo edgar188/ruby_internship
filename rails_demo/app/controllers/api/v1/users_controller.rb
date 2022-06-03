@@ -1,6 +1,7 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
   
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show]
+  before_action :set_logged_in_user, only: [:update, :destroy]
 
   def index
     @users = User.all
@@ -14,27 +15,27 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   end
 
   def update
-    if @user == logged_in_user && @user.update(user_params)
-      @user
-    else
-      render json: @user.errors, status: :bad_request
-    end
+    return @user if @user.update(user_params)
+    render json: @user.errors, status: :bad_request
   end
 
   def destroy
-    if @user == logged_in_user
-      @user.destroy 
-    else
-      render json: @user.errors, status: :forbidden
-    end
+    return @user.destroy
+    render json: @user.errors, status: :forbidden
   end 
 
   private
 
   def set_user
     @user = User.find_by_id!(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      render json: { errors: I18n.t(:not_found, obj: 'User') }, status: :not_found
+  end
+
+  def set_logged_in_user
+    @user = User.find_by_id!(params[:id])
+
+    unless @user == logged_in_user
+      render json: {error: I18n.t(:not_allowed, obj: 'User')}, status: :bad_request 
+    end
   end
 
   def user_params

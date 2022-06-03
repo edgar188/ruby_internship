@@ -7,6 +7,9 @@ class Api::V1::ApplicationController < ActionController::API
   def current
     @is_admin = !!logged_in_admin
     @logged_in = logged_in_user.present? ? logged_in_user : logged_in_admin
+    return render 'current_admin' if @is_admin
+    render 'current_user'
+    @logged_in
   end
 
   private
@@ -54,7 +57,8 @@ class Api::V1::ApplicationController < ActionController::API
   end
 
   def set_logged_in
-    ApplicationRecord.set_logged_in_user(current)
+    logged_in = logged_in_user.present? ? logged_in_user : logged_in_admin
+    ApplicationRecord.set_logged_in_user(logged_in)
   end
 
   def notfound

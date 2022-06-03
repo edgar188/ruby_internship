@@ -1,37 +1,36 @@
 class Api::V1::AuthenticationController < Api::V1::ApplicationController
-  before_action :authorized, only: [:authenticate]
-
+  
   def registration
     user = User.new(login_params)
-
-    if user.save
-      token = encode_token({ user_id: user.id })
-      render json: token.to_json
-    else
-      render json: { errors: user.errors.full_messages }, status: :bad_request
+    
+    unless user.save
+      return render json: { errors: user.errors.full_messages }, status: :bad_request
     end
+
+    token = encode_token({ user_id: user.id })
+    render json: { email: user['email'], token: token } 
   end
 
   def auth
     user = User.find_by_email(params[:email])
 
-    if user && user.valid_password?(params[:password])
-      token = encode_token({ user_id: user.id })
-      render json: { user: user, token: token }
-    else
-      render json: { errors: I18n.t(:invalid_email_or_password) }, status: :unauthorized
+    unless user && user.valid_password?(params[:password])
+      return render json: { errors: I18n.t(:invalid_email_or_password) }, status: :unauthorized 
     end
+
+    token = encode_token({ user_id: user.id })
+    render json: { email: user['email'], token: token }
   end
 
   def admin_auth
     admin = AdminUser.find_by_email(params[:email])
     
-    if admin && admin.valid_password?(params[:password])
-      token = encode_token({ admin_id: admin.id })
-      render json: { admin: admin, token: token }
-    else
-      render json: { errors: I18n.t(:invalid_email_or_password) }, status: :unauthorized
+    unless admin && admin.valid_password?(params[:password])
+      return render json: { errors: I18n.t(:invalid_email_or_password) }, status: :unauthorized 
     end
+
+    token = encode_token({ admin_id: admin.id })
+    render json: { email: admin['email'], token: token }
   end
 
   private
