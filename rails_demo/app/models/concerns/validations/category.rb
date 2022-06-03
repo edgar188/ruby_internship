@@ -5,7 +5,7 @@ module Validations::Category
 
   # Validating the level of the category.
   def validate_level
-    if self.level > 2 
+    if self.level > 2
       self.errors.add(:level, I18n.t(:wrong_level))
     end
   end
@@ -22,7 +22,7 @@ module Validations::Category
   # Checking if the user is a buyer or not.
   def validate_user_role
     if ApplicationRecord.class_variable_get(:@@logged_in_user).buyer?
-      self.errors.add(:role, I18n.t(:not_valid)) 
+      self.errors.add(:role, I18n.t(:not_valid))
     end
   end
 

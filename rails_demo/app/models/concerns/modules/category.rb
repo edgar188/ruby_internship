@@ -12,15 +12,15 @@ module Modules::Category
       categories = Category.all
 
       # It's searching the categories list by name or owner full_name.
-      search_query = "name LIKE :query OR LOWER(JSON_EXTRACT(owner, '$.full_name')) LIKE :query" 
+      search_query = "name LIKE :query OR LOWER(JSON_EXTRACT(owner, '$.full_name')) LIKE :query"
       categories = categories.with_query(search_query, params[:query]) if params[:query].present?
-      
+
       # It's sorting the categories list by name or by owner full_name.
       categories = categories.order("#{params[:sort_by] || :name} #{params[:sort_type] || :ASC}")
 
       # It's paginating the categories list.
       categories = categories.paginate(
-        page: params[:page] || Modules::Constants::PAGE, 
+        page: params[:page] || Modules::Constants::PAGE,
         per_page: params[:per_page] || Modules::Constants::PER_PAGE
       ) unless Modules::Helpers::to_boolean(params[:all])
 
@@ -32,18 +32,18 @@ module Modules::Category
 
   # It's showing the name of the parent category.
   def show_parent
-    return Modules::Constants::EMPTY unless self.parent 
-    self.parent.name if self.parent 
+    return Modules::Constants::EMPTY unless self.parent
+    self.parent.name if self.parent
   end
 
   # It's showing the full name of the owner of the category.
   def show_owner_full_name
     if self.owner['type'] == 'User'
       record = User.find_by_id([self.owner['id']])
-    else 
+    else
       record = AdminUser.find_by_id([self.owner['id']])
     end
-    
+
     return record.show_full_name unless record.nil?
     self.owner['full_name']
   end
@@ -73,9 +73,9 @@ module Modules::Category
   def set_owner
     self.assign_attributes(
       owner: {
-        id: ApplicationRecord.class_variable_get(:@@logged_in_user).id, 
-        type: ApplicationRecord.class_variable_get(:@@logged_in_user).class.name, 
-        full_name: ApplicationRecord.class_variable_get(:@@logged_in_user).show_full_name 
+        id: ApplicationRecord.class_variable_get(:@@logged_in_user).id,
+        type: ApplicationRecord.class_variable_get(:@@logged_in_user).class.name,
+        full_name: ApplicationRecord.class_variable_get(:@@logged_in_user).show_full_name
       }
     )
   end
