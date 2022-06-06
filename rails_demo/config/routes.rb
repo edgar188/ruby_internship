@@ -10,7 +10,8 @@ Rails.application.routes.draw do
       resources :users
       get '/current', to: 'users#current'
       resources :categories
-      get '/*a', to: 'application#not_found'
+      resources :items
+      get '/*a', to: 'application#notfound'
     end
   end
 
