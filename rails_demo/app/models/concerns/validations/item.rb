@@ -34,7 +34,7 @@ module Validations::Item
   # Checking the role of the user.
   def validate_user_role
     if ApplicationRecord.class_variable_get(:@@logged_in_user).buyer?
-      self.errors.add(:role, I18n.t(:not_valid)) 
+      self.errors.add(:role, I18n.t(:not_valid))
     end
   end
 
@@ -47,5 +47,5 @@ module Validations::Item
       )
     )
   end
-  
+
 end
