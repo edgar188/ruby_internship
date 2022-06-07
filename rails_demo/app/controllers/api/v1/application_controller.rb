@@ -4,6 +4,10 @@ class Api::V1::ApplicationController < ActionController::API
   before_action :set_logged_in
   rescue_from ActiveRecord::RecordNotFound, with: :notfound
 
+  def notfound
+    render json: { error: I18n.t(:not_found) }, status: :not_found
+  end
+
   private
 
   def encode_token(payload)
@@ -53,8 +57,5 @@ class Api::V1::ApplicationController < ActionController::API
     ApplicationRecord.set_logged_in_user(logged_in)
   end
 
-  def notfound
-    render json: { error: I18n.t(:not_found) }, status: :not_found
-  end
 
 end

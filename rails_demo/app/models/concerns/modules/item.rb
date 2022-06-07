@@ -15,7 +15,7 @@ module Modules::Item
     scope :with_category_name, -> (name) { joins(:category).where(category: { name: name }) }
     scope :with_price, -> (min_price, max_price) { where("price <= ? AND price >= ?", min_price, max_price)}
   end
-  
+
   # Class methods
   class_methods do
     def paginate_data(params)
@@ -30,7 +30,7 @@ module Modules::Item
       if Modules::Helpers::to_boolean(params[:not_owner])
         items = items.with_not_current
       end
-      
+
       # Filter items by category
       if Modules::Helpers::to_boolean(params[:category_id])
         items = items.with_category(params[:category_id])
@@ -40,22 +40,22 @@ module Modules::Item
       if Modules::Helpers::to_boolean(params[:min_price] && params[:max_price])
         items = items.with_price(params[:max_price], params[:min_price])
       end
-      
+
       # Filter items by category_name
       if Modules::Helpers::to_boolean(params[:category_name]) && params[:category_name][0] != ''
         items = items.with_category_name(params[:category_name][0])
       end
 
       # It's searching the items by title
-      search_query = "title LIKE :query" 
+      search_query = "title LIKE :query"
       items = items.with_query(search_query, params[:query]) if params[:query].present?
 
-      # Sort items by name 
+      # Sort items by name
       items = items.order("#{params[:sort_by] || :title} #{params[:sort_type] || :ASC}")
-      
+
       # It's paginating the items list.
       items = items.paginate(
-        page: params[:page] || Modules::Constants::PAGE, 
+        page: params[:page] || Modules::Constants::PAGE,
         per_page: params[:per_page] || Modules::Constants::PER_PAGE
       ) unless Modules::Helpers::to_boolean(params[:all])
 
@@ -123,8 +123,8 @@ module Modules::Item
 
   # It's incrementing the count of the views of the item.
   def view_increment
-    current = ApplicationRecord.class_variable_get(:@@logged_in_user) 
-    count = self.views['count'].to_i 
+    current = ApplicationRecord.class_variable_get(:@@logged_in_user)
+    count = self.views['count'].to_i
     user_viewed = self.views['user_viewed']
 
     if current.present?
@@ -141,12 +141,12 @@ module Modules::Item
   def set_default_view
     self.assign_attributes(
       views: {
-        count: 1, 
+        count: 1,
         user_viewed: { "#{ApplicationRecord.class_variable_get(:@@logged_in_user).id}": Date.current }
       }
     )
   end
-  
+
   # It's sending an email when created the item.
   def send_mail
     ItemMailer.with(
