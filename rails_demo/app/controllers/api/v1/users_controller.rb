@@ -33,7 +33,9 @@ class Api::V1::UsersController < Api::V1::ApplicationController
   def current
     @is_admin = !!logged_in_admin
     @logged_in = logged_in_user.present? ? logged_in_user : logged_in_admin
-    render :current, status: :ok
+    @friends = logged_in_user.friends if logged_in_user.present?
+    @pending_requests = logged_in_user.pending_requests if logged_in_user.present?
+    @received_requests = logged_in_user.received_requests if logged_in_user.present?
   end
 
   private

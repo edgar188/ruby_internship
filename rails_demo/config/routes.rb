@@ -7,7 +7,16 @@ Rails.application.routes.draw do
       post '/registration', to: 'authentication#registration'
       post '/auth', to: 'authentication#auth'
       post '/admin_auth', to: 'authentication#admin_auth'
-      resources :users
+
+      resources :users do
+        resources :friendships, only: %i[create] do
+          collection do
+            get 'accept_friend'
+            get 'decline_friend'
+          end
+        end
+      end
+
       get '/current', to: 'users#current'
       resources :categories
       get '/*a', to: 'application#not_found'

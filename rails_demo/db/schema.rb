@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_24_104102) do
+ActiveRecord::Schema.define(version: 2022_06_06_073751) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(version: 2022_05_24_104102) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
+
+  create_table "friendships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "sent_by_id", null: false
+    t.bigint "sent_to_id", null: false
+    t.boolean "status", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["sent_by_id"], name: "index_friendships_on_sent_by_id"
+    t.index ["sent_to_id"], name: "index_friendships_on_sent_to_id"
   end
 
   create_table "item_resources", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -149,6 +159,8 @@ ActiveRecord::Schema.define(version: 2022_05_24_104102) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "friendships", "users", column: "sent_by_id"
+  add_foreign_key "friendships", "users", column: "sent_to_id"
   add_foreign_key "item_resources", "items", on_delete: :cascade
   add_foreign_key "items", "categories", on_delete: :cascade
   add_foreign_key "ratings", "items", on_delete: :cascade
