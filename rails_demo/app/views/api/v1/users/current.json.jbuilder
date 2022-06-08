@@ -13,10 +13,6 @@ unless @is_admin
     json.full_name pending_request.show_full_name
   end
 
-  json.received_requests @received_requests do |received_request|
-    json.extract! received_request, :id
-    json.full_name received_request.show_full_name
-  end
 end
 
 json.extract! @logged_in, :id, :first_name, :last_name, :email

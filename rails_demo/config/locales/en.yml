@@ -54,4 +54,4 @@ en:
   already_friends: 'You are already friends'
   self_request: "You can't sent friend request to you"
   friend_request: "Friend request %{action}!"
-  is_user: 'You should be user'
+  is_not_user: 'You should be user'

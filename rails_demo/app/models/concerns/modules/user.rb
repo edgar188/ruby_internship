@@ -20,6 +20,7 @@ module Modules::User
     scope :with_birth_date, -> (min_age, max_age) { where("YEAR(birth_date) BETWEEN ? AND ?", min_age, max_age)}
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
     scope :except_current_user, -> (id) { where.not(id: id) }
+    scope :friendships, -> (data) { data.where(sent_by_id: ApplicationRecord.class_variable_get(:@@logged_in_user).id, status: 1).or(data.where(sent_to_id: ApplicationRecord.class_variable_get(:@@logged_in_user).id, status: 1)) }
   end
 
   # Class methods
@@ -134,6 +135,18 @@ module Modules::User
   # It's a method that returns the value of the created_at attribute.
   def show_create_date
     self.created_at.to_date
+  end
+
+  # It's a method that returns the list of friends of the user.
+  def friends
+    friends = []
+
+    User.friendships(Friendship.all).each do |friendship|
+      friend = friendship.sent_to_id == self.id ? User.find(friendship.sent_by_id) : User.find(friendship.sent_to_id)
+      friends << friend
+    end
+
+    friends
   end
 
   ## Checking

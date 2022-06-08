@@ -9,4 +9,6 @@ class Friendship < ApplicationRecord
   validate :validate_already_sent_request
   validate :validate_already_friends
 
+  after_create :sent_friend_request_notice
+
 end

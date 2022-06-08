@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_06_073751) do
+ActiveRecord::Schema.define(version: 2022_06_07_122322) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -117,6 +117,15 @@ ActiveRecord::Schema.define(version: 2022_06_06_073751) do
     t.index ["owner_type", "owner_id"], name: "index_items_on_owner"
   end
 
+  create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "notice_type", null: false
+    t.string "notice_message", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "ratings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "item_id"
@@ -163,6 +172,7 @@ ActiveRecord::Schema.define(version: 2022_06_06_073751) do
   add_foreign_key "friendships", "users", column: "sent_to_id"
   add_foreign_key "item_resources", "items", on_delete: :cascade
   add_foreign_key "items", "categories", on_delete: :cascade
+  add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "ratings", "items", on_delete: :cascade
   add_foreign_key "ratings", "users", on_delete: :cascade
   add_foreign_key "user_items", "items", on_delete: :cascade

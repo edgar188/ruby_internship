@@ -9,11 +9,17 @@ Rails.application.routes.draw do
       post '/admin_auth', to: 'authentication#admin_auth'
 
       resources :users do
-        resources :friendships, only: %i[create] do
+        resources :friendships, only: [:create] do
           collection do
-            get 'accept_friend'
-            get 'decline_friend'
+            get :accept_friend
+            get :decline_friend
           end
+        end
+      end
+
+      resources :notifications, only: [:index, :destroy] do
+        collection do
+          get :delete_all
         end
       end
 
