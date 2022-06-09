@@ -11,8 +11,8 @@ Rails.application.routes.draw do
       resources :users do
         resources :friendships, only: [:create] do
           collection do
-            get :accept_friend
-            get :decline_friend
+            get :accept
+            get :decline
           end
         end
       end

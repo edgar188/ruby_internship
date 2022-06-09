@@ -5,12 +5,12 @@ class Api::V1::NotificationsController < Api::V1::ApplicationController
   before_action :check_correct_user, only: [:destroy]
 
   def index
-    @notifications = logged_in_user.notifications
+    @notifications = Notification.paginate_data(all: true)
   end
 
   def destroy
     unless @notification.destroy
-      return render json: { error: I18n.t(:not_destroyed) }, status: :bad_request
+      return render json: { errors: I18n.t(:not_destroyed) }, status: :bad_request
     end
 
     render json: { message: I18n.t(:destroyed, obj: 'Notification') }, status: :ok
@@ -18,7 +18,7 @@ class Api::V1::NotificationsController < Api::V1::ApplicationController
 
   def delete_all
     unless logged_in_user.notifications.delete_all
-      return render json: { error: I18n.t(:not_destroyed) }, status: :bad_request
+      return render json: { errors: I18n.t(:not_destroyed) }, status: :bad_request
     end
 
     render json: { message: I18n.t(:destroyed, obj: 'Notifications') }, status: :ok
@@ -27,13 +27,13 @@ class Api::V1::NotificationsController < Api::V1::ApplicationController
   private
 
   def set_notification
-    @notification = Notification.find(params[:id])
-    return render json: { error: I18n.t(:not_found) }, status: :not_found if @notification.nil?
+    @notification = Notification.find_by_id(params[:id])
+    return render json: { errors: I18n.t(:not_found) }, status: :not_found if @notification.nil?
   end
 
   def check_correct_user
     unless @notification.user_id == logged_in_user.id
-      render json: { error: I18n.t(:not_allowed, obj: 'Notification') }, status: :bad_request
+      render json: { errors: I18n.t(:not_allowed, obj: 'Notification') }, status: :bad_request
     end
   end
 
