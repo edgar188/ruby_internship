@@ -12,7 +12,7 @@ class Api::V1::NotificationsController < Api::V1::ApplicationController
       return render json: { errors: I18n.t(:not_destroyed) }, status: :bad_request
     end
 
-    render json: { message: I18n.t(:destroyed, obj: 'Notification') }, status: :ok
+    render json: { message: I18n.t(:destroyed, obj: :Notification) }, status: :ok
   end
 
   def delete_all
@@ -20,7 +20,7 @@ class Api::V1::NotificationsController < Api::V1::ApplicationController
       return render json: { errors: I18n.t(:not_destroyed) }, status: :bad_request
     end
 
-    render json: { message: I18n.t(:destroyed, obj: 'Notifications') }, status: :ok
+    render json: { message: I18n.t(:destroyed, obj: :Notifications) }, status: :ok
   end
 
   private
@@ -32,7 +32,7 @@ class Api::V1::NotificationsController < Api::V1::ApplicationController
 
   def check_correct_user
     unless @notification.user_id == logged_in_user.id
-      render json: { errors: I18n.t(:not_allowed, obj: 'Notification') }, status: :bad_request
+      render json: { errors: I18n.t(:not_allowed, obj: :Notification) }, status: :bad_request
     end
   end
 

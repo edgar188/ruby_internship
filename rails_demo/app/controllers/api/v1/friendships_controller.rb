@@ -10,7 +10,7 @@ class Api::V1::FriendshipsController < Api::V1::ApplicationController
       return render json: { errors: @friendship.errors }, status: :bad_request
     end
 
-    render json: { message: I18n.t(:friend_request, action: 'Sent') }, status: :created
+    render json: { message: I18n.t(:friend_request, action: :Sent) }, status: :created
   end
 
   def accept
@@ -20,7 +20,7 @@ class Api::V1::FriendshipsController < Api::V1::ApplicationController
       return render json: { errors: @friendship.errors }, status: :bad_request
     end
 
-    render json: { message: I18n.t(:friend_request, action: 'Accepted') }, status: :ok
+    render json: { message: I18n.t(:friend_request, action: :Accepted) }, status: :ok
   end
 
   def decline
@@ -28,7 +28,7 @@ class Api::V1::FriendshipsController < Api::V1::ApplicationController
       return render json: { errors: @friendship.errors }, status: :bad_request
     end
 
-    render json: { message: I18n.t(:friend_request, action: 'Declined') }, status: :ok
+    render json: { message: I18n.t(:friend_request, action: :Declined) }, status: :ok
   end
 
   private
