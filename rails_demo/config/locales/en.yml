@@ -50,3 +50,8 @@ en:
   duplicate: "%{obj} has already been taken."
   imported: "%{obj} are imported."
   invalid_email_or_password: 'Invalid email or password'
+  already_sent_request: 'The request already sent'
+  already_friends: 'You are already friends'
+  self_request: "You can't sent friend request to you"
+  friend_request: "Friend request %{action}!"
+  is_not_user: 'You should be user'

@@ -7,7 +7,21 @@ Rails.application.routes.draw do
       post '/registration', to: 'authentication#registration'
       post '/auth', to: 'authentication#auth'
       post '/admin_auth', to: 'authentication#admin_auth'
-      resources :users
+
+      resources :users do
+        resources :friendships, only: [:create] do
+          collection do
+            get :accept, :decline
+          end
+        end
+      end
+
+      resources :notifications, only: [:index, :destroy] do
+        collection do
+          get :delete_all
+        end
+      end
+
       get '/current', to: 'users#current'
       resources :categories
       resources :items
