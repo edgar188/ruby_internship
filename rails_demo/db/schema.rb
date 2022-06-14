@@ -119,7 +119,7 @@ ActiveRecord::Schema.define(version: 2022_06_07_122322) do
 
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "notice_type", null: false
+    t.integer "notice_type", limit: 1, null: false
     t.string "notice_message", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -168,8 +168,8 @@ ActiveRecord::Schema.define(version: 2022_06_07_122322) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "friendships", "users", column: "sent_by_id"
-  add_foreign_key "friendships", "users", column: "sent_to_id"
+  add_foreign_key "friendships", "users", column: "sent_by_id", on_delete: :cascade
+  add_foreign_key "friendships", "users", column: "sent_to_id", on_delete: :cascade
   add_foreign_key "item_resources", "items", on_delete: :cascade
   add_foreign_key "items", "categories", on_delete: :cascade
   add_foreign_key "notifications", "users", on_delete: :cascade
