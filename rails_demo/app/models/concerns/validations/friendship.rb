@@ -18,8 +18,7 @@ module Validations::Friendship
   end
 
   def validate_already_friends
-    if Friendship.find_by(sent_by_id: @@logged_in_user.id, sent_to_id: self.sent_to.id, status: true).present? ||
-      Friendship.find_by(sent_to_id: @@logged_in_user.id, sent_by_id: self.sent_to.id, status: true).present?
+    if self.check_friends
       self.errors.add(:base, I18n.t(:already_friends))
     end
   end

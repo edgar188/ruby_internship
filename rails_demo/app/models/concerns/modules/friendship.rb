@@ -8,6 +8,12 @@ module Modules::Friendship
     scope :not_friends, -> { where(status: false) }
   end
 
+  def check_friends
+    friendships = Friendship.all
+    friendships.where(sent_by_id: @@logged_in_user.id, sent_to_id: self.sent_to.id, status: true)
+      .or(friendships.where(sent_to_id: @@logged_in_user.id, sent_by_id: self.sent_to.id, status: true)).present?
+  end
+
   def friend_request_sent?(user, status = false)
     @@logged_in_user.friend_sent.exists?(sent_to_id: user.id, status: status)
   end

@@ -139,14 +139,11 @@ module Modules::User
   # It's a method that returns the list of friends of the user.
   def friends
     friendships = User.except_current_user(self.id).left_outer_joins(:friend_request, :friend_sent)
-    friends = friendships.where(friend_request: { sent_to_id: self.id, status: true })
+    friendships.where(friend_request: { sent_to_id: self.id, status: true })
       .or(friendships.where(friend_request: { sent_by_id: self.id, status: true }))
       .or(friendships.where(friend_sent: { sent_to_id: self.id, status: true })
       .or(friendships.where(friend_sent: { sent_by_id: self.id, status: true })))
   end
-
-
-  ## Checking
 
   # Checking if the user has an avatar attached to it.
   def has_avatar?
