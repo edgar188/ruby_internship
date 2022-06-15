@@ -34,8 +34,33 @@ describe Item, type: :model do
       expect(Item.last.id).to eq @item.id
     end
 
-    it 'should be invalid' do
-      @item.update(price: -1)
+    it 'is not valid when negative price' do
+      @item.update(price: -100)
+      expect(@item).to_not be_valid
+    end
+
+    it 'is not valid when negative countity' do
+      @item.update(countity: -1)
+      expect(@item).to_not be_valid
+    end
+
+    it 'is not valid without a category' do
+      @item.update(category_id: nil)
+      expect(@item).to_not be_valid
+    end
+
+    it 'is not valid without a title' do
+      @item.update(title: nil)
+      expect(@item).to_not be_valid
+    end
+
+    it 'is not valid without valid state' do
+      @item.update(state: :speedily)
+      expect(@item).to be_valid
+    end
+
+    it 'is not valid without a options' do
+      @item.update(options: nil)
       expect(@item).to_not be_valid
     end
 
