@@ -1,0 +1,8 @@
+- @conversations.each do |conversation|
+  %div.list-group-item.list-group-item-action.border-0
+    .d-flex.align-items-start
+      - if conversation.recipient(current_user).has_avatar?
+        = image_tag(conversation.recipient(current_user).avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 50px; border-radius: 50%;')
+      - else
+        = image_tag('avatar.png', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 50px; border-radius: 50%;')
+      = link_to conversation.recipient(current_user).email, conversation_messages_path(conversation)

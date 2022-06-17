@@ -1,0 +1,25 @@
+%main.content
+  .container.p-0
+    .card
+      .row.g-0
+        .col-12.col-lg-5.col-xl-3.border-right
+          = render 'conversations'
+        %hr.d-block.d-lg-none.mt-1.mb-0/
+        .col-12.col-lg-7.col-xl-9
+          .py-2.px-4.border-bottom.d-none.d-lg-block
+            .d-flex.align-items-center.py-1
+              .position-relative
+                - if @conversation.recipient(current_user).has_avatar?
+                  = image_tag(@conversation.recipient(current_user).avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 50px; border-radius: 50%;')
+                - else
+                  = image_tag('avatar.png', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 50px; border-radius: 50%;')
+              .flex-grow-1.pl-3
+                %strong= @conversation.recipient(current_user).email
+          = render 'messages'
+          .flex-grow-0.py-3.px-4.border-top
+            .input-group
+            = form_for [@conversation, @message] do |f|
+              .form-group.d-flex
+                = f.hidden_field :user_id, value: current_user.id
+                = f.text_field :body, autofocus: true, placeholder: 'Your message', class: 'form-control'
+                = f.submit 'Send', class: 'btn btn-primary'

@@ -1,0 +1,22 @@
+.chat-messages.p-4{style: 'height: 500px;'}
+  - @conversation.messages.each do |message|
+    - if message.body.present? && message.user == current_user
+      .chat-message-right.pb-4
+        %div
+          - if current_user.has_avatar?
+            = image_tag(current_user.avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 60px; border-radius: 50%;')
+          - else
+            = image_tag('avatar.png', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 60px; border-radius: 50%;')
+        .flex-shrink-1.bg-light.rounded.py-2.px-3.mr-3
+          = message.body
+          .text-muted.small.text-nowrap.mt-2= message.show_time
+    - elsif message.body.present? && message.user == @conversation.recipient(current_user)
+      .chat-message-left.pb-4
+        %div
+          - if @conversation.recipient(current_user).has_avatar?
+            = image_tag(@conversation.recipient(current_user).avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 60px; border-radius: 50%;')
+          - else
+            = image_tag('avatar.png', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 60px; border-radius: 50%;')
+        .flex-shrink-1.bg-light.rounded.py-2.px-3.ml-3
+          = message.body
+          .text-muted.small.text-nowrap.mt-2= message.show_time

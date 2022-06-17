@@ -80,4 +80,8 @@ Rails.application.routes.draw do
 
   resources :ratings, only: [:new, :create]
 
+  resources :conversations, only: [:create] do
+    resources :messages, only: [:index, :create]
+  end
+
 end
