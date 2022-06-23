@@ -3,9 +3,10 @@ class Message < ApplicationRecord
   include Modules::Message
 
   belongs_to :conversation
-  belongs_to :user
+  belongs_to :conversation_user
 
-  validates_presence_of :body, :conversation_id, :user_id
-  validate :validate_members
+  before_validation :set_additional_info, on: :create
+
+  validates_presence_of :conversation_id, :conversation_user_id, :text, :additional_info
 
 end

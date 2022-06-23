@@ -1,0 +1,8 @@
+.flex-grow-0.py-3.px-4.border-top
+  .input-group
+  = form_for [@conversation, @message] do |f|
+    .form-group.d-flex
+      = f.hidden_field :converstaion_id, value: @conversation.id
+      = f.hidden_field :conversation_user_id, value: current_user.correct_conversation_user(@conversation)
+      = f.text_field :text, placeholder: 'Your message', class: 'form-control'
+      = f.submit 'Send', class: 'btn btn-primary'

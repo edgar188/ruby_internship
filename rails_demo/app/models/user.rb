@@ -11,8 +11,7 @@ class User < ActiveRecord::Base
   has_many :friend_request, class_name: :Friendship, foreign_key: 'sent_to_id', inverse_of: 'sent_to', dependent: :destroy
   has_many :pending_requests, -> { merge(Friendship.not_friends) }, through: :friend_sent, source: :sent_to
   has_many :notifications, dependent: :destroy
-  has_many :messages, dependent: :destroy
-  has_many :conversations, foreign_key: :sender_id, dependent: :destroy
+  has_many :conversation_users, dependent: :destroy
 
   auto_strip_attributes :first_name, :last_name, :email, :phone, squish: true
 

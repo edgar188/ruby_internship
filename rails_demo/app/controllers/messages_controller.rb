@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
 
-  before_action :set_conversation, :set_conversations
-  before_action :check_correct_user
+  before_action :set_conversation, :set_conversation_users
+  before_action :check_correct_member, only: [:index]
 
   def index
     @message = @conversation.messages.new
@@ -14,26 +14,27 @@ class MessagesController < ApplicationController
       return redirect_to conversation_messages_path(@conversation)
     end
 
-    redirect_to conversations_path, alert: t(:wrong)
+    redirect_to conversation_messages_path(@conversation), alert: t(:wrong)
   end
 
   private
 
   def message_params
-    params.require(:message).permit(:user_id, :body)
+    params.require(:message).permit(:conversation_user_id, :conversation_id, :text)
   end
 
   def set_conversation
     @conversation = Conversation.find(params[:conversation_id])
   end
 
-  def set_conversations
-    @conversations = Conversation.with_current(current_user)
+  def set_conversation_users
+    @conversation_users = Conversation.with_current(current_user)
   end
 
-  def check_correct_user
-    unless @conversation.recipient_id == current_user.id || @conversation.sender_id == current_user.id
-      redirect_to root_path, alert: t(:not_found)
+  def check_correct_member
+    unless @conversation.member?(current_user)
+      return redirect_to root_path, alert: t(:not_found)
     end
   end
+
 end

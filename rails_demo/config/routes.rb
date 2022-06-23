@@ -80,8 +80,14 @@ Rails.application.routes.draw do
 
   resources :ratings, only: [:new, :create]
 
-  resources :conversations, only: [:create] do
+  resources :conversations, only: [:create, :new] do
     resources :messages, only: [:index, :create]
+  end
+
+  resources :conversation_users do
+    collection do
+      post :add_member
+    end
   end
 
 end

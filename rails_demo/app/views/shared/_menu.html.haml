@@ -10,9 +10,11 @@
           %li.nav-item
             = link_to 'Categories', categories_path, class: 'nav-link active'
           %li.nav-item
-            - conversation = Conversation.where(sender_id: current_user.id).or(Conversation.where(recipient_id: current_user.id)).first
-            - if conversation.present?
-              = link_to 'Conversations', conversation_messages_path(conversation), class: 'nav-link active'
+            - conversation_user = Conversation.with_current(current_user).first
+            - if conversation_user.present?
+              = link_to 'Conversations', conversation_messages_path(conversation_user.conversation_id), class: 'nav-link active'
+            - else
+              = link_to 'New Coversation', new_conversation_path, class: 'nav-link active'
     .navbar-collapse
       %ul.navbar-nav.ms-auto
         -if user_signed_in?

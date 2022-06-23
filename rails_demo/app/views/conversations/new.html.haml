@@ -1,0 +1,5 @@
+= form_with model: @conversation do |f|
+  .form-group.d-flex.col-xl-6
+    = f.text_field :name, autofocus: true, autocomplete: 'name', class: 'form-control', placeholder: 'Name'
+    = f.hidden_field :chat_type, value: :room
+    = f.submit 'Create', class: 'btn btn-primary'

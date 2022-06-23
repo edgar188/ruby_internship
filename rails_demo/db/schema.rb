@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_16_104608) do
+ActiveRecord::Schema.define(version: 2022_06_20_052441) do
 
   create_table "active_admin_comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "namespace"
@@ -78,14 +78,21 @@ ActiveRecord::Schema.define(version: 2022_06_16_104608) do
     t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
-  create_table "conversations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "recipient_id"
-    t.integer "sender_id"
+  create_table "conversation_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "conversation_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["recipient_id", "sender_id"], name: "index_conversations_on_recipient_id_and_sender_id", unique: true
-    t.index ["recipient_id"], name: "index_conversations_on_recipient_id"
-    t.index ["sender_id"], name: "index_conversations_on_sender_id"
+    t.index ["conversation_id"], name: "index_conversation_users_on_conversation_id"
+    t.index ["user_id"], name: "index_conversation_users_on_user_id"
+  end
+
+  create_table "conversations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "chat_type", limit: 1, null: false
+    t.json "creator", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "friendships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -128,14 +135,14 @@ ActiveRecord::Schema.define(version: 2022_06_16_104608) do
   end
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "body"
-    t.bigint "user_id", null: false
+    t.bigint "conversation_user_id", null: false
     t.bigint "conversation_id", null: false
-    t.boolean "read", default: false
+    t.text "text", null: false
+    t.json "additional_info", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
+    t.index ["conversation_user_id"], name: "index_messages_on_conversation_user_id"
   end
 
   create_table "notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -189,12 +196,13 @@ ActiveRecord::Schema.define(version: 2022_06_16_104608) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "conversation_users", "conversations", on_delete: :cascade
+  add_foreign_key "conversation_users", "users", on_delete: :cascade
   add_foreign_key "friendships", "users", column: "sent_by_id", on_delete: :cascade
   add_foreign_key "friendships", "users", column: "sent_to_id", on_delete: :cascade
   add_foreign_key "item_resources", "items", on_delete: :cascade
   add_foreign_key "items", "categories", on_delete: :cascade
   add_foreign_key "messages", "conversations", on_delete: :cascade
-  add_foreign_key "messages", "users", on_delete: :cascade
   add_foreign_key "notifications", "users", on_delete: :cascade
   add_foreign_key "ratings", "items", on_delete: :cascade
   add_foreign_key "ratings", "users", on_delete: :cascade
