@@ -11,10 +11,10 @@ class MessagesController < ApplicationController
     @message = @conversation.messages.new(message_params)
 
     if @message.save
-      return redirect_to conversation_messages_path(@conversation)
+      return ConversationChannel.broadcast_to(@conversation, @message)
     end
 
-    redirect_to conversation_messages_path(@conversation), alert: t(:wrong)
+    ConversationChannel.broadcast_to(@conversation, @message)
   end
 
   private

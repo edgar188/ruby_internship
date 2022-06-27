@@ -19,9 +19,19 @@ module Modules::Message
     self.additional_info['full_name']
   end
 
-  # A method that returns the date in a long ordinal format.
   def show_time
     self.created_at.to_s(:long_ordinal)
+  end
+
+  # Get user avatar path
+  def as_json(options)
+    path = '/assets/avatar-4968360c5b8ec9fa389ed9b7ed24363327ba80696915986c7b29f6c65a2641d0.png'
+
+    if User.find_by_id(self.additional_info['user_id']).has_avatar?
+      path = Rails.application.routes.url_helpers.rails_blob_path(User.find_by_id(self.additional_info['user_id']).avatar, only_path: true)
+    end
+
+    super(options).merge(user_avatar_url: path)
   end
 
   # Checking if the conversation_user is the logged in user and it will show the messages.
