@@ -12,7 +12,7 @@ class ConversationsController < ApplicationController
 
       if @conversation.save
         @conversation.create_initial_members(current_user, params[:conversation][:conversation_user_id])
-        return redirect_to conversation_messages_path(@conversation), notice: t(:success)
+        return redirect_to conversation_messages_path(@conversation), notice: t(:created, obj: 'Conversation')
       end
 
       redirect_to users_path, alert: @conversation.errors.full_messages

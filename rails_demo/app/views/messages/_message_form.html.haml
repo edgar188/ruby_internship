@@ -4,5 +4,9 @@
     .form-group.d-flex
       = f.hidden_field :conversation_id, value: @conversation.id
       = f.hidden_field :conversation_user_id, value: current_user.correct_conversation_user(@conversation)
-      = f.text_field :text, placeholder: 'Your message', autofocus: true, id: 'new_message_input', class: 'form-control'
-      = f.submit 'Send', id: 'send_message_btn', class: 'btn btn-primary d-none'
+      .image-upload
+        %label{for: 'message_attachments'}
+          %i.bi.bi-plus-circle.upload-button
+        = f.file_field :attachments, multiple: true, accept: 'image/jpeg, image/jpg, image/png'
+      = f.text_field :text, placeholder: 'Your message', autofocus: true, class: 'form-control'
+      = f.submit 'Send', class: 'btn btn-primary'

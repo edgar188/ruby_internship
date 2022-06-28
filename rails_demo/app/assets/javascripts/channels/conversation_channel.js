@@ -14,7 +14,7 @@ window.onload = function () {
       let conversation_id = $element.data('conversation-id');
 
       messageTemplate = $('[data-role="message-template"]');
-      $element.animate({ scrollTop: $element.prop('scrollHeight') }, 100);
+      $element.animate({ scrollTop: $element.prop('scrollHeight') }, 10);
 
       App.cable.subscriptions.create(
         {
@@ -24,7 +24,7 @@ window.onload = function () {
         {
           received: function (data) {
             render_new_message($element, data);
-            $element.animate({ scrollTop: $element.prop('scrollHeight') }, 100);
+            $element.animate({ scrollTop: $element.prop('scrollHeight') }, 10);
           },
         }
       );

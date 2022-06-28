@@ -20,7 +20,7 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:conversation_user_id, :conversation_id, :text)
+    params.require(:message).permit(:conversation_user_id, :conversation_id, :text, attachments: [])
   end
 
   def set_conversation

@@ -55,11 +55,8 @@ gem 'jbuilder', '~> 2.7'
 # Shim to load environment variables from .env into ENV in development.
 gem 'dotenv-rails', require: 'dotenv/rails-now'
 
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-
 # Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
