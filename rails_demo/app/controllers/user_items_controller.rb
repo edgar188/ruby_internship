@@ -1,9 +1,10 @@
 class UserItemsController < ApplicationController
 
   before_action :set_user_item, only: [:edit, :update, :destroy]
+  before_action :set_card_user_items, only: [:index]
+  before_action :set_order_history_user_items, only: [:order_history]
 
   def index
-    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: true))
   end
 
   def show
@@ -11,7 +12,6 @@ class UserItemsController < ApplicationController
   end
 
   def order_history
-    @user_items = current_user.user_items.paginate_data(params.merge(ordered: true))
   end
 
   def new
@@ -23,7 +23,7 @@ class UserItemsController < ApplicationController
 
   def create
     @user_item = UserItem.new(user_item_params)
-      
+
     if @user_item.save
       return redirect_to root_path
     end
@@ -43,13 +43,13 @@ class UserItemsController < ApplicationController
     if @user_item.ordered_at.present?
       return redirect_to user_item_path, alert: t(:not_destroyed)
     end
-    
+
     @user_item.destroy
     redirect_to user_item_path
   end
 
   def buy_all
-    service = OrderCreator.new(current_user)
+    service = UserItem::OrderCreator.new(current_user)
     result = service.call
 
     if result.success?
@@ -58,7 +58,7 @@ class UserItemsController < ApplicationController
 
     redirect_to user_items_path, alert: result.errors
   end
-  
+
   def delete_all
     if current_user.user_items.with_not_ordered.destroy_all 
       return redirect_to user_items_path, notice: t(:destroyed, obj: 'User items')
@@ -66,9 +66,9 @@ class UserItemsController < ApplicationController
 
     redirect_to user_items_path, alert: t(:not_destroyed)
   end
-  
+
   private
-  
+
   def user_item_params
   params.require(:user_item).permit(
     :user_id,
@@ -80,5 +80,13 @@ class UserItemsController < ApplicationController
   def set_user_item
     @user_item = current_user.user_items.find(params[:id])
   end
-	  
+
+  def set_card_user_items
+    @user_items = current_user.user_items.paginate_data(params.merge(not_ordered: true))
+  end
+
+  def set_order_history_user_items
+    @user_items = current_user.user_items.paginate_data(params.merge(ordered: true))
+  end
+
 end
