@@ -60,7 +60,7 @@ class UserItemsController < ApplicationController
   end
 
   def delete_all
-    if current_user.user_items.with_not_ordered.destroy_all 
+    if current_user.not_ordered_items.destroy_all
       return redirect_to user_items_path, notice: t(:destroyed, obj: 'User items')
     end
 
