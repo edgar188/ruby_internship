@@ -1,7 +1,7 @@
-- if @item.images.attached? 
+- if @item.images.attached?
   = image_tag(@item.images.first, style: 'width: 200px; height: 200px')
 - else
-  %h2 NO PHOTO 
+  = image_tag(image_url('shop.jpg'), style: 'width: 200px; height: 200px')
 %table.pdf_table
   %tr
     %th.pdf_th Title
@@ -31,7 +31,7 @@
   %tr
     %th.pdf_th Options
     %td.pdf_td= @item.options.map { |k, v| "#{k} : #{v}" }   
-     
+
 %h3 Category
 %table.pdf_table
   %tr

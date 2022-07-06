@@ -1,0 +1,5 @@
+id,first_name,last_name,email,role,gender,phone
+1,Vahe,Sedrakyan,vahe@mail.com,seller,female,11111111111
+2,AAA,BBB,ccc@mail.com,buyer,no_select,
+3,aaa,azganun,aa@mail.com,seller,male,88888888888
+23,11,oooooooo,ooooo@mail.com,seller,no_select,

@@ -3,12 +3,13 @@ module Validations::Variables
 
   VALID_IMAGE_TYPES = %w(image/jpeg image/jpg image/png)
   VALID_FILE_TYPES = %w(
-    text/csv 
+    text/csv
     application/excel
     application/vnd.ms-excel
     application/x-excel
     application/x-msexcel
     application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+    application/x-ole-storage
   )
   CSV = %w[text/csv]
   VALID_URL = %w[http https]
