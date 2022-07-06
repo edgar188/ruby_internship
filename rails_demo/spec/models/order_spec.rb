@@ -9,12 +9,13 @@ describe UserItem, type: :model do
   end
 
   before do
-    @user = User.create!(
-      email: 'test@mail.com',
-      first_name: 'FNAME',
-      last_name: 'LNAME',
-      balance: 200,
-      password: '123456'
+    @user = User.create(
+      email: ENV['RSPEC_USER_EMAIL'],
+      first_name: ENV['RSPEC_USER_FN'],
+      last_name: ENV['RSPEC_USER_LN'],
+      password: ENV['RSPEC_USER_PASS'],
+      password_confirmation: ENV['RSPEC_USER_PASS'],
+      balance: 200
     )
 
     @category = Category.create(
