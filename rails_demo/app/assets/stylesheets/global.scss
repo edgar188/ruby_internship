@@ -6,6 +6,10 @@
   list-style: none;
 }
 
+.btn:hover {
+  text-decoration: none;
+}
+
 .inf-content {
   border: 1px solid #dddddd;
   -webkit-border-radius: 10px;
@@ -26,8 +30,7 @@ header {
 }
 
 footer {
-  min-height: 65px;
-  margin-top: auto; 
+  margin-top: auto;
 }
 
 a {
@@ -57,47 +60,6 @@ a {
 .pagination li:hover:not(.active) {
   background: #ddd;
   border-radius: 5px;
-}
-
-.m-0 {
-  margin: 0;
-  margin: none;
-}
-
-.ml-1 {
-  margin-left: (5px) !important;
-}
-
-.ml-4 {
-  margin-left: (20px) !important;
-}
-
-.ml-8 {
-  margin-left: (40px) !important;
-}
-
-.mr-2 {
-  margin-right: (10px) !important;
-}
-
-.mr-8 {
-  margin-right: (40px) !important;
-}
-
-.mt-2 {
-  margin-top: (10px) !important;
-}
-
-.mb-2 {
-  margin-bottom: (10px) !important;
-}
-
-.mb-5 {
-  margin-bottom: (25px) !important;
-}
-
-.pr-80 {
-  padding-right: (400px) !important;
 }
 
 .d-none {

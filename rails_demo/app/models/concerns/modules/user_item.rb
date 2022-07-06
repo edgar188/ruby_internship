@@ -14,7 +14,7 @@ module Modules::UserItem
 
       user_items = user_items.with_ordered if Modules::Helpers::to_boolean(params[:ordered])
       user_items = user_items.with_not_ordered if Modules::Helpers::to_boolean(params[:not_ordered])
-      
+
       unless Modules::Helpers::to_boolean(params[:all])
         user_items = user_items.paginate(
           page: params[:page] || Modules::Constants::PAGE,
@@ -26,12 +26,6 @@ module Modules::UserItem
       user_items = { result: user_items, count: count }
       user_items
     end
-
-    # Calculating the balance after buying all the items in the user's cart.
-    def balance_after_buy_all
-      current_balance =  ApplicationRecord.class_variable_get(:@@logged_in_user).balance
-      current_balance - self.total_price
-    end
   end
 
   # A method that returns the date in a long ordinal format.
@@ -42,9 +36,9 @@ module Modules::UserItem
   # Subtracting the price of the item from the user's balance and count of items.
   def pay
     current = ApplicationRecord.class_variable_get(:@@logged_in_user)
-    balance = current.balance 
+    balance = current.balance
     balance -= self.item.price
-    current.update_columns(balance: balance) 
+    current.update_columns(balance: balance)
     item = self.item
     countity = item.countity
     countity -= 1

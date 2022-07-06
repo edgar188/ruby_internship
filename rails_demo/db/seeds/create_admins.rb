@@ -1,7 +1,7 @@
 admin_user = AdminUser.find_by_email(ENV['ADMIN_USER_EMAIL'])
 
 if admin_user.nil?
-  AdminUser.create!(
+  AdminUser.create(
     email: ENV['ADMIN_USER_EMAIL'],
     first_name: ENV['ADMIN_USER_FN'],
     last_name: ENV['ADMIN_USER_LN'],
