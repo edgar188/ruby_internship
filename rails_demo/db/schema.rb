@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 2022_06_20_052441) do
   end
 
   create_table "messages", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "conversation_user_id", null: false
+    t.bigint "conversation_user_id"
     t.bigint "conversation_id", null: false
     t.text "text", null: false
     t.json "additional_info", null: false

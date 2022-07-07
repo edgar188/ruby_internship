@@ -17,21 +17,20 @@ function render_new_message(element, data) {
     message_owner_name = `<div class="text-muted small text-nowrap mt-2">${data.additional_info.full_name}</div>`;
   }
 
-  let message_box = `<div class="${message_box_class_name} pb-4">
-    <div>
+  let message_box = `
+  ${message_owner_name}
+  <div class="${message_box_class_name} pb-4">
       <img
         class="img img-circle img-thumbnail isTooltip"
         style="width: 60px; height: 60px; border-radius: 50%;"
         src="${data.user_avatar_url}">
-      </div>
       <div class="flex-shrink-1 ${message_text_class_name} rounded py-2 px-3 mr-3 text-wrap" style="width: 40vw">
-        ${message_owner_name}
         ${data.text}
         <div id="${data.id}" class="attachments d-flex flex-wrap"> </div>
-        <div class="text-muted small text-nowrap mt-2">${timeAgo(data.created_at)}</div>
-        </div>
+        <div class="text-muted small text-nowrap mt-2">${time_ago(data.created_at)}</div>
       </div>
-    </div>`;
+    </div>
+  </div>`;
 
   element.append(message_box);
 

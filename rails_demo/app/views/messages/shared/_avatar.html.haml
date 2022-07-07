@@ -1,0 +1,4 @@
+- if user.has_avatar?
+  = image_tag(user.avatar, class: 'img img-circle img-thumbnail isTooltip', style: 'width: 60px; height: 60px; border-radius: 50%;')
+- else
+  = image_tag('avatar.png', class: 'img img-circle img-thumbnail isTooltip', style: 'width: 60px; height: 60px; border-radius: 50%;')

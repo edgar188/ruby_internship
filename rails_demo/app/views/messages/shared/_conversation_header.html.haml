@@ -1,0 +1,7 @@
+.py-2.px-4.border-bottom.d-none.d-lg-block
+  .d-flex.justify-content-between.py-1
+    %h5= "#{@conversation.name} / #{@conversation.chat_type}"
+    - if @conversation.room?
+      = render 'messages/shared/members'
+      - if @conversation.creator['id'] == current_user.id
+        = render 'messages/shared/friends'

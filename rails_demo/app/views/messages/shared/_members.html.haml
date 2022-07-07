@@ -1,0 +1,8 @@
+.dropdown.align-baseline
+  %h5.dropdown-toggle.active{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', role: 'button'} Members
+  %ul.dropdown-menu
+    - @conversation.conversation_users.each do |member|
+      - unless member.user_id == current_user.id
+        %p= member.full_name
+        %hr/
+    %b= "Creator #{@conversation.show_creator_name}"

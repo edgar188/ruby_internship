@@ -28,11 +28,11 @@ class MessagesController < ApplicationController
   end
 
   def set_conversation_users
-    @conversation_users = Conversation.with_current(current_user)
+    @conversation_users = Conversation.with_current
   end
 
   def check_correct_member
-    unless @conversation.member?(current_user)
+    unless @conversation.member?(current_user.id)
       return redirect_to root_path, alert: t(:not_found)
     end
   end

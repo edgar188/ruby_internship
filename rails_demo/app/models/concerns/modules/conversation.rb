@@ -2,12 +2,12 @@ module Modules::Conversation
   extend ActiveSupport::Concern
 
   included do
-    scope :with_current, ->  (current_user) { ConversationUser.where(user: current_user) }
+    scope :with_current, -> { ConversationUser.where(user_id: ApplicationRecord.class_variable_get(:@@logged_in_user).id) }
   end
 
   class_methods do
     def paginate_data(params)
-      conversations = Conversation.all
+      conversations = self.all
 
       conversations = conversations.paginate(
         page: params[:page] || Modules::Constants::PAGE,
@@ -20,8 +20,8 @@ module Modules::Conversation
 
     # A class method that is used to find a conversation between two users.
     def between(current_user, interlocutor)
-      Conversation.where(name: "#{current_user.email} / #{interlocutor}")
-      .or(Conversation.where(name: "#{interlocutor} / #{current_user.email}")).first
+      self.where(name: "#{current_user.email} / #{interlocutor}")
+        .or(self.where(name: "#{interlocutor} / #{current_user.email}")).first
     end
   end
 
@@ -48,8 +48,8 @@ module Modules::Conversation
     self.creator['full_name']
   end
 
-  def member?(user)
-    self.conversation_users.map{ |u| u.user }.pluck(:id).include?(user.id)
+  def member?(user_id)
+    self.conversation_users.where(user_id: user_id).present?
   end
 
 end

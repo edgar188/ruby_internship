@@ -10,10 +10,10 @@ module ApplicationCable
 
     def find_verified_user
       if verified_user = User.find_by(id: ApplicationRecord.class_variable_get(:@@logged_in_user).id)
-        verified_user
-      else
-        reject_unauthorized_connection
+        return verified_user
       end
+
+      reject_unauthorized_connection
     end
   end
 end

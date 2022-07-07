@@ -8,9 +8,9 @@ class ConversationUser::AddMember
   def call
     ActiveRecord::Base.transaction do
       add_member()
-      OpenStruct.new(success?: true)
     end
 
+    OpenStruct.new(success?: true)
     rescue ActiveRecord::RecordInvalid => exception
       OpenStruct.new(success?: false, errors: exception.message)
   end

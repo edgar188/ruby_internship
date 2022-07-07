@@ -7,7 +7,7 @@ function get_formatted_date(date, preformatted_date = false, hideYear = false) {
   }
 }
 
-function timeAgo(date_param) {
+function time_ago(date_param) {
   if (!date_param) {
     return null;
   }
