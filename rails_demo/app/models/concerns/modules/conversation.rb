@@ -20,8 +20,11 @@ module Modules::Conversation
 
     # A class method that is used to find a conversation between two users.
     def between(current_user, interlocutor)
-      self.where(name: "#{current_user.email} / #{interlocutor}")
-        .or(self.where(name: "#{interlocutor} / #{current_user.email}")).first
+      self.find_by_name(["#{current_user} / #{interlocutor}", "#{interlocutor} / #{current_user}"])
+    end
+
+    def conversation_user_first
+      ConversationUser.find_by_user_id(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
     end
   end
 
@@ -49,7 +52,7 @@ module Modules::Conversation
   end
 
   def member?(user_id)
-    self.conversation_users.where(user_id: user_id).present?
+    self.conversation_users.find_by_user_id(user_id).present?
   end
 
 end

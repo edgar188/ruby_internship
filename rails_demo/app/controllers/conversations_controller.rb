@@ -26,7 +26,7 @@ class ConversationsController < ApplicationController
   end
 
   def set_dual_conversation
-    @conversation = Conversation.between(current_user, params[:conversation][:interlocutor_email])
+    @conversation = Conversation.between(current_user.email, params[:conversation][:interlocutor_email])
 
     if @conversation.present?
       return redirect_to conversation_messages_path(@conversation)

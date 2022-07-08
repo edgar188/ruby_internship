@@ -33,7 +33,7 @@ module Modules::Message
     user = User.find_by_id(self.additional_info['user_id'])
     attachments_list = []
 
-    if user.has_avatar?
+    if user.present? && user.has_avatar?
       avatar_path = get_attachment_path(user.avatar)
     end
 
@@ -74,8 +74,7 @@ module Modules::Message
   # Checking if the conversation_user is the logged in user and it will show the messages.
   def current_user_messages?
     self.text.present? &&
-    self.conversation_user.present? &&
-    self.conversation_user.user_id == ApplicationRecord.class_variable_get(:@@logged_in_user).id ||
+    self.conversation_user&.user_id == ApplicationRecord.class_variable_get(:@@logged_in_user).id ||
     self.attachments.attached?
   end
 
