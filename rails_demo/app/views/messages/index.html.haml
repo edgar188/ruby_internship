@@ -1,0 +1,12 @@
+%main.content
+  .container.p-0
+    .card
+      .row.g-0
+        .col-12.col-lg-5.col-xl-3.border.border-dark
+          = render 'messages/shared/conversations'
+        .col-12.col-lg-7.col-xl-9
+          = render 'messages/shared/conversation_header'
+          = render 'messages/shared/messages'
+          = render 'messages/shared/message_form'
+
+= javascript_include_tag 'conversations/clear_input'

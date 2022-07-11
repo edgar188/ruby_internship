@@ -1,0 +1,25 @@
+.chat-messages.p-4{style: 'height: 500px;', 'data-channel-subscribe': 'conversation', 'data-conversation-id': @conversation.id}
+  - @conversation.messages.each do |message|
+    - if message.current_user_messages?
+      .chat-message-right.pb-4
+        = render 'messages/shared/avatar', user: current_user
+        .flex-shrink-1.bg-info.rounded.py-2.px-3.mr-3.text-wrap{style: 'width: 40vw'}
+          = message.text
+          .attachments.d-flex.flex-wrap
+            = render 'messages/shared/attachments', message: message
+          .text-muted.small.text-nowrap.mt-2= message.show_time
+    - elsif message.interlocutor_messages?
+      .text-muted.small.text-nowrap.mt-2= message.show_owner_name
+      .chat-message-left.pb-4
+        = render 'messages/shared/avatar', user: message.user
+        .d-flex.flex-column
+          .flex-shrink-1.bg-light.rounded.py-2.px-3.ml-3.text-wrap{style: 'width: 40vw'}
+            = message.text
+            .attachments.d-flex.flex-wrap
+              = render 'messages/shared/attachments', message: message
+            .text-muted.small.text-nowrap.mt-2= message.show_time
+#message_data.d-none{'data-role': 'message-template', 'data-current_user_id': current_user.id}
+
+= javascript_include_tag 'conversations/render_new_message'
+= javascript_include_tag 'conversations/show_date'
+= javascript_include_tag 'channels/conversation_channel'

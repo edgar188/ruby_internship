@@ -1,0 +1,6 @@
+.d-flex.justify-content-center
+  = link_to 'New Room', new_conversation_path, class: 'btn btn-secondary mb-2'
+- @conversation_users.each do |conversation_user|
+  %div.list-group-item.list-group-item-action.border-0
+    .d-flex.align-items-start
+      = link_to "#{conversation_user.conversation.name}", conversation_messages_path(conversation_user.conversation.id)

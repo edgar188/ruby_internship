@@ -1,0 +1,12 @@
+.flex-grow-0.py-3.px-4.border-top
+  .input-group
+  = form_for [@conversation, @message], remote: true  do |f|
+    .form-group.d-flex
+      = f.hidden_field :conversation_id, value: @conversation.id
+      = f.hidden_field :conversation_user_id, value: current_user.correct_conversation_user(@conversation)
+      .image-upload
+        %label{for: 'message_attachments'}
+          %i.bi.bi-plus-circle.upload-button
+        = f.file_field :attachments, multiple: true, accept: 'image/jpeg, image/jpg, image/png'
+      = f.text_field :text, placeholder: 'Your message', autofocus: true, class: 'form-control'
+      = f.submit 'Send', class: 'btn btn-primary'

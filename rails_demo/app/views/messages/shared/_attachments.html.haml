@@ -1,0 +1,5 @@
+- if message.attachments.attached?
+  - message.attachments.each_with_index do |attachment, index|
+    - if attachment.image?
+      .message-image-container.d-flex
+        = image_tag(message.conversation_attachment(index))

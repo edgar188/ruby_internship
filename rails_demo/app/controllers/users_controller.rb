@@ -4,11 +4,12 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show]
 
   def index
+    @conversation = Conversation.new
   end
 
   def show
   end
-  
+
   def search
     render json: @users, status: :ok
   end
@@ -22,18 +23,18 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :role, 
-      :first_name, 
-      :last_name, 
-      :email, 
-      :gender, 
-      :birth_date, 
-      :country, 
-      :phone, 
+      :role,
+      :first_name,
+      :last_name,
+      :email,
+      :gender,
+      :birth_date,
+      :country,
+      :phone,
       :avatar
       )
   end
-  
+
   def set_users
     @users = User.paginate_data(params)
   end

@@ -155,12 +155,23 @@ module Modules::User
     friendships.where(friend_request: { sent_to_id: self.id, status: true })
       .or(friendships.where(friend_request: { sent_by_id: self.id, status: true }))
       .or(friendships.where(friend_sent: { sent_to_id: self.id, status: true })
-      .or(friendships.where(friend_sent: { sent_by_id: self.id, status: true })))
+      .or(friendships.where(friend_sent: { sent_by_id: self.id, status: true }))).distinct
   end
 
   # Checking if the user has an avatar attached to it.
   def has_avatar?
     self.avatar.attached?
+  end
+
+  # It's a method that returns the id of the conversation user.
+  def correct_conversation_user(conversation)
+    conversation_user = ConversationUser.where(conversation_id: conversation.id, user_id: self.id)
+    conversation_user.first.id if conversation_user.present?
+  end
+
+  # It's a method that returns the first conversation user.
+  def conversation_user_first
+    self.conversation_users.find_by_user_id(self.id)
   end
 
 end
