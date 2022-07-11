@@ -169,4 +169,9 @@ module Modules::User
     conversation_user.first.id if conversation_user.present?
   end
 
+  # It's a method that returns the first conversation user.
+  def conversation_user_first
+    self.conversation_users.find_by_user_id(self.id)
+  end
+
 end

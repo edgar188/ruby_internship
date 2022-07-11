@@ -23,9 +23,6 @@ module Modules::Conversation
       self.find_by_name(["#{current_user} / #{interlocutor}", "#{interlocutor} / #{current_user}"])
     end
 
-    def conversation_user_first
-      ConversationUser.find_by_user_id(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
-    end
   end
 
   # Setting the creator of the conversation.

@@ -12,7 +12,7 @@
           %li.nav-item
           = link_to 'Categories', categories_path, class: 'nav-link active'
           %li.nav-item
-            - conversation_user = Conversation.conversation_user_first
+            - conversation_user = current_user.conversation_user_first
             - if conversation_user.present?
               = link_to 'Conversations', conversation_messages_path(conversation_user.conversation_id), class: 'nav-link active'
             - else
