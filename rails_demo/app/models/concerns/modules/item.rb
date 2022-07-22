@@ -152,7 +152,7 @@ module Modules::Item
     ItemMailer.with(
       user: ApplicationRecord.class_variable_get(:@@logged_in_user),
       item: self
-    ).item_created.deliver_now
+    ).item_created.deliver_later
   end
 
 end
