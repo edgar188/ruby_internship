@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-
   before_action :set_categories, only: %i[index search]
   before_action :set_category, only: %i[show edit update destroy]
   before_action :check_correct_user, only: %i[edit update destroy]
@@ -57,6 +56,7 @@ class CategoriesController < ApplicationController
       service = Category::Import.new(params[:file])
       result = service.call
       return redirect_to categories_path, notice: t(:imported, obj: 'Categories') if result.success?
+
       flash[:msg] = { message: result.errors }
       redirect_to categories_path
       raise ActiveRecord::Rollback

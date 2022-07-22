@@ -1,6 +1,5 @@
 class Api::V1::NotificationsController < Api::V1::ApplicationController
-
-  before_action :is_user?
+  before_action :user?
   before_action :set_notification, :check_correct_user, only: [:destroy]
 
   def index

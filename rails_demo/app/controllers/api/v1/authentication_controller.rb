@@ -25,7 +25,7 @@ class Api::V1::AuthenticationController < Api::V1::ApplicationController
   def admin_auth
     admin = AdminUser.find_by_email(params[:email])
 
-    unless admin && admin.valid_password?(params[:password])
+    unless admin && admin&.valid_password?(params[:password])
       return render json: { errors: I18n.t(:invalid_email_or_password) }, status: :unauthorized
     end
 

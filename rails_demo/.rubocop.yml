@@ -1,13 +1,28 @@
 require: rubocop-rails
 
+Rails/FilePath:
+  Enabled: false
+
+Rails/DynamicFindBy:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Layout:
+Style/IfUnlessModifier:
   Enabled: false
 
-Rails/FilePath:
+Style/GuardClause:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/TrailingEmptyLines:
   Enabled: false

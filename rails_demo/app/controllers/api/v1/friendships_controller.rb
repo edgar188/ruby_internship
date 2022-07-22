@@ -1,7 +1,6 @@
 class Api::V1::FriendshipsController < Api::V1::ApplicationController
-
-  before_action :is_user?
-  before_action :set_friendship, only: [:accept, :decline]
+  before_action :user?
+  before_action :set_friendship, only: %i[accept decline]
 
   def create
     @friendship = Friendship.new(sent_by_id: logged_in_user.id, sent_to_id: params[:user_id])

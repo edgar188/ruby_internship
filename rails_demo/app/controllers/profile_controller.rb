@@ -1,14 +1,11 @@
 class ProfileController < ApplicationController
 
-  def index
-  end
+  def index; end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
-  
+  def edit; end
+
   def update
     @user = User.find(params[:id])
 
@@ -20,20 +17,20 @@ class ProfileController < ApplicationController
     end
   end
 
-  private 
+  private
 
   def user_params
     params.require(:user).permit(
-      :role, 
-      :first_name, 
-      :last_name, 
-      :email, 
-      :gender, 
-      :birth_date, 
-      :country, 
-      :phone, 
+      :role,
+      :first_name,
+      :last_name,
+      :email,
+      :gender,
+      :birth_date,
+      :country,
+      :phone,
       :avatar
-      )
+    )
   end
-  
+
 end

@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   protect_from_forgery with: :exception
@@ -15,7 +14,7 @@ class ApplicationController < ActionController::Base
       :last_name,
       :email,
       :password
-      )
+    )
     end
 
     devise_parameter_sanitizer.permit(:account_update) do |u| u.permit(
@@ -30,9 +29,8 @@ class ApplicationController < ActionController::Base
       :avatar,
       :password,
       :current_password
-      )
+    )
     end
-
   end
 
   private
