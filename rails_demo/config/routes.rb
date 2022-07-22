@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
 
   root 'landing#index'
+
+  authenticated :admin_user do
+    mount Sidekiq::Web, at: '/sidekiq'
+  end
 
   namespace :api do
     namespace :v1 do
