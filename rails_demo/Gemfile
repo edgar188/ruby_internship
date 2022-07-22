@@ -39,6 +39,8 @@ gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
 # Simple, efficient background processing for Ruby
 gem 'sidekiq', '~> 6.5', '>= 6.5.1'
+# Scheduler / Cron for Sidekiq jobs
+gem 'sidekiq-cron', '~> 1.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'

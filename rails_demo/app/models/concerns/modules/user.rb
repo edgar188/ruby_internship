@@ -20,6 +20,7 @@ module Modules::User
     scope :with_birth_date, -> (min_age, max_age) { where("YEAR(birth_date) BETWEEN ? AND ?", min_age, max_age)}
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
     scope :except_current_user, -> (id) { where.not(id: id) }
+    scope :with_previous_day, -> { where('users.created_at > ? AND users.created_at < ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
   end
 
   # Class methods
