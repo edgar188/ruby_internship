@@ -25,23 +25,32 @@
             - else
               %a.nav-link.dropdown-toggle.active{'aria-expanded': 'false', 'data-bs-toggle': 'dropdown', href: '#', role: 'button'} Login
             %ul.dropdown-menu
-              -if user_signed_in?
-                = link_to profile_page_path, class: 'dropdown-item d-flex justify-content-between' do
+              - if user_signed_in?
+                - if admin_user_signed_in?
+                  = button_to admin_dashboard_path, method: :get, class: 'd-flex justify-content-between dropdown-item' do
+                    Admin Panel
+                    %i.bi-joystick
+                  %hr.dropdown-divider/
+                  = button_to sidekiq_web_path, method: :get, class: 'd-flex justify-content-between dropdown-item' do
+                    Sidekiq
+                    %i.bi-calendar-date
+                  %hr.dropdown-divider/
+                = button_to profile_page_path,  method: :get, class: 'd-flex justify-content-between dropdown-item' do
                   Account
                   %i.bi-person-circle
                 %hr.dropdown-divider/
-                = button_to user_items_path, method: :get, class: 'd-flex justify-content-between  dropdown-item' do
+                = button_to user_items_path, method: :get, class: 'd-flex justify-content-between dropdown-item' do
                   Cart
                   %i.bi-cart-fill.me-1
                 %hr.dropdown-divider/
-                = button_to order_history_user_items_path, method: :get, class: 'd-flex justify-content-between  dropdown-item' do
+                = button_to order_history_user_items_path, method: :get, class: 'd-flex justify-content-between dropdown-item' do
                   Order history
                   %i.bi-clock-history
                 %hr.dropdown-divider/
                 = button_to destroy_user_session_path, class: 'd-flex justify-content-between dropdown-item', method: :delete do
                   Log out
                   %i.bi-box-arrow-right
-              -else
+              - else
                 = link_to new_user_session_path, class: 'd-flex justify-content-between dropdown-item' do
                   Sign in
                   %i.bi-box-arrow-in-right
