@@ -22,18 +22,35 @@ module Modules::Friendship
   end
 
   def sent_friend_request_notice
-    Notification.create(user_id: sent_to.id, notice_type: :friend_request, notice_message: "#{@@logged_in_user.show_full_name} sent you friend request" )
-    Notification.create(user_id: @@logged_in_user.id, notice_type: :friend_request, notice_message: "You sent friend request to #{User.find(sent_to.id).show_full_name}" )
+    Notification.create(
+      user_id: sent_to.id,
+      notice_type: :friend_request,
+      notice_message: "#{@@logged_in_user.show_full_name} sent you friend request"
+    )
+
+    Notification.create(
+      user_id: @@logged_in_user.id,
+      notice_type: :friend_request,
+      notice_message: "You sent friend request to #{User.find(sent_to.id).show_full_name}"
+    )
   end
 
   def sent_friend_accept_notice
     if self.status_changed?
-      Notification.create(user_id: sent_by.id, notice_type: :accept_friend_request, notice_message: "#{@@logged_in_user.show_full_name} accepted your friend request")
+      Notification.create(
+        user_id: sent_by.id,
+        notice_type: :accept_friend_request,
+        notice_message: "#{@@logged_in_user.show_full_name} accepted your friend request"
+      )
     end
   end
 
   def sent_friend_decline_notice
-    Notification.create(user_id: sent_by.id, notice_type: :decline_friend_request, notice_message: "#{@@logged_in_user.show_full_name} declined your friend request")
+    Notification.create(
+      user_id: sent_by.id,
+      notice_type: :decline_friend_request,
+      notice_message: "#{@@logged_in_user.show_full_name} declined your friend request"
+    )
   end
 
 end

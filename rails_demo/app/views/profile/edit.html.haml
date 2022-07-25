@@ -5,7 +5,7 @@
     .col-sm-10
       - if current_user.avatar.present?
         %small Current: #{current_user.avatar.filename.to_s}
-      = f.file_field :avatar, class: 'form-control' 
+      = f.file_field :avatar, class: 'form-control', accept: 'image/jpeg, image/jpg, image/png'
   %fieldset.form-group
     .row.mb-2
       %legend.col-form-label.col-sm-2.pt-0 Role

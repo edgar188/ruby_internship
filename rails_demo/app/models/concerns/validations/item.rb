@@ -14,7 +14,7 @@ module Validations::Item
   # Validating the options of the item.
   def validate_options
     if self.options.present?
-      self.options.each do |option_key, option_value|
+      self.options.each do |_option_key, option_value|
         if option_value.length < 3
           self.errors.add(:options, I18n.t(:wrong_option))
         end
@@ -43,8 +43,7 @@ module Validations::Item
     validate_uniqueness_of_in_memory(
       item_resources,
       [:name, :resource_type],
-      I18n.t(:duplicate, obj: 'Item resources name'
-      )
+      I18n.t(:duplicate, obj: 'Item resources name')
     )
   end
 
