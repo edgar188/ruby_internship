@@ -7,7 +7,7 @@
   .form-group.row.mb-2
     %label.col-sm-2.col-form-label Category
     .col-sm-10
-      .select.form-select.mb-3{'aria-label': '.form-select-lg example'}
+      .select.mb-3{'aria-label': '.form-select-lg example'}
         = f.select :category_id, @categories[:result].map { |cat| [cat.name, cat.id] }
   .form-group.row.mb-2
     %label.col-sm-2.col-form-label Options
@@ -37,10 +37,10 @@
   .row.mb-2
     %legend.col-form-label.col-sm-2.pt-0 State
     .col-sm-10
-      .form-check 
+      .form-check
         = f.radio_button :state, 'normal', class: 'gridRadios1 form-check-input'
         = f.label :state, 'Normal', class: 'label form-check-label'
-      .form-check 
+      .form-check
         = f.radio_button :state, 'speedily', class: 'gridRadios1 form-check-input'
         = f.label :state, 'Speedily', class: 'label form-check-label'
   %hr{style: "height: 5px;"}

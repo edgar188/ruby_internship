@@ -7,7 +7,7 @@ window.onload = function () {
   // Disable categories greater than 1
   for (let i = 0; i < category_select.length; i++) {
     let option = category_select[i];
-    let option_level = option.getAttribute('data-level'); 
+    let option_level = option.getAttribute('data-level');
 
     if (option_level > 1) {
       option.disabled = true;

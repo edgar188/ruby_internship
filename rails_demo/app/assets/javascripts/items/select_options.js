@@ -5,7 +5,7 @@ window.onload = function () {
   let create_item_btn = document.getElementById('create_item_btn');
 
   for (let i = 0; i < category_options.length; i++) {
-    category_options[i].addEventListener('click', function () { 
+    category_options[i].addEventListener('click', function () {
       item_options[i].className = this.selected == true ? 'd-block' : 'd-none';
 
       for (let i = 0; i < category_options.length; i++) {

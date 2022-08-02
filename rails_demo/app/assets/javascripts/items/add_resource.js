@@ -6,7 +6,7 @@ let exists_link_input = document.getElementsByClassName('exists_resource_type_li
 let exists_document_input = document.getElementsByClassName('exists_resource_type_document')
 let current_resources_type = document.getElementsByClassName('exists_item_resource_type')
 let resource_index = 0;
- 
+
 // Checking if the exists_item_resources_list exists. If it does, it will add the number of children to the resource_index.
 exists_item_resources_list ? resource_index += exists_item_resources_list.childElementCount / 2 : 0
 
@@ -46,15 +46,15 @@ function add_resource() {
       </div>
     </div>
     <div class='resource_type_document form-group row mb-2 d-none'>
-      <label class='col-sm-2 col-form-label'>Recource Document</label>
+      <label class='col-sm-2 col-form-label'>Resource Document</label>
       <div class='col-sm-10'>
           <input class='form-control' name='item[item_resources_attributes][${resource_index}][file]' placeholder='Resource doc' type='file'>
       </div>
     </div>
     <hr>
   </div>`
-  
-  document.getElementById('item_resources_list').innerHTML += code_block;  
+
+  document.getElementById('item_resources_list').innerHTML += code_block;
 }
 
 function counter_increment() {
@@ -66,12 +66,12 @@ function counter_increment() {
 for (let i = 0; i < exists_link_radio.length; i++) {
   toggle_class(current_resources_type[i].value, exists_link_input[i], exists_document_input[i], 'exists_')
 
-  exists_link_radio[i].addEventListener('click', function () {  
+  exists_link_radio[i].addEventListener('click', function () {
     toggle_class(this.value, exists_link_input[i], exists_document_input[i], 'exists_')
     }
   )
 
-  exists_document_radio[i].addEventListener('click', function () {  
+  exists_document_radio[i].addEventListener('click', function () {
     toggle_class(this.value, exists_link_input[i], exists_document_input[i], 'exists_')
     }
   )
@@ -86,11 +86,11 @@ function hide_field() {
   let document_input = document.getElementsByClassName('resource_type_document');
 
   for (let i = 0; i < link_radio.length; i++) {
-    link_radio[i].addEventListener('click', function () {  
+    link_radio[i].addEventListener('click', function () {
       toggle_class(this.value, link_input[i], document_input[i])
     });
 
-    document_radio[i].addEventListener('click', function () {  
+    document_radio[i].addEventListener('click', function () {
       toggle_class(this.value, link_input[i], document_input[i])
     });
   }
