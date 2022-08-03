@@ -5,7 +5,7 @@ module Modules::Item
   STATE = {
     normal: 'Normal',
     speedily: 'Speedily'
-  }
+  }.freeze
 
   included do
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
@@ -13,7 +13,7 @@ module Modules::Item
     scope :with_not_current, -> { where.not(owner: ApplicationRecord.class_variable_get(:@@logged_in_user).id) }
     scope :with_category, -> (id) { where(category_id: id) }
     scope :with_category_name, -> (name) { joins(:category).where(category: { name: name }) }
-    scope :with_price, -> (min_price, max_price) { where('price <= ? AND price >= ?', min_price, max_price)}
+    scope :with_price, -> (min_price, max_price) { where('price <= ? AND price >= ?', min_price, max_price) }
     scope :with_previous_day, -> { where('items.created_at > ? AND items.created_at < ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
   end
 
@@ -23,42 +23,44 @@ module Modules::Item
       items = self.joins(:category)
 
       # Get current_user items
-      if Modules::Helpers::to_boolean(params[:owner])
+      if Modules::Helpers.to_boolean(params[:owner])
         items = items.with_current
       end
 
       # Get not current_user items
-      if Modules::Helpers::to_boolean(params[:not_owner])
+      if Modules::Helpers.to_boolean(params[:not_owner])
         items = items.with_not_current
       end
 
       # Filter items by category
-      if Modules::Helpers::to_boolean(params[:category_id])
+      if Modules::Helpers.to_boolean(params[:category_id])
         items = items.with_category(params[:category_id])
       end
 
       # Filter items by price
-      if Modules::Helpers::to_boolean(params[:min_price] && params[:max_price])
+      if Modules::Helpers.to_boolean(params[:min_price] && params[:max_price])
         items = items.with_price(params[:max_price], params[:min_price])
       end
 
       # Filter items by category_name
-      if Modules::Helpers::to_boolean(params[:category_name]) && params[:category_name][0] != ''
+      if Modules::Helpers.to_boolean(params[:category_name]) && params[:category_name][0] != ''
         items = items.with_category_name(params[:category_name][0])
       end
 
       # It's searching the items by title
-      search_query = "title LIKE :query"
+      search_query = 'title LIKE :query'
       items = items.with_query(search_query, params[:query]) if params[:query].present?
 
       # Sort items by name
       items = items.order("#{params[:sort_by] || :title} #{params[:sort_type] || :ASC}")
 
       # It's paginating the items list.
-      items = items.paginate(
-        page: params[:page] || Modules::Constants::PAGE,
-        per_page: params[:per_page] || Modules::Constants::PER_PAGE
-      ) unless Modules::Helpers::to_boolean(params[:all])
+      unless Modules::Helpers.to_boolean(params[:all])
+        items = items.paginate(
+          page: params[:page] || Modules::Constants::PAGE,
+          per_page: params[:per_page] || Modules::Constants::PER_PAGE
+        )
+      end
 
       # Get items and items count
       items = { result: items, count: count }
@@ -124,15 +126,13 @@ module Modules::Item
 
   # It's incrementing the count of the views of the item.
   def view_increment
-    current = ApplicationRecord.class_variable_get(:@@logged_in_user)
+    current_user_id = ApplicationRecord.class_variable_get(:@@logged_in_user).id.to_s
     count = self.views['count'].to_i
     user_viewed = self.views['user_viewed']
 
-    if current.present?
-      unless self.views['user_viewed'].include?("#{current.id}")
-        count += 1
-        user_viewed["#{current.id}"] = Date.current
-      end
+    if current_user_id.present? && !self.views['user_viewed'].include?(current_user_id)
+      count += 1
+      user_viewed[current_user_id] = DateTime.current
     end
 
     self.update_column(:views, { count: count, user_viewed: user_viewed })

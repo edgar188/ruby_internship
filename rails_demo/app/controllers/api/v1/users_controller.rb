@@ -1,14 +1,12 @@
 class Api::V1::UsersController < Api::V1::ApplicationController
-
   before_action :set_user, only: [:show]
-  before_action :set_logged_in_user, only: [:update, :destroy]
+  before_action :set_logged_in_user, only: %i[update destroy]
 
   def index
     @users = User.paginate_data(all: true)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @user = User.new
@@ -47,7 +45,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
     @user = User.find(params[:id])
 
     unless @user == logged_in_user
-      render json: {error: I18n.t(:not_allowed, obj: 'User')}, status: :bad_request
+      render json: { error: I18n.t(:not_allowed, obj: 'User') }, status: :bad_request
     end
   end
 
@@ -62,7 +60,7 @@ class Api::V1::UsersController < Api::V1::ApplicationController
       :country,
       :phone,
       :avatar
-      )
+    )
   end
 
 end

@@ -12,10 +12,10 @@ module Modules::UserItem
     def paginate_data(params)
       user_items = self.all
 
-      user_items = user_items.with_ordered if Modules::Helpers::to_boolean(params[:ordered])
-      user_items = user_items.with_not_ordered if Modules::Helpers::to_boolean(params[:not_ordered])
+      user_items = user_items.with_ordered if Modules::Helpers.to_boolean(params[:ordered])
+      user_items = user_items.with_not_ordered if Modules::Helpers.to_boolean(params[:not_ordered])
 
-      unless Modules::Helpers::to_boolean(params[:all])
+      unless Modules::Helpers.to_boolean(params[:all])
         user_items = user_items.paginate(
           page: params[:page] || Modules::Constants::PAGE,
           per_page: params[:per_page] || Modules::Constants::PER_PAGE

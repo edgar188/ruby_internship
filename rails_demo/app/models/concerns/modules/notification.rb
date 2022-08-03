@@ -8,10 +8,12 @@ module Modules::Notification
       notifications = @@logged_in_user.notifications
 
       # It's paginating the notifications list.
-      notifications = notifications.paginate(
-        page: params[:page] || Modules::Constants::PAGE,
-        per_page: params[:per_page] || Modules::Constants::PER_PAGE
-      ) unless Modules::Helpers::to_boolean(params[:all])
+      unless Modules::Helpers.to_boolean(params[:all])
+        notifications = notifications.paginate(
+          page: params[:page] || Modules::Constants::PAGE,
+          per_page: params[:per_page] || Modules::Constants::PER_PAGE
+        )
+      end
 
       # Get logged_in_user notifications and notifications count
       notifications = { result: notifications, count: count }

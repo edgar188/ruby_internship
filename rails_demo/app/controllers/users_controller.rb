@@ -1,14 +1,12 @@
 class UsersController < ApplicationController
-
-  before_action :set_users, only: [:index, :search]
+  before_action :set_users, only: %i[index search]
   before_action :set_user, only: [:show]
 
   def index
     @conversation = Conversation.new
   end
 
-  def show
-  end
+  def show; end
 
   def search
     render json: @users, status: :ok
@@ -32,7 +30,7 @@ class UsersController < ApplicationController
       :country,
       :phone,
       :avatar
-      )
+    )
   end
 
   def set_users

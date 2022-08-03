@@ -1,7 +1,7 @@
 ActiveAdmin.register User do
   permit_params :role, :first_name, :last_name, :email, :gender, :birth_date, :country, :phone
   menu label:  'Users'
-  
+
   index do
     selectable_column
     id_column
@@ -55,7 +55,7 @@ ActiveAdmin.register User do
       f.input :country, as: :select, collection: (['No select', 'Armenia', 'Russia', 'USA', 'UK'])
       f.input :phone
     end
-    
+
     f.actions
   end
 end

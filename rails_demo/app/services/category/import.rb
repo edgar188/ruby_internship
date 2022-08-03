@@ -1,5 +1,5 @@
 class Category::Import
-  
+
   def initialize(file)
     @file = file
     @errors = []
@@ -9,7 +9,7 @@ class Category::Import
     if @file.present? && @file.content_type.in?(Validations::Variables::CSV)
       import()
     else
-      @errors << I18n.t(:not_valid_file) 
+      @errors << I18n.t(:not_valid_file)
     end
 
     return OpenStruct.new(success?: false, errors: @errors) if @errors.present?
@@ -27,17 +27,17 @@ class Category::Import
         next
       end
 
-      category_hash['Options'] ||= [] 
+      category_hash['Options'] ||= []
       category_hash['Options'] = category_hash['Options'].split(',')
 
       category = Category.new(
         parent_id: category_parent_id,
         name: category_hash['Name'],
-        options: category_hash['Options'] 
+        options: category_hash['Options']
       )
 
       unless category.save
-        category.errors.messages.inject({}) do |hash, error|
+        category.errors.messages.inject({}) do |_hash, error|
           @errors << "Row #{index + 2}, #{error[0]} - #{error[1][0]} "
         end
       end

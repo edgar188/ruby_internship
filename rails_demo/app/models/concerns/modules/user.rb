@@ -7,17 +7,17 @@ module Modules::User
     no_select: 'No select',
     male: 'Male',
     female: 'Female'
-  }
+  }.freeze
 
   ROLE = {
     buyer: 'Buyer',
     seller: 'Seller'
-  }
+  }.freeze
 
   included do
     scope :with_role, -> (role) { where(role: role) }
     scope :with_gender, -> (gender) { where(gender: gender) }
-    scope :with_birth_date, -> (min_age, max_age) { where("YEAR(birth_date) BETWEEN ? AND ?", min_age, max_age)}
+    scope :with_birth_date, -> (min_age, max_age) { where('YEAR(birth_date) BETWEEN ? AND ?', min_age, max_age) }
     scope :with_query, -> (search_query, query) { where(search_query, query: "%#{query}%") }
     scope :except_current_user, -> (id) { where.not(id: id) }
     scope :with_previous_day, -> { where('users.created_at > ? AND users.created_at < ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
@@ -32,17 +32,17 @@ module Modules::User
       users = users.except_current_user(ApplicationRecord.class_variable_get(:@@logged_in_user).id)
 
       # Filter users by role
-      if Modules::Helpers::to_boolean(params[:role])
+      if Modules::Helpers.to_boolean(params[:role])
         users = users.with_role(params[:role])
       end
 
       # Filter users by gender
-      if Modules::Helpers::to_boolean(params[:gender])
+      if Modules::Helpers.to_boolean(params[:gender])
         users = users.with_gender(params[:gender])
       end
 
       # Filter users by age
-      if Modules::Helpers::to_boolean(params[:min_age] && params[:max_age])
+      if Modules::Helpers.to_boolean(params[:min_age] && params[:max_age])
         min_age = get_age(params[:min_age])
         max_age = get_age(params[:max_age])
         users = users.with_birth_date(max_age, min_age)
@@ -65,10 +65,12 @@ module Modules::User
       end
 
       # It's paginating the users list.
-      users = users.paginate(
-        page: params[:page] || Modules::Constants::PAGE,
-        per_page: params[:per_page] || Modules::Constants::PER_PAGE
-      ) unless Modules::Helpers::to_boolean(params[:all])
+      unless Modules::Helpers.to_boolean(params[:all])
+        users = users.paginate(
+          page: params[:page] || Modules::Constants::PAGE,
+          per_page: params[:per_page] || Modules::Constants::PER_PAGE
+        )
+      end
 
       # Get users and users count
       users = { result: users, count: count }

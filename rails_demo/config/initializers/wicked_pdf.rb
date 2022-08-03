@@ -19,7 +19,7 @@ WickedPdf.config = {
   # (but can be overridden in `render :pdf` calls)
   # layout: 'pdf.html',
   layout: 'pdf',
-  orientation: 'Portrait', 
+  orientation: 'Portrait',
   page_size: 'A4'
 
   # Using wkhtmltopdf without an X server can be achieved by enabling the

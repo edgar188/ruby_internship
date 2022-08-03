@@ -3,6 +3,6 @@
   %ul.dropdown-menu
     - @conversation.conversation_users.each do |member|
       - unless member.user_id == current_user.id
-        %p= member.full_name
-        %hr/
+        %small= member.full_name
+        %hr{style: 'height: 1px; margin: 3px;'}
     %b= "Creator #{@conversation.show_creator_name}"

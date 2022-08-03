@@ -4,7 +4,7 @@
     .form-group.d-flex
       = f.hidden_field :conversation_id, value: @conversation.id
       = f.hidden_field :conversation_user_id, value: current_user.correct_conversation_user(@conversation)
-      .image-upload
+      .file-upload
         %label{for: 'message_attachments'}
           %i.bi.bi-plus-circle.upload-button
         = f.file_field :attachments, multiple: true, accept: 'image/jpeg, image/jpg, image/png'

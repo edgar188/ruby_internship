@@ -19,10 +19,12 @@ module Modules::Category
       categories = categories.order("#{params[:sort_by] || :name} #{params[:sort_type] || :ASC}")
 
       # It's paginating the categories list.
-      categories = categories.paginate(
-        page: params[:page] || Modules::Constants::PAGE,
-        per_page: params[:per_page] || Modules::Constants::PER_PAGE
-      ) unless Modules::Helpers::to_boolean(params[:all])
+      unless Modules::Helpers.to_boolean(params[:all])
+        categories = categories.paginate(
+          page: params[:page] || Modules::Constants::PAGE,
+          per_page: params[:per_page] || Modules::Constants::PER_PAGE
+        )
+      end
 
       # Get categories and categories count
       categories = { result: categories, count: count }
@@ -55,7 +57,7 @@ module Modules::Category
     lvl = 0
 
     while ctg.parent_id.present?
-      lvl +=1
+      lvl += 1
       ctg = ctg.parent
     end
 

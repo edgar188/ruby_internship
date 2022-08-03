@@ -5,15 +5,15 @@
     .col-sm-10
       - if current_user.avatar.present?
         %small Current: #{current_user.avatar.filename.to_s}
-      = f.file_field :avatar, class: 'form-control' 
+      = f.file_field :avatar, class: 'form-control', accept: 'image/jpeg, image/jpg, image/png'
   %fieldset.form-group
     .row.mb-2
       %legend.col-form-label.col-sm-2.pt-0 Role
       .col-sm-10
-        .form-check 
+        .form-check
           = f.radio_button :role, 'buyer', class: 'gridRadios1 form-check-input'
           = f.label :role, 'Buyer', class: 'label form-check-label'
-        .form-check 
+        .form-check
           = f.radio_button :role, 'seller', class: 'gridRadios1 form-check-input'
           = f.label :role, 'Seller', class: 'label form-check-label'
   .form-group.row.mb-2
@@ -32,13 +32,13 @@
     .row.mb-2
       %legend.col-form-label.col-sm-2.pt-0 Gender
       .col-sm-10
-        .form-check 
+        .form-check
           = f.radio_button :gender, 'no_select', class: 'gridRadios1 form-check-input'
           = f.label :gender, 'No select', class: 'label form-check-label'
-        .form-check 
+        .form-check
           = f.radio_button :gender, 'male', class: 'gridRadios1 form-check-input'
           = f.label :gender, 'Male', class: 'label form-check-label'
-        .form-check 
+        .form-check
           = f.radio_button :gender, 'female', class: 'gridRadios1 form-check-input'
           = f.label :gender, 'Female', class: 'label form-check-label'
   .form-group.row.mb-2
@@ -48,7 +48,7 @@
   .form-group.row.mb-2
     %label.col-sm-2.col-form-label Counrty
     .col-sm-10
-      .select.form-select.mb-3{'aria-label': '.form-select-lg example'}
+      .select.mb-3{'aria-label': '.form-select-lg example'}
         = f.select :country, ['No select', 'Armenia', 'Russia', 'USA', 'UK']
   .form-group.row.mb-2
     %label.col-sm-2.col-form-label Phone number

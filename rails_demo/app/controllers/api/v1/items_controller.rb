@@ -1,14 +1,12 @@
 class Api::V1::ItemsController < Api::V1::ApplicationController
-
-  before_action :set_item, only: [:show, :update, :destroy]
-  before_action :check_correct_user, only: [:edit, :update, :destroy], if: :logged_in_user
+  before_action :set_item, only: %i[show update destroy]
+  before_action :check_correct_user, only: %i[edit update destroy], if: :logged_in_user
 
   def index
     @items = Item.paginate_data(all: true)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @item = Item.new
@@ -67,7 +65,7 @@ class Api::V1::ItemsController < Api::V1::ApplicationController
 
   def check_correct_user
     unless @item.correct_user?
-      render json: { error:  I18n.t(:not_allowed, obj: 'Item') }, status: :bad_request
+      render json: { error: I18n.t(:not_allowed, obj: 'Item') }, status: :bad_request
     end
   end
 

@@ -1,5 +1,4 @@
 class MessagesController < ApplicationController
-
   before_action :set_conversation, :set_conversation_users
   before_action :check_correct_member, only: [:index]
 
@@ -33,7 +32,7 @@ class MessagesController < ApplicationController
 
   def check_correct_member
     unless @conversation.member?(current_user.id)
-      return redirect_to root_path, alert: t(:not_found)
+      redirect_to root_path, alert: t(:not_found)
     end
   end
 

@@ -5,10 +5,12 @@ module Modules::Message
     def paginate_data(params)
       messages = self.all
 
-      messages = messages.paginate(
-        page: params[:page] || Modules::Constants::PAGE,
-        per_page: params[:per_page] || Modules::Constants::PER_PAGE
-      ) unless Modules::Helpers::to_boolean(params[:all])
+      unless Modules::Helpers.to_boolean(params[:all])
+        messages = messages.paginate(
+          page: params[:page] || Modules::Constants::PAGE,
+          per_page: params[:per_page] || Modules::Constants::PER_PAGE
+        )
+      end
 
       messages = { result: messages, count: count }
       messages
@@ -74,8 +76,8 @@ module Modules::Message
   # Checking if the conversation_user is the logged in user and it will show the messages.
   def current_user_messages?
     self.text.present? &&
-    self.conversation_user&.user_id == ApplicationRecord.class_variable_get(:@@logged_in_user).id ||
-    self.attachments.attached?
+      self.conversation_user&.user_id == ApplicationRecord.class_variable_get(:@@logged_in_user).id ||
+      self.attachments.attached?
   end
 
   # Checking if the message has text and if it does, it will show the messages.

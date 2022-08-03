@@ -10,5 +10,5 @@ class UserItem < ApplicationRecord
 
   validate :validate_item_countity, on: :update
   validate :validate_ordered_at, on: :update
-  
+
 end

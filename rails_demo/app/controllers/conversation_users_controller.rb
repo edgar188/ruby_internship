@@ -1,5 +1,4 @@
 class ConversationUsersController < ApplicationController
-
   before_action :set_conversation
 
   def create

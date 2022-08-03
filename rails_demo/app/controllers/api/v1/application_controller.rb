@@ -1,5 +1,4 @@
 class Api::V1::ApplicationController < ActionController::API
-
   before_action :authorized
   before_action :set_logged_in
   rescue_from ActiveRecord::RecordNotFound, with: :notfound
@@ -57,8 +56,8 @@ class Api::V1::ApplicationController < ActionController::API
     ApplicationRecord.set_logged_in_user(logged_in)
   end
 
-  def is_user?
-    return render json: { error: I18n.t(:is_not_user) } if logged_in_admin.present?
+  def user?
+    render json: { error: I18n.t(:is_not_user) } if logged_in_admin.present?
   end
 
 end

@@ -1,24 +1,20 @@
 class UserItemsController < ApplicationController
-
-  before_action :set_user_item, only: [:edit, :update, :destroy]
+  before_action :set_user_item, only: %i[edit update destroy]
   before_action :set_card_user_items, only: [:index]
   before_action :set_order_history_user_items, only: [:order_history]
 
-  def index
-  end
+  def index; end
+
+  def edit; end
+
+  def order_history; end
 
   def show
     redirect_to user_items_path
   end
 
-  def order_history
-  end
-
   def new
     @user_item = UserItem.new
-  end
-
-  def edit
   end
 
   def create
@@ -70,11 +66,11 @@ class UserItemsController < ApplicationController
   private
 
   def user_item_params
-  params.require(:user_item).permit(
-    :user_id,
-    :item_id,
-    :ordered_at
-  )
+    params.require(:user_item).permit(
+      :user_id,
+      :item_id,
+      :ordered_at
+    )
   end
 
   def set_user_item
