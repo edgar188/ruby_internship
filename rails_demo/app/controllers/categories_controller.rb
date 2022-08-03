@@ -1,29 +1,25 @@
 class CategoriesController < ApplicationController
+  before_action :set_categories, only: %i[index search]
+  before_action :set_category, only: %i[show edit update destroy]
+  before_action :check_correct_user, only: %i[edit update destroy]
 
-  before_action :set_categories, only: [:index, :search]
-  before_action :set_category, only: [:show, :edit, :update, :destroy]
-  before_action :check_correct_user, only: [:edit, :update, :destroy]
+  def index; end
 
-  def index
-  end
+  def show; end
 
-  def show
-  end
+  def edit; end
 
   def new
     redirect_to root_path if current_user.buyer?
     @category = Category.new
   end
 
-  def edit
-  end
-
   def create
     @category = Category.new(category_params)
-    
+
     # Get options array
     @category.options = params.require(:options)
-    
+
     if @category.save
       redirect_to @category, notice: t(:created, obj: 'Category')
     else
@@ -34,7 +30,7 @@ class CategoriesController < ApplicationController
 
   def update
     @category.options = params.require(:options)
-    
+
     if @category.update(category_params)
       redirect_to category_path(@category), notice: t(:updated, obj: 'Category')
     else
@@ -58,10 +54,11 @@ class CategoriesController < ApplicationController
   def import
     ActiveRecord::Base.transaction do
       service = Category::Import.new(params[:file])
-      result = service.call()
+      result = service.call
       return redirect_to categories_path, notice: t(:imported, obj: 'Categories') if result.success?
+
       flash[:msg] = { message: result.errors }
-      redirect_to categories_path 
+      redirect_to categories_path
       raise ActiveRecord::Rollback
     end
   end
@@ -69,17 +66,17 @@ class CategoriesController < ApplicationController
   def export_sample_csv
     send_file "#{Rails.root}/public/csv/categories_sample.csv"
   end
-  
+
   private
 
   def category_params
     params.require(:category).permit(
-      :name, 
-      :parent_id, 
+      :name,
+      :parent_id,
       :owner,
       :options
     )
-  end  
+  end
 
   def set_categories
     @categories = Category.paginate_data(params)
@@ -96,5 +93,5 @@ class CategoriesController < ApplicationController
       redirect_to categories_path, alert: t(:not_allowed, obj: 'Category')
     end
   end
-  
+
 end

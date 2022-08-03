@@ -10,8 +10,8 @@ class UserItem::OrderCreator
     end
 
     OpenStruct.new(success?: true)
-    rescue ActiveRecord::RecordInvalid => exception
-      OpenStruct.new(success?: false, errors: exception.message)
+    rescue ActiveRecord::RecordInvalid => e
+      OpenStruct.new(success?: false, errors: e.message)
   end
 
   private

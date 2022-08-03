@@ -1,7 +1,7 @@
 class Api::V1::CategoriesController < Api::V1::ApplicationController
 
-  before_action :set_category, only: [:show, :update, :destroy]
-  before_action :check_correct_user, only: [:edit, :update, :destroy], if: :logged_in_user
+  before_action :set_category, only: %i[show update destroy]
+  before_action :check_correct_user, only: %i[edit update destroy], if: :logged_in_user
 
   def index
     @categories = Category.paginate_data(all: true)
@@ -58,7 +58,7 @@ class Api::V1::CategoriesController < Api::V1::ApplicationController
 
   def check_correct_user
     unless @category.correct_user?
-      render json: { error:  I18n.t(:not_allowed, obj: 'Category') }, status: :bad_request
+      render json: { error: I18n.t(:not_allowed, obj: 'Category') }, status: :bad_request
     end
   end
 

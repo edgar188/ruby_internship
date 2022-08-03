@@ -1,7 +1,6 @@
 class RatingsController < ApplicationController
 
-  def new
-  end
+  def new; end
 
   def create
     @rating = Rating.new(rating_params)
@@ -9,7 +8,7 @@ class RatingsController < ApplicationController
     if @rating.save
       return redirect_to root_path, notice: t(:success)
     end
-    
+
     redirect_to root_path, alert: t(:wrong)
   end
 
@@ -21,5 +20,5 @@ class RatingsController < ApplicationController
       :item_id,
       :value
     )
-  end  
+  end
 end

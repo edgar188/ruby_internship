@@ -19,7 +19,7 @@
         .table-responsive
           %table.table.table-user-information
             %tbody
-              - if user_signed_in? && !@item.get_rated_user 
+              - if user_signed_in? && !@item.get_rated_user
                 %tr
                   %td
                     %strong
@@ -105,7 +105,8 @@
                       %span.glyphicon.glyphicon-envelope.text-primary
                       Options
                   %td.text-primary
-                    = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] })
+                    .select
+                      = select_tag :options, options_for_select(@item.options.map { |k, v| ["#{k} : #{v}"] })
                 - if @item.item_resources.present?
                   - @item.item_resources.each do |item_resource|
                     %tr

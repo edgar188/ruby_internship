@@ -1,8 +1,8 @@
 module Validations::Variables
   extend ActiveSupport::Concern
 
-  VALID_IMAGE_TYPES = %w(image/jpeg image/jpg image/png)
-  VALID_FILE_TYPES = %w(
+  VALID_IMAGE_TYPES = %w[image/jpeg image/jpg image/png].freeze
+  VALID_FILE_TYPES = %w[
     text/csv
     application/excel
     application/vnd.ms-excel
@@ -10,8 +10,9 @@ module Validations::Variables
     application/x-msexcel
     application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
     application/x-ole-storage
-  )
-  CSV = %w[text/csv]
-  VALID_URL = %w[http https]
+  ].freeze
+
+  CSV = %w[text/csv].freeze
+  VALID_URL = %w[http https].freeze
 
 end

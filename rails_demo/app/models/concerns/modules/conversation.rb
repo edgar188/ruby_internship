@@ -9,10 +9,12 @@ module Modules::Conversation
     def paginate_data(params)
       conversations = self.all
 
-      conversations = conversations.paginate(
-        page: params[:page] || Modules::Constants::PAGE,
-        per_page: params[:per_page] || Modules::Constants::PER_PAGE
-      ) unless Modules::Helpers::to_boolean(params[:all])
+      unless Modules::Helpers.to_boolean(params[:all])
+        conversations = conversations.paginate(
+          page: params[:page] || Modules::Constants::PAGE,
+          per_page: params[:per_page] || Modules::Constants::PER_PAGE
+        )
+      end
 
       conversations = { result: conversations, count: count }
       conversations
@@ -22,7 +24,6 @@ module Modules::Conversation
     def between(current_user, interlocutor)
       self.find_by_name(["#{current_user} / #{interlocutor}", "#{interlocutor} / #{current_user}"])
     end
-
   end
 
   # Setting the creator of the conversation.

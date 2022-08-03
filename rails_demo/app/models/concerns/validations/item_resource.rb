@@ -20,11 +20,11 @@ module Validations::ItemResource
     end
   end
 
-  # Removing the url if the resource type is a document 
+  # Removing the url if the resource type is a document
   # and removing the file if the resource type is a link.
   def remove_not_selected_resource
     self.url = nil if self.document?
     self.file.purge_later if self.link? && self.file.attached?
   end
-  
+
 end
