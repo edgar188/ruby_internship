@@ -1,0 +1,4 @@
+daily_email_job:
+  cron: '59 23 * * *' # At 23:59 every day
+  class: DailyEmailJob
+  description: "This job sends admins daily email."

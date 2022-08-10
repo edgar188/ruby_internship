@@ -14,6 +14,7 @@ module Modules::Item
     scope :with_category, -> (id) { where(category_id: id) }
     scope :with_category_name, -> (name) { joins(:category).where(category: { name: name }) }
     scope :with_price, -> (min_price, max_price) { where('price <= ? AND price >= ?', min_price, max_price) }
+    scope :with_previous_day, -> { where('items.created_at > ? AND items.created_at < ?', DateTime.now.beginning_of_day, DateTime.now.end_of_day) }
   end
 
   # Class methods
@@ -152,7 +153,7 @@ module Modules::Item
     ItemMailer.with(
       user: ApplicationRecord.class_variable_get(:@@logged_in_user),
       item: self
-    ).item_created.deliver_now
+    ).item_created.deliver_later
   end
 
 end

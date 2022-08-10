@@ -10,7 +10,7 @@ gem 'devise', '~> 4.8'
 gem 'devise-i18n'
 # Make sure Bootstrap 4 is installed, either as a Ruby gem or using CDN
 gem 'devise-bootstrap-views', '~> 1.0'
-# Haml-rails provides Haml generators for Rails 5. It also enables Haml as the templating engine 
+# Haml-rails provides Haml generators for Rails 5. It also enables Haml as the templating engine
 gem "haml-rails", "~> 2.0"
 # Converts HTML into Haml.
 gem 'html2haml', '~> 2.2'
@@ -38,6 +38,10 @@ gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 gem 'jwt'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+# Simple, efficient background processing for Ruby
+gem 'sidekiq', '~> 6.5', '>= 6.5.1'
+# Scheduler / Cron for Sidekiq jobs
+gem 'sidekiq-cron', '~> 1.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.5'
